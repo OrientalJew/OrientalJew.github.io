@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-simple.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Okio封装InputStream和OutputStream为Source和Sink，提供了一些列高效读写字节和字符的方法；  基本使用 向File中写入数据 12345678910String name = &amp;quot;xiaoming&amp;quot;;int age = 11;try &amp;#123;    Okio.buffer(Okio.sink(file)).writeUtf8(name).w">
+<meta name="keywords" content="Okio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Okio基础">
+<meta property="og:url" content="http://yoursite.com/2018/09/12/Android/okio/基础/index.html">
+<meta property="og:site_name" content="HSH&#39;s Blogs">
+<meta property="og:description" content="Okio封装InputStream和OutputStream为Source和Sink，提供了一些列高效读写字节和字符的方法；  基本使用 向File中写入数据 12345678910String name = &amp;quot;xiaoming&amp;quot;;int age = 11;try &amp;#123;    Okio.buffer(Okio.sink(file)).writeUtf8(name).w">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/okio.jpg">
+<meta property="og:image" content="http://yoursite.com/images/segment.png">
+<meta property="og:updated_time" content="2019-02-11T02:34:37.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Okio基础">
+<meta name="twitter:description" content="Okio封装InputStream和OutputStream为Source和Sink，提供了一些列高效读写字节和字符的方法；  基本使用 向File中写入数据 12345678910String name = &amp;quot;xiaoming&amp;quot;;int age = 11;try &amp;#123;    Okio.buffer(Okio.sink(file)).writeUtf8(name).w">
+<meta name="twitter:image" content="http://yoursite.com/images/okio.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/12/Android/okio/基础/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Okio基础 | HSH's Blogs</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HSH's Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+    
+      
+    
+    <a href="https://github.com/OrientalJew" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg>
+    
+      </a>
+    
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/Android/okio/基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Okio基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-12T00:00:00+08:00">2018-09-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-11 10:34:37" itemprop="dateModified" datetime="2019-02-11T10:34:37+08:00">2019-02-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- toc -->
+<h4 id="Okio"><a href="#Okio" class="headerlink" title="Okio"></a>Okio</h4><p>封装InputStream和OutputStream为Source和Sink，提供了一些列高效读写字节和字符的方法；</p>
+<p><img src="/images/okio.jpg" alt="image"></p>
+<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ul>
+<li><p>向File中写入数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String name = &quot;xiaoming&quot;;</span><br><span class="line">int age = 11;</span><br><span class="line"></span><br><span class="line">try &#123;</span><br><span class="line">    Okio.buffer(Okio.sink(file)).writeUtf8(name).writeInt(age).close();</span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;catch (IOException ex)&#123;</span><br><span class="line">  ex.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件拷贝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  /**</span><br><span class="line"> * 当同时存在Source和Sink时，不建议完全采用链式的调用，因为source、sink在结束时必须关闭；</span><br><span class="line"> * 小心使用writeAll,因为writeAll并不会返回Sink，所以采用链式调用最后没法直接close；</span><br><span class="line"> *</span><br><span class="line"> * 对于压缩文件，如果在最后没有调用close将流正确关闭，则会损坏到压缩文件</span><br><span class="line"> */</span><br><span class="line">  // Okio.buffer(Okio.sink(destFile)).writeAll(Okio.buffer(Okio.source(srcFile)));</span><br><span class="line">  BufferedSink sink = Okio.buffer(Okio.sink(new File(filePath)));</span><br><span class="line"></span><br><span class="line">  BufferedSource source = Okio.buffer(Okio.source(in));</span><br><span class="line"></span><br><span class="line">  sink.writeAll(source);</span><br><span class="line"></span><br><span class="line">  sink.close();</span><br><span class="line">  source.close();</span><br><span class="line"></span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;catch (IOException ex)&#123;</span><br><span class="line">  ex.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h4><ul>
+<li><p>对应原生IO的InputStream，提供字节流数据，通过source，可以从网络、存储、内存等地方读取到数据流；</p>
+</li>
+<li><p>提供了read方法，支持Sink读取数据到其Buffer缓存中；</p>
+</li>
+<li><p>一般情况下，不要直接操作Source，而是操作BufferedSource，它提供了更丰富、高效的接口；</p>
+</li>
+<li><p>Source还提供了一个强大的skip方法(BufferedSource)，能让我们跳过指定数量的字节后，再读字节流；</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public interface Source extends Closeable &#123;</span><br><span class="line">  /**</span><br><span class="line">   * Removes at least 1, and up to &#123;@code byteCount&#125; bytes from this and appends</span><br><span class="line">   * them to &#123;@code sink&#125;. Returns the number of bytes read, or -1 if this</span><br><span class="line">   * source is exhausted.</span><br><span class="line">   */</span><br><span class="line">  // 将字节数据从source中移除，并添加到Sink中</span><br><span class="line">  long read(Buffer sink, long byteCount) throws IOException;</span><br><span class="line"></span><br><span class="line">  /** Returns the timeout for this source. */</span><br><span class="line">  Timeout timeout();</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * Closes this source and releases the resources held by this source. It is an</span><br><span class="line">   * error to read a closed source. It is safe to close a source more than once.</span><br><span class="line">   */</span><br><span class="line">  @Override void close() throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="BufferedSource"><a href="#BufferedSource" class="headerlink" title="BufferedSource"></a>BufferedSource</h4><p>带有缓存的Source接口，实际实现是RealBufferedSource；</p>
+<h4 id="Sink"><a href="#Sink" class="headerlink" title="Sink"></a>Sink</h4><ul>
+<li><p>对应原生IO的OutputStream，提供了write方法，用来从Source缓存中读取缓存数据，写入到自己的<br>Buffer缓存中；</p>
+</li>
+<li><p>一般情况下，不要直接操作Sink，而是操作BufferedSink，它提供了更丰富、高效的接口；</p>
+</li>
+<li><p>Sink能够代替DataOutputStream(写入原生数据)、BufferedOutputStream(写入缓存数据)、<br>OutputStreamWriter(数据流字符编码)；</p>
+</li>
+<li><p>在结束时，必须调用Sink的close方法，将缓存数据推送进目标中，并且释放调用持有的资源(在采用<br>链式调用时，需要注意最后也需要关闭Sink)；</p>
+</li>
+</ul>
+<p>通过：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Okio.buffer(Sink);</span><br></pre></td></tr></table></figure></p>
+<p>可以得到BufferedSink实例；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public interface Sink extends Closeable, Flushable &#123;</span><br><span class="line">  /** Removes &#123;@code byteCount&#125; bytes from &#123;@code source&#125; and appends them to this. */</span><br><span class="line">  // 基础的write操作,该方法将指定数量的字节从source中移出，并写入自己的Buffer</span><br><span class="line">  void write(Buffer source, long byteCount) throws IOException;</span><br><span class="line"></span><br><span class="line">  /** Pushes all buffered bytes to their final destination. */</span><br><span class="line">  @Override void flush() throws IOException;</span><br><span class="line"></span><br><span class="line">  /** Returns the timeout for this sink. */</span><br><span class="line">  Timeout timeout();</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * Pushes all buffered bytes to their final destination and releases the</span><br><span class="line">   * resources held by this sink. It is an error to write a closed sink. It is</span><br><span class="line">   * safe to close a sink more than once.</span><br><span class="line">   */</span><br><span class="line">   // Sink可以多次调用close</span><br><span class="line">  @Override void close() throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="BufferedSink"><a href="#BufferedSink" class="headerlink" title="BufferedSink"></a>BufferedSink</h4><p>带有缓存的Sink接口，实际实现是BufferedSink类；</p>
+<h4 id="Segment"><a href="#Segment" class="headerlink" title="Segment"></a>Segment</h4><p>Segment字面的意思就是片段，okio将数据也就是Buffer分割成一块块的片段，内部维护者固定长度的<br>byte[]数组，同时segment拥有前面节点和后面节点，构成一个双向循环链表；</p>
+<p><img src="/images/segment.png" alt="image"></p>
+<ul>
+<li>采用双向链表的解构，每一个Segment都代表一个节点，并且保存了前后两个节点的指针，<br>提供了pop(出栈)和push(入栈)方法；</li>
+<li>封装了一个byte数组，用来保存一小段缓存数据；</li>
+<li>多个Segment之间可能会分享数据流，在这种情况下的Segment，可能无法被回收和修改；</li>
+<li>pop方法用来将当前Segment从当前链表中移除，push方法用来将一个Segment添加到当前Segment的<br>后面；</li>
+</ul>
+<p>属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/** The size of all segments in bytes. */</span><br><span class="line">static final int SIZE = 8192;</span><br><span class="line"></span><br><span class="line">/** Segments will be shared when doing so avoids &#123;@code arraycopy()&#125; of this many bytes. */</span><br><span class="line">// 在调用split分割Segment时，如果要求分割的字节数超过了该值，则不会采用复制数组的方式进行</span><br><span class="line">// 分割，而是采用共享的方式</span><br><span class="line">static final int SHARE_MINIMUM = 1024;</span><br><span class="line"></span><br><span class="line">final byte[] data;</span><br><span class="line"></span><br><span class="line">// Segment保存的字节数组中，第一个可读的位置</span><br><span class="line">/** The next byte of application data byte to read in this segment. */</span><br><span class="line">int pos;</span><br><span class="line"></span><br><span class="line">// Segment的剩余可写的字节数组的第一个位置</span><br><span class="line">// 所以Segment实际保存的数据为pos ~ limit-1</span><br><span class="line">/** The first byte of available data ready to be written to. */</span><br><span class="line">int limit;</span><br><span class="line"></span><br><span class="line">// Segment的字节数据是不是与别的Segment共享的，默认情况下是false</span><br><span class="line">// 当在split时采用的是共享的方式，则分割出来的Segment该变量为true</span><br><span class="line">/** True if other segments or byte strings use the same byte array. */</span><br><span class="line">boolean shared;</span><br><span class="line"></span><br><span class="line">// 当前Segment是否是其中字节数据的拥有者</span><br><span class="line">/** True if this segment owns the byte array and can append to it, extending &#123;@code limit&#125;. */</span><br><span class="line">boolean owner;</span><br><span class="line"></span><br><span class="line">/** Next segment in a linked or circularly-linked list. */</span><br><span class="line">Segment next;</span><br><span class="line"></span><br><span class="line">/** Previous segment in a circularly-linked list. */</span><br><span class="line">Segment prev;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>pos和limit变量类似于两个指针，在Segment进行字节数据共享时，这两个变量用来指定当前Segment<br>有效的数据域(范围)，这也是为什么，当多个Segment共享字节数据时，Segment无法被修改。如果修改了，<br>那么其他的Segment的有效数据域可能会受到影响；</p>
+</blockquote>
+<ul>
+<li>sharedCopy</li>
+</ul>
+<p>创建一个新的Segment，这个与创建它的Segment共享同一个字节数组数据，并且标明这个新的Segment不是<br>字节数组数据的拥有者；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Segment sharedCopy() &#123;</span><br><span class="line">  shared = true;</span><br><span class="line">  return new Segment(data, pos, limit, true, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>unsharedCopy</li>
+</ul>
+<p>创建一个全新的Segment，并且这个Segment的数据与创建它的Segment是相同的；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Segment unsharedCopy() &#123;</span><br><span class="line">  return new Segment(data.clone(), pos, limit, false, true);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>pop</li>
+</ul>
+<p>将当前Segment从链表中移除；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public @Nullable Segment pop() &#123;</span><br><span class="line">  Segment result = next != this ? next : null;</span><br><span class="line">  prev.next = next;</span><br><span class="line">  next.prev = prev;</span><br><span class="line">  next = null;</span><br><span class="line">  prev = null;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>push</li>
+</ul>
+<p>将Segment添加到当前Segment之后；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public Segment push(Segment segment) &#123;</span><br><span class="line">  segment.prev = this;</span><br><span class="line">  segment.next = next;</span><br><span class="line">  next.prev = segment;</span><br><span class="line">  next = segment;</span><br><span class="line">  return segment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>split</li>
+</ul>
+<p>根据传入的字节数，分割Segment，将新分割出来的Segment添加到当前Segment之前；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public Segment split(int byteCount) &#123;</span><br><span class="line">  if (byteCount &lt;= 0 || byteCount &gt; limit - pos) throw new IllegalArgumentException();</span><br><span class="line">  Segment prefix;</span><br><span class="line"></span><br><span class="line">  // We have two competing performance goals:</span><br><span class="line">  //  - Avoid copying data. We accomplish this by sharing segments.</span><br><span class="line">  //  - Avoid short shared segments. These are bad for performance because they are readonly and</span><br><span class="line">  //    may lead to long chains of short segments.</span><br><span class="line">  // To balance these goals we only share segments when the copy will be large.</span><br><span class="line">  // 如果分割的字节数超过了1024，则采用共享字节数组的方式</span><br><span class="line">  if (byteCount &gt;= SHARE_MINIMUM) &#123;</span><br><span class="line">    prefix = sharedCopy();</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    // 否则直接创建一个新的Segment，并复制数据</span><br><span class="line">    prefix = SegmentPool.take();</span><br><span class="line">    System.arraycopy(data, pos, prefix.data, 0, byteCount);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 如果采用共享数据的方式，data数据拥有者的pos最大不会超过limit</span><br><span class="line">  // 如果是共享数据的方式，分割后的两个Segment实际是通过pos和limit来分别指向同一个字节数组的</span><br><span class="line">  // 不同数据段</span><br><span class="line">  prefix.limit = prefix.pos + byteCount;</span><br><span class="line">  // 当前Segment的pos重新指向</span><br><span class="line">  pos += byteCount;</span><br><span class="line">  // 将分割出去的Segment放到前一个Segment的后面，也就是当前Segment的前面</span><br><span class="line">  prev.push(prefix);</span><br><span class="line">  return prefix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>compact</li>
+</ul>
+<p>合并当前Segment和它之前的Segment为一个；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void compact() &#123;</span><br><span class="line">  if (prev == this) throw new IllegalStateException();</span><br><span class="line">  if (!prev.owner) return; // Cannot compact: prev isn&apos;t writable.</span><br><span class="line">  int byteCount = limit - pos;</span><br><span class="line">  // 如果prev是与别的Segment共享字节数组的，则其只能使用从limit～SIZE的部分</span><br><span class="line">  // 否则，0～pos部分也是可以使用的，当然，一般情况下，pos是等于0的</span><br><span class="line">  int availableByteCount = SIZE - prev.limit + (prev.shared ? 0 : prev.pos);</span><br><span class="line">  if (byteCount &gt; availableByteCount) return; // Cannot compact: not enough writable space.</span><br><span class="line">  // 开始合并到prev中</span><br><span class="line">  writeTo(prev, byteCount);</span><br><span class="line">  // 移除当前Segment</span><br><span class="line">  pop();</span><br><span class="line">  SegmentPool.recycle(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>writeTo</li>
+</ul>
+<p>将指定字节数的数据移到Sink中；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public void writeTo(Segment sink, int byteCount) &#123;</span><br><span class="line">  if (!sink.owner) throw new IllegalArgumentException();</span><br><span class="line">  // sink从limit~SIZE的部分不足以放入当前Segment，则检查Sink的0~pos部分是否可以放入数据</span><br><span class="line">  if (sink.limit + byteCount &gt; SIZE) &#123;</span><br><span class="line">    // We can&apos;t fit byteCount bytes at the sink&apos;s current position. Shift sink first.</span><br><span class="line">    // 虽然Sink是其字节数组的拥有者，但是其字节数组一部分是与别人共享的，这部分共享的数据，</span><br><span class="line">    // 可能使用了0～pos的部分，所以这部分不能被修改</span><br><span class="line">    if (sink.shared) throw new IllegalArgumentException();</span><br><span class="line">    // 加上前面的pos部分也不足以将当前Segment数据移进Sink中</span><br><span class="line">    if (sink.limit + byteCount - sink.pos &gt; SIZE) throw new IllegalArgumentException();</span><br><span class="line">    // 将sink的字节数组数据移到pos = 0的位置</span><br><span class="line">    System.arraycopy(sink.data, sink.pos, sink.data, 0, sink.limit - sink.pos);</span><br><span class="line">    sink.limit -= sink.pos;</span><br><span class="line">    sink.pos = 0;</span><br><span class="line">  &#125;</span><br><span class="line">  // 将当前Segment的数据移到Sink中</span><br><span class="line">  System.arraycopy(data, pos, sink.data, sink.limit, byteCount);</span><br><span class="line">  sink.limit += byteCount;</span><br><span class="line">  pos += byteCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="ByteString"><a href="#ByteString" class="headerlink" title="ByteString"></a>ByteString</h4><p>ByteString内部可以保存byte类型的数据，作为一个工具类，它可以把byte转为String，这个String可<br>以是utf8的值，也可以是base64后的值，也可以是md5的值等等;</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Okio/" rel="tag"># Okio</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/28/NDK/C/预编译/" rel="next" title="预编译处理">
+                <i class="fa fa-chevron-left"></i> 预编译处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/07/NDK/C/jni异常处理/" rel="prev" title="jni异常处理">
+                jni异常处理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">黄声焕</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Okio"><span class="nav-number">1.</span> <span class="nav-text">Okio</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本使用"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Source"><span class="nav-number">3.</span> <span class="nav-text">Source</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BufferedSource"><span class="nav-number">4.</span> <span class="nav-text">BufferedSource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sink"><span class="nav-number">5.</span> <span class="nav-text">Sink</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BufferedSink"><span class="nav-number">6.</span> <span class="nav-text">BufferedSink</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Segment"><span class="nav-number">7.</span> <span class="nav-text">Segment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ByteString"><span class="nav-number">8.</span> <span class="nav-text">ByteString</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄声焕</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.3.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

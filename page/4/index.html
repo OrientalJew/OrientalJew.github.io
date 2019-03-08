@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/dll/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Android/RxJava/RxJava源码分析3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -330,8 +330,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/29/NDK/C/dll/" itemprop="url">
-                  dll
+                <a class="post-title-link" href="/2018/08/11/Android/RxJava/RxJava源码分析3/" itemprop="url">
+                  RxJava源码分析(三)
                 </a>
               
             
@@ -357,7 +357,7 @@
                 
               
 
-              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
             
 
             
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-30 16:01:25" itemprop="dateModified" datetime="2018-08-30T16:01:25+08:00">2018-08-30</time>
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
               
             
           </span>
@@ -391,7 +391,533 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- toc -->
+<h5 id="observeOn"><a href="#observeOn" class="headerlink" title="observeOn"></a>observeOn</h5><p>observeOn用来切换事件流下游所在的线程；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Observable.create&lt;Int&gt; &#123;</span><br><span class="line">    it.onNext(1)</span><br><span class="line">    it.onNext(2)</span><br><span class="line">    it.onNext(3)</span><br><span class="line">    it.onComplete()</span><br><span class="line">&#125;.map &#123;</span><br><span class="line">    it.toString()</span><br><span class="line">&#125;.flatMap &#123;</span><br><span class="line">    Observable.just(it)</span><br><span class="line">&#125;.subscribeOn(Schedulers.io())</span><br><span class="line"> .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line"> .subscribe(object :Observer&lt;String&gt;&#123;</span><br><span class="line">    override fun onComplete() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onSubscribe(d: Disposable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onNext(t: String) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onError(e: Throwable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/11/Android/RxJava/RxJava源码分析3/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Android/RxJava/RxJava源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/11/Android/RxJava/RxJava源码分析/" itemprop="url">
+                  RxJava源码分析(一)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- toc -->
+<h4 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h4><p>1、RxJava中的操作符，照目前的理解，大体可以分为两类：一类是由static修饰的类操作符，这类操作符代<br>表有create、just等，它们用来引起一个Rx数据流；另一类则是实例操作符，这一类操作符必须得有Observable<br>实例才能够调用，代表有map、flatMap等，它们一般作用于数据流的中间环节，起到操作数据流的作用；</p>
+<p>2、我们把Rx操作认为是一个数据流，并分为上游和下游，最上游即我们开始Rx操作的地方，一般以<br>Observable.create、Observable.create等类操作符开始，而最下游则是我们调用subscribe,并为<br>其传递一个Observer为终点；可以这样认为，除了最上游，每一个操作符都有自己的上游操作符，除了最下游，<br>每一个操作符都有自己的下游操作符；<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/11/Android/RxJava/RxJava源码分析/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Android/RxJava/RxJava源码分析2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/11/Android/RxJava/RxJava源码分析2/" itemprop="url">
+                  RxJava源码分析(二)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- toc -->
+<h4 id="subscribeOn"><a href="#subscribeOn" class="headerlink" title="subscribeOn"></a>subscribeOn</h4><p>subscribeOn用来切换事件流上游所在的线程；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Observable.create&lt;Int&gt; &#123;</span><br><span class="line">    it.onNext(1)</span><br><span class="line">    it.onNext(2)</span><br><span class="line">    it.onNext(3)</span><br><span class="line">    it.onComplete()</span><br><span class="line">&#125;.map &#123;</span><br><span class="line">    it.toString()</span><br><span class="line">&#125;.flatMap &#123;</span><br><span class="line">    Observable.just(it)</span><br><span class="line">&#125;.subscribeOn(Schedulers.io()).subscribe(object :Observer&lt;String&gt;&#123;</span><br><span class="line">    override fun onComplete() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onSubscribe(d: Disposable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onNext(t: String) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onError(e: Throwable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/11/Android/RxJava/RxJava源码分析2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/Android/RxJava/Map与FlatMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/08/Android/RxJava/Map与FlatMap/" itemprop="url">
+                  RxJava操作符
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-08 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-08T00:00:00+08:00">2018-08-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作符/" itemprop="url" rel="index"><span itemprop="name">操作符</span></a></span>
 
                 
                 
@@ -428,18 +954,13 @@
         
           
             <!-- toc -->
-<h4 id="visual-studio-生成dll"><a href="#visual-studio-生成dll" class="headerlink" title="visual studio 生成dll"></a>visual studio 生成dll</h4><blockquote>
-<p>dll是C中的动态库，在程序执行时，被动态加载进来；</p>
+<h4 id="map于flatMap的区别"><a href="#map于flatMap的区别" class="headerlink" title="map于flatMap的区别"></a>map于flatMap的区别</h4><p>map和flatMap可以说是Rx操作符中使用频率最高的操作符，它们的区别：</p>
+<p>1、对于map，执行过程中，只有一个事件流，我们操作的是流中的内容，可以理解为操作Observable<t><br>中的T，将其装换为另一种类型O,即Observable<t> ——&gt; Observable<o></o></t></t></p>
+<p>2、对于flatMap，其作用就是把原先一个事件流转化为多个事件流，比如有一个集合，原先一个事件流，集合<br>中的元素是线性的，一个一个被发送，而通过flatMap，将集合中的每个元素又转化为一个新的事件流，所有<br>事件流同时发送结合中的每个元素，这些元素被接收时是无序的；</p>
+<blockquote>
+<p>查看ObservableFlatMap源码可以发现，每一个flatMap操作符生成的Observable都开启新的、独立<br>的订阅流程，这些订阅流程的Observer都持有了当前ObservableFlatMap的Observer，他们发送的数据<br>(onNext)最终都汇聚到了ObservableFlatMap的Observer中，通过该Observer在往下一个操作符发送<br>(onNext);</p>
 </blockquote>
-<ul>
-<li>对于函数增加前缀：__declspec(dllexport)</li>
-<li>更改项目属性，将生成结果该为dll；</li>
-<li>点击生成，生成对应的解决方案；</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__declspec(dllexport) void plugin()&#123;</span><br><span class="line">	// 获取到对应的内存地址</span><br><span class="line">	int* p = 0x2ff9d8;</span><br><span class="line">	// 修改指定内存地址的内容</span><br><span class="line">	*p = 999;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="静态库与动态库"><a href="#静态库与动态库" class="headerlink" title="静态库与动态库"></a>静态库与动态库</h4><p>静态库与动态库的区别：</p>
-<p>静态库(.a)只能使用在一个exe程序中，打包时，会被打包进行exe程序中；</p>
-<p>动态库(.dll)能被多个程序共用，打包时不会被打进exe中，而是单独存在；</p>
+<p><em>在将一种数据类型的Observable转换为另一种数据类型的Observable时，如果整个流程只有发送一个数据，<br>那么使用map进行转换即可，完全没有必要通过flatMap来转换</em></p>
 
           
         
@@ -493,7 +1014,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/C访问Java/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/NDK/C/字符串函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -512,8 +1033,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/29/NDK/C/C访问Java/" itemprop="url">
-                  C与Java互操作
+                <a class="post-title-link" href="/2018/08/05/NDK/C/字符串函数/" itemprop="url">
+                  字符串操作
                 </a>
               
             
@@ -539,7 +1060,7 @@
                 
               
 
-              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+              <time title="Created: 2018-08-05 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-05T00:00:00+08:00">2018-08-05</time>
             
 
             
@@ -556,7 +1077,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-10-07 16:20:46" itemprop="dateModified" datetime="2018-10-07T16:20:46+08:00">2018-10-07</time>
+                <time title="Modified: 2018-09-08 02:45:51" itemprop="dateModified" datetime="2018-09-08T02:45:51+08:00">2018-09-08</time>
               
             
           </span>
@@ -609,10 +1130,11 @@
       
         
           <!-- toc -->
-<h4 id="JNI读取Java成员变量类型对应的签名"><a href="#JNI读取Java成员变量类型对应的签名" class="headerlink" title="JNI读取Java成员变量类型对应的签名"></a>JNI读取Java成员变量类型对应的签名</h4><p>C访问Java中对应的成员变量，需要根据变量名和变量签名来定位变量；<br><img src="\images\Java数据类型签名列表.png" alt="image"></p>
+<h4 id="字符串操作函数"><a href="#字符串操作函数" class="headerlink" title="字符串操作函数"></a>字符串操作函数</h4><blockquote>
+<p>参考网站：<a href="http://www.kuqin.com/clib/string/strcmp.html" target="_blank" rel="noopener">http://www.kuqin.com/clib/string/strcmp.html</a><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/29/NDK/C/C访问Java/#more" rel="contents">
+            <a class="btn" href="/2018/08/05/NDK/C/字符串函数/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -668,7 +1190,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/指针/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Android/注解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -687,8 +1209,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/29/NDK/C/指针/" itemprop="url">
-                  指针
+                <a class="post-title-link" href="/2018/08/03/Android/注解/" itemprop="url">
+                  注解
                 </a>
               
             
@@ -714,7 +1236,7 @@
                 
               
 
-              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+              <time title="Created: 2018-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-03T00:00:00+08:00">2018-08-03</time>
             
 
             
@@ -731,7 +1253,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-27 09:24:55" itemprop="dateModified" datetime="2018-08-27T09:24:55+08:00">2018-08-27</time>
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
               
             
           </span>
@@ -748,7 +1270,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
 
                 
                 
@@ -784,13 +1306,13 @@
       
         
           <!-- toc -->
-<h4 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h4><blockquote>
-<p>指针存储的是变量的内存地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void main()&#123;</span><br><span class="line">	int i = 60;</span><br><span class="line">	// 创建一个int类型的指针，并将i的地址赋给它</span><br><span class="line">	int* p = &amp;i;</span><br><span class="line">	printf(&quot;%#x\n&quot;, p);</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="元数据-metadata"><a href="#元数据-metadata" class="headerlink" title="元数据(metadata)"></a>元数据(metadata)</h4><p>元数据就是描述数据的数据，对数据及信息资源的描述性信息.比如说一个文本文件,有创建时间,创建人,文件大小等数据,这都可以理解为是元数据.</p>
+<blockquote>
+<p>在java中,元数据以标签的形式存在java代码中,它的存在并不影响程序代码的编译和执行，通常它被用来生成其它的文件或运行时知道被运行代码的描述信息。java当中的javadoc和注解都属于元数据.</p>
 </blockquote>
-<p>在指针中，* 称为取内容运算符，指针变量指向的是变量的地址，而拥有了变量的地址，我们可以直接通过指针操作其指向的地址中的内容；</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/29/NDK/C/指针/#more" rel="contents">
+            <a class="btn" href="/2018/08/03/Android/注解/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -846,7 +1368,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/函数/函数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Android/EventBus/基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -865,8 +1387,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/28/js/函数/函数/" itemprop="url">
-                  函数
+                <a class="post-title-link" href="/2018/08/03/Android/EventBus/基础/" itemprop="url">
+                  EventBus源码分析
                 </a>
               
             
@@ -892,7 +1414,7 @@
                 
               
 
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
+              <time title="Created: 2018-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-03T00:00:00+08:00">2018-08-03</time>
             
 
             
@@ -909,7 +1431,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
               
             
           </span>
@@ -926,7 +1448,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
 
                 
                 
@@ -962,10 +1484,13 @@
       
         
           <!-- toc -->
-<h4 id="arguments关键字"><a href="#arguments关键字" class="headerlink" title="arguments关键字"></a>arguments关键字</h4><p>arguments是函数内部的关键字，可以用来获取传给函数的所有参数，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function foo(x) &#123;</span><br><span class="line">    console.log(&apos;x = &apos; + x); // 10</span><br><span class="line">    for (var i=0; i&lt;arguments.length; i++) &#123;</span><br><span class="line">        console.log(&apos;arg &apos; + i + &apos; = &apos; + arguments[i]); // 10, 20, 30</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">foo(10, 20, 30);</span><br></pre></td></tr></table></figure></p>
+<h4 id="什么是EventBus"><a href="#什么是EventBus" class="headerlink" title="什么是EventBus"></a>什么是EventBus</h4><p><strong>EventBus是一个使用”观察者模式”的、松耦合的开源框架，能够帮助我们简化代码、松依赖、加速开发。</strong></p>
+<p>EventBus基于观察者模式中的发布-订阅(Publish-Subscribe)模式(事件总线)，与传统的观察者模式<br>不同，在传统的观察者模式下，我们更多是处于订阅者的身份，数据的发布大多数情况下我们是不可控的，我<br>们一般只能触发数据开始发送，而EventBus则将发布(post)和订阅的能力都交由我们自己处理；<br>当然，EventBus同样拥有观察者模式的优点，就是发布者和订阅者是解耦的。</p>
+<blockquote>
+<p>1、订阅者注册时，会用两个HashMap来保存其信息，分别是根据事件类型(key)保存订阅信息<br>(订阅者 - 订阅方法)的subscriptionsByEventType和根据订阅者(key)保存其对应的所有订阅事件的<br>typesBySubscriber；<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/函数/函数/#more" rel="contents">
+            <a class="btn" href="/2018/08/03/Android/EventBus/基础/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1021,7 +1546,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/函数/生成器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Android/Utils/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1040,8 +1565,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/28/js/函数/生成器/" itemprop="url">
-                  生成器
+                <a class="post-title-link" href="/2018/08/03/Android/Utils/" itemprop="url">
+                  Utils
                 </a>
               
             
@@ -1067,7 +1592,7 @@
                 
               
 
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
+              <time title="Created: 2018-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-03T00:00:00+08:00">2018-08-03</time>
             
 
             
@@ -1084,7 +1609,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
               
             
           </span>
@@ -1101,7 +1626,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
 
                 
                 
@@ -1136,905 +1661,403 @@
 
       
         
-          <!-- toc -->
+          
+            <!-- toc -->
+<h4 id="校验重复方法签名"><a href="#校验重复方法签名" class="headerlink" title="校验重复方法签名"></a>校验重复方法签名</h4><p>该方法取自EventBus3.0，原理是通过HashMap的put方法，在相同key的情况下，会返回旧的数据；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">private boolean checkAddWithMethodSignature(Method method, Class&lt;?&gt; eventType) &#123;</span><br><span class="line">    // 构造方法签名</span><br><span class="line">    methodKeyBuilder.setLength(0);</span><br><span class="line">    methodKeyBuilder.append(method.getName());</span><br><span class="line">    methodKeyBuilder.append(&apos;&gt;&apos;).append(eventType.getName());</span><br><span class="line"></span><br><span class="line">    String methodKey = methodKeyBuilder.toString();</span><br><span class="line">    Class&lt;?&gt; methodClass = method.getDeclaringClass();</span><br><span class="line">    // 放进HashMap查看是否有重复</span><br><span class="line">    Class&lt;?&gt; methodClassOld = subscriberClassByMethodKey.put(methodKey, methodClass);</span><br><span class="line">    // 如果方法签名重复，并且两个方法是在同一个类或者存在父子或接口继承关系</span><br><span class="line">    if (methodClassOld == null || methodClassOld.isAssignableFrom(methodClass)) &#123;</span><br><span class="line">        // Only add if not already found in a sub class</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // Revert the put, old class is further down the class hierarchy</span><br><span class="line">        subscriberClassByMethodKey.put(methodKey, methodClassOld);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Kotlin/接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/Kotlin/接口/" itemprop="url">
+                  接口
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kotlin/" itemprop="url" rel="index"><span itemprop="name">Kotlin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h4 id="定义变量和方法"><a href="#定义变量和方法" class="headerlink" title="定义变量和方法"></a>定义变量和方法</h4><p>Kotlin中的接口是可以定义变量和方法体，但变量不可以初始化，也就是不能有状态，只能有定义（<strong>Java<br>中的变量可以被初始化</strong>），在被继承时必须初始化接口变量，赋予状态，而方法表示的是实现过程，本身就没<br>有状态（<strong>Java8开始，也支持定义static和default类型的方法，这些方法是可以有方法体的</strong>）。</p>
+<blockquote>
+<p>为什么接口中的变量不能被初始化？</p>
+</blockquote>
+<p>因为接口中的变量没有backing field，也就无法存储变量，所以只能做为一种声明；</p>
+<p>backing field(类中定义的变量自带，用来存储变量内容，可以理解为堆栈) + get、set 方法 等价于<br>Kotlin类中的属性Property，这也是Kotlin中独有的；</p>
+<p>在Kotlin中只需声明一个变量，就相当于属性，backing field + get、set 方法由Kotlin自动生成；<br>在Java中，这些都必须自己手动声明；</p>
+<h4 id="解决多接口方法冲突"><a href="#解决多接口方法冲突" class="headerlink" title="解决多接口方法冲突"></a>解决多接口方法冲突</h4><p>当一个类继承了多个接口，这些接口出现了两个完全一致的方法声明，必须通过super进行显式指定调用方；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">interface n1&#123;</span><br><span class="line">    fun nn(): Int = 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface n2&#123;</span><br><span class="line">    fun nn(): Int = 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">abstract class n3&#123;</span><br><span class="line">    open fun nn(): Int = 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class n0 : n1, n2, n3() &#123;</span><br><span class="line">    val i = 0</span><br><span class="line">    override fun nn(): Int &#123;</span><br><span class="line">        if (i &gt; 0) &#123;</span><br><span class="line">            return super&lt;n2&gt;.nn()</span><br><span class="line">        &#125;else if (i &lt; 0) &#123;</span><br><span class="line">            return super&lt;n3&gt;.nn()</span><br><span class="line">        &#125;</span><br><span class="line">        return super&lt;n1&gt;.nn()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="SAM接口"><a href="#SAM接口" class="headerlink" title="SAM接口"></a>SAM接口</h4><p>SAM接口又称为函数式接口(Single Abstract Method interfaces)，这种接口可以简单的理解为：只有<br>一个抽象方法的接口，这种接口可以通过lambda实现简化，在Java8和Kotlin中都有应用到。</p>
+<blockquote>
+<p>比如View的OnclickListener接口就是一个典型的SAM接口，Kotlin中的函数类型也可以理解为SAM接口<br>的另一种形式(Kotlin不需要定义SAM接口，有函数类型就够了，对SAM接口的简化只是为了兼容Java)。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Java/Java基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/Java/Java基础/" itemprop="url">
+                  Java基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h4 id="变量的存储位置"><a href="#变量的存储位置" class="headerlink" title="变量的存储位置"></a>变量的存储位置</h4><p>1.寄存器：最快的存储区, 由编译器根据需求进行分配,我们在程序中无法控制。</p>
+<ol start="2">
+<li><p>栈：存放基本类型的变量数据和对象的引用，但对象本身不存放在栈中，而是存放在堆（new 出来的对象）<br>或者常量池中（字符串常量对象存放在常量池中）。</p>
+</li>
+<li><p>堆：存放所有new出来的对象。</p>
+</li>
+<li><p>静态域：存放静态成员（static定义的）。</p>
+</li>
+<li><p>常量池：存放字符串常量和基本类型常量（public static final）。</p>
+</li>
+<li><p>非RAM存储：硬盘等永久存储空间。</p>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p>堆栈：</p>
 <ul>
-<li>generator通过function* 进行定义，并且除了return语句，还可以使用yield进行返回数据；</li>
+<li>对于栈和常量池中的对象可以共享，对于堆中的对象不可以共享;</li>
+<li>栈中的数据大小和生命周期是可以确定的，当没有引用指向数据时，这个数据就会消失。堆中的对象的由垃<br>圾回收器负责回收，因此大小和生命周期不需要确定，具有很大的灵活性;</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function* fib(max) &#123;</span><br><span class="line">    var</span><br><span class="line">        t,</span><br><span class="line">        a = 0,</span><br><span class="line">        b = 1,</span><br><span class="line">        n = 0;</span><br><span class="line">    while (n &lt; max) &#123;</span><br><span class="line">        yield a;</span><br><span class="line">        [a, b] = [b, a + b];</span><br><span class="line">        n ++;</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/函数/生成器/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/函数/闭包/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/js/函数/闭包/" itemprop="url">
-                  闭包
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><blockquote>
-<p>函数式编程的世界中，闭包的作用等价于面向对象编程中的类！</p>
 </blockquote>
+<blockquote>
+<p>字符串：</p>
 <ul>
-<li>闭包可以认为是携带状态的函数，它能让其中的临时变量的生命周期得到无限的延长，因为闭包函数的执行周期是无限的！</li>
-<li>闭包每次返回的函数都是一个全新的函数实例对象，但是对于这些新的函数实例对象，外部函数的临时变量是唯一的，即是所有函数实例对象所共享的！</li>
-<li>闭包能够对临时变量进行封装，使其达到私有变量的效果，外部代码无法访问到(函数科里化)！
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/函数/闭包/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/js/方法/" itemprop="url">
-                  方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
-              
-            
-          </span>
+<li>对于字符串：其对象的引用都是存储在栈中的，如果是编译期已经创建好(直接用双引号定义的)的就存储在<br>常量池中，如果是运行期（new出来的）才能确定的就存储在堆中。对于equals相等的字符串，在常量池中永<br>远只有一份，在堆中有多份；</li>
+<li>对于通过new产生一个字符串（假设为”china”）时，会先去常量池中查找是否已经有了”china”对象，如<br>果没有则在常量池中创建一个此字符串对象，然后堆中再创建一个常量池中此”china”对象的拷贝对象。这也<br>就是有道面试题：String s = new String(“xyz”);产生几个对象？一个或两个，如果常量池中原来没有<br>”xyz”,就是两个。</li>
+</ul>
+</blockquote>
+<h4 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h4><ul>
+<li>一个程序至少有一个进程(通过为Activity设置android:process可以让其运行在单独的进程中)，一个<br>进程至少有一个线程；</li>
+<li>进程可以单独存在，而线程不能独立存在，必须依赖于一个进程；</li>
+<li>进程是系统资源分配的最小单位，线程是程序执行的最小单位；</li>
+<li>进程有自己独立的内存地址空间，进程之间无法直接通讯，只能通过IPC进行通讯；</li>
+<li>线程间共享进程的地址空间和内存资源，多个线程共享全局变量和静态变量，所以线程之间的通讯更加方便；</li>
+<li>进程之间是相互独立的，一个进程死掉，不会影响到其他进程，而在多线程的环境下，一个线程死掉，其所<br>在的整个进程也会死掉；</li>
+</ul>
+<h4 id="内部类的优点"><a href="#内部类的优点" class="headerlink" title="内部类的优点"></a>内部类的优点</h4><p>Java不支持多继承 ，只支持多实现。但是，很多时候，只是实现一些接口很难解决问题，此时，我们就可以<br>使用内部类来解决问题。内部类即可与外部类关联(非静态内部类)，也可以独立于外部类(静态内部类)，并且，<br>内部类的环境是不受到外部类的影响的，通过它们来继承我们需要的类的能力，能让我们更灵活的解决问题；</p>
+<p>可以说，接口只是帮我们解决了部分问题，而内部类赋予类多重继承的能力，使解决问题的方案更加的完整；</p>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="this引用问题"><a href="#this引用问题" class="headerlink" title="this引用问题"></a>this引用问题</h4><p>JavaScript的对象也可以为其定义方法；</p>
-<p>方法与函数不同之处在于，方法可以通过this来引用对象中的属性和其他方法；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var xiaoming = &#123;</span><br><span class="line">    name: &apos;小明&apos;,</span><br><span class="line">    birth: 1990,</span><br><span class="line">    age: function () &#123;</span><br><span class="line">        var y = new Date().getFullYear();</span><br><span class="line">        return y - this.birth;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xiaoming.age; // function xiaoming.age()</span><br><span class="line">xiaoming.age(); // 今年调用是25,明年调用就变成26了</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/方法/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/函数/高阶函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/js/函数/高阶函数/" itemprop="url">
-                  高阶函数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h4><p>在JavaScript的世界中，万物皆为对象，而函数同样也是对象；</p>
-<p>我们可以声明一个变量来指向函数对象，同样的，我们也可以用函数对象作为参数传递给另一个函数；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add(x, y, f) &#123;</span><br><span class="line">    // f 指向了一个函数对象</span><br><span class="line">    return f(x) + f(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/函数/高阶函数/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/基础 (1)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/js/基础 (1)/" itemprop="url">
-                  基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><p>JavaScript中存在两种比较运算符，分别是== 和 === 两种:</p>
-<p>第一种是’==’比较，它会自动转换数据类型再比较，很多时候，会得到非常诡异的结果；</p>
-<p>第二种是’===’比较，它不会自动转换数据类型，如果数据类型不一致，返回false，如果一致，再比较。</p>
-<p>由于JavaScript这个设计缺陷，不要使用 == 比较，始终坚持使用 === 比较。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/基础 (1)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/标准对象/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/js/标准对象/" itemprop="url">
-                  标准对象
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-30 09:26:39" itemprop="dateModified" datetime="2018-07-30T09:26:39+08:00">2018-07-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="typeof获取对象的的类型"><a href="#typeof获取对象的的类型" class="headerlink" title="typeof获取对象的的类型"></a>typeof获取对象的的类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typeof 123; // &apos;number&apos;</span><br><span class="line">typeof NaN; // &apos;number&apos;</span><br><span class="line">typeof &apos;str&apos;; // &apos;string&apos;</span><br><span class="line">typeof true; // &apos;boolean&apos;</span><br><span class="line">typeof undefined; // &apos;undefined&apos;</span><br><span class="line">typeof Math.abs; // &apos;function&apos;</span><br><span class="line">typeof null; // &apos;object&apos;</span><br><span class="line">typeof []; // &apos;object&apos;</span><br><span class="line">typeof &#123;&#125;; // &apos;object&apos;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/标准对象/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -2075,7 +2098,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2118,7 +2141,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2149,7 +2172,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2208,7 +2233,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

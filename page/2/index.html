@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Android/RxJava/RxJava源码分析3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/NDK/C++/C++函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -330,8 +330,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/11/Android/RxJava/RxJava源码分析3/" itemprop="url">
-                  RxJava源码分析(三)
+                <a class="post-title-link" href="/2019/02/24/NDK/C++/C++函数/" itemprop="url">
+                  C++ 函数
                 </a>
               
             
@@ -357,7 +357,7 @@
                 
               
 
-              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
+              <time title="Created: 2019-02-24 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-24T00:00:00+08:00">2019-02-24</time>
             
 
             
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
+                <time title="Modified: 2019-03-03 15:27:43" itemprop="dateModified" datetime="2019-03-03T15:27:43+08:00">2019-03-03</time>
               
             
           </span>
@@ -391,708 +391,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h5 id="observeOn"><a href="#observeOn" class="headerlink" title="observeOn"></a>observeOn</h5><p>observeOn用来切换事件流下游所在的线程；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Observable.create&lt;Int&gt; &#123;</span><br><span class="line">    it.onNext(1)</span><br><span class="line">    it.onNext(2)</span><br><span class="line">    it.onNext(3)</span><br><span class="line">    it.onComplete()</span><br><span class="line">&#125;.map &#123;</span><br><span class="line">    it.toString()</span><br><span class="line">&#125;.flatMap &#123;</span><br><span class="line">    Observable.just(it)</span><br><span class="line">&#125;.subscribeOn(Schedulers.io())</span><br><span class="line"> .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line"> .subscribe(object :Observer&lt;String&gt;&#123;</span><br><span class="line">    override fun onComplete() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onSubscribe(d: Disposable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onNext(t: String) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onError(e: Throwable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/11/Android/RxJava/RxJava源码分析3/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Android/RxJava/RxJava源码分析2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/11/Android/RxJava/RxJava源码分析2/" itemprop="url">
-                  RxJava源码分析(二)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="subscribeOn"><a href="#subscribeOn" class="headerlink" title="subscribeOn"></a>subscribeOn</h4><p>subscribeOn用来切换事件流上游所在的线程；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Observable.create&lt;Int&gt; &#123;</span><br><span class="line">    it.onNext(1)</span><br><span class="line">    it.onNext(2)</span><br><span class="line">    it.onNext(3)</span><br><span class="line">    it.onComplete()</span><br><span class="line">&#125;.map &#123;</span><br><span class="line">    it.toString()</span><br><span class="line">&#125;.flatMap &#123;</span><br><span class="line">    Observable.just(it)</span><br><span class="line">&#125;.subscribeOn(Schedulers.io()).subscribe(object :Observer&lt;String&gt;&#123;</span><br><span class="line">    override fun onComplete() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onSubscribe(d: Disposable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onNext(t: String) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onError(e: Throwable) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/11/Android/RxJava/RxJava源码分析2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Java/捕获全局异常/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/11/Java/捕获全局异常/" itemprop="url">
-                  捕获全局异常
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="UncaughtExceptionHandler"><a href="#UncaughtExceptionHandler" class="headerlink" title="UncaughtExceptionHandler"></a>UncaughtExceptionHandler</h4><p>Java提供了一种捕获全局异常的机制，当线程中出现异常时，我们可以主动将其捕获，并传入自己的异常<br>处理其，可以决定是否结束程序；<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/11/Java/捕获全局异常/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Android/RxJava/RxJava源码分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/11/Android/RxJava/RxJava源码分析/" itemprop="url">
-                  RxJava源码分析(一)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="RxJava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava</h4><p>1、RxJava中的操作符，照目前的理解，大体可以分为两类：一类是由static修饰的类操作符，这类操作符代<br>表有create、just等，它们用来引起一个Rx数据流；另一类则是实例操作符，这一类操作符必须得有Observable<br>实例才能够调用，代表有map、flatMap等，它们一般作用于数据流的中间环节，起到操作数据流的作用；</p>
-<p>2、我们把Rx操作认为是一个数据流，并分为上游和下游，最上游即我们开始Rx操作的地方，一般以<br>Observable.create、Observable.create等类操作符开始，而最下游则是我们调用subscribe,并为<br>其传递一个Observer为终点；可以这样认为，除了最上游，每一个操作符都有自己的上游操作符，除了最下游，<br>每一个操作符都有自己的下游操作符；<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/11/Android/RxJava/RxJava源码分析/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/Android/RxJava/Map与FlatMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/08/Android/RxJava/Map与FlatMap/" itemprop="url">
-                  RxJava操作符
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-08 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-08T00:00:00+08:00">2018-08-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作符/" itemprop="url" rel="index"><span itemprop="name">操作符</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1129,13 +428,9 @@
         
           
             <!-- toc -->
-<h4 id="map于flatMap的区别"><a href="#map于flatMap的区别" class="headerlink" title="map于flatMap的区别"></a>map于flatMap的区别</h4><p>map和flatMap可以说是Rx操作符中使用频率最高的操作符，它们的区别：</p>
-<p>1、对于map，执行过程中，只有一个事件流，我们操作的是流中的内容，可以理解为操作Observable<t><br>中的T，将其装换为另一种类型O,即Observable<t> ——&gt; Observable<o></o></t></t></p>
-<p>2、对于flatMap，其作用就是把原先一个事件流转化为多个事件流，比如有一个集合，原先一个事件流，集合<br>中的元素是线性的，一个一个被发送，而通过flatMap，将集合中的每个元素又转化为一个新的事件流，所有<br>事件流同时发送结合中的每个元素，这些元素被接收时是无序的；</p>
-<blockquote>
-<p>查看ObservableFlatMap源码可以发现，每一个flatMap操作符生成的Observable都开启新的、独立<br>的订阅流程，这些订阅流程的Observer都持有了当前ObservableFlatMap的Observer，他们发送的数据<br>(onNext)最终都汇聚到了ObservableFlatMap的Observer中，通过该Observer在往下一个操作符发送<br>(onNext);</p>
-</blockquote>
-<p><em>在将一种数据类型的Observable转换为另一种数据类型的Observable时，如果整个流程只有发送一个数据，<br>那么使用map进行转换即可，完全没有必要通过flatMap来转换</em></p>
+<h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 函数默认参数</span><br><span class="line">// 一旦有一个参数设置默认值，后面的参数就必须跟着设置默认值</span><br><span class="line">void testFun(int x, int y = 1, int z = 2)&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	testFun(1);</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 可变参数</span><br><span class="line">void fundc(int i, ...)&#123;</span><br><span class="line">	// 拿到可变参数指针</span><br><span class="line">	va_list args_p;</span><br><span class="line"></span><br><span class="line">	// 开始读取时，需要指定哪个参数是可变参数前的最后一个参数</span><br><span class="line">	va_start(args_p, i);</span><br><span class="line">	// 拿到可变参数列表中的值</span><br><span class="line">	int a = va_arg(args_p, int);</span><br><span class="line">	char c = va_arg(args_p, char);</span><br><span class="line">	int  b = va_arg(args_p, int);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; a &lt;&lt; &quot;,&quot; &lt;&lt; c &lt;&lt; &quot;,&quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	fundc(1, 2, &apos;c&apos;, 12);</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="常函数"><a href="#常函数" class="headerlink" title="常函数"></a>常函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class B&#123;</span><br><span class="line">public:</span><br><span class="line">	int i;</span><br><span class="line">	int j;</span><br><span class="line">	int k;</span><br><span class="line">	void myPrintf()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;打印&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 常函数，修饰的是this的内容，即是常量指针</span><br><span class="line">	// 不能在函数中修改this指向的变量的内容，使函数更加安全；</span><br><span class="line">	// const B* const this</span><br><span class="line">	void testConst()const&#123;</span><br><span class="line">		//this-&gt;i = 10;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// B* const this</span><br><span class="line">	void testConst2()&#123;</span><br><span class="line">		this-&gt;j = 10;</span><br><span class="line">		// this 是指针常量，不能修改指向</span><br><span class="line">		//this = (B*)0x00009;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	cout &lt;&lt; sizeof(A) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; sizeof(B) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// C/C++内存分区：栈、堆、全局(静态、全局)、常量区(字符串)、程序代码区</span><br><span class="line">	// 普通类属性与结构体中的属性有相同的内存布局(各属性大小的和)，</span><br><span class="line">	// 静态成员存在于全局区中；</span><br><span class="line">	// 函数存在于程序代码区中；</span><br><span class="line"></span><br><span class="line">	// 普通对象能调用常函数</span><br><span class="line">	B b;</span><br><span class="line">	b.testConst();</span><br><span class="line">	b.testConst2();</span><br><span class="line"></span><br><span class="line">	const B b1;</span><br><span class="line">	// 常量对象只能调用常函数</span><br><span class="line">	// 在常函数中，当前对象指向的变量内容不能被修改，能够起到防止数据成员被非法访问</span><br><span class="line">	//b1.testConst2();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1189,7 +484,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/NDK/C/字符串函数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/C++与C的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1208,8 +503,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/05/NDK/C/字符串函数/" itemprop="url">
-                  字符串操作
+                <a class="post-title-link" href="/2019/02/20/NDK/C++/C++与C的区别/" itemprop="url">
+                  C++ 与C 的区别
                 </a>
               
             
@@ -1235,7 +530,167 @@
                 
               
 
-              <time title="Created: 2018-08-05 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-05T00:00:00+08:00">2018-08-05</time>
+              <time title="Created: 2019-02-20 00:00:00 / Modified: 01:10:52" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h3 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// C++ 比C多了一种基本数据类型，bool</span><br><span class="line">	// true和false对应C中的1和0</span><br><span class="line">	//bool isSingle = true;</span><br><span class="line">	//bool isSingle = 3;</span><br><span class="line">	//bool isSingle = -3;</span><br><span class="line">	// 0表示false，非0表示true</span><br><span class="line">	bool isSingle = 0;</span><br><span class="line">	if (isSingle)&#123;</span><br><span class="line">		cout &lt;&lt; &quot;single&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">		cout &lt;&lt; &quot;not single&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	// 在C++中，三元运算符?:并不是表示普通的逻辑运算语句(语句(statement)：不返回值的代码块，或可执行代码行)，而是可以是表达式</span><br><span class="line">	// (表达式：允许有返回值)，它的返回值是逻辑运算的结果</span><br><span class="line">	// 在C中，三元运算符仍然只是一个语句！</span><br><span class="line">	int a = 1, b = 3;</span><br><span class="line">	// 对逻辑运算结果进行赋值</span><br><span class="line">	// a = 1,b= 10</span><br><span class="line">	(a &gt; b ? a : b) = 10;</span><br><span class="line">	cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;,b= &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/C++的类和结构体/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/NDK/C++/C++的类和结构体/" itemprop="url">
+                  C++ 类和结构体
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
             
 
             
@@ -1252,7 +707,1010 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-09-08 02:45:51" itemprop="dateModified" datetime="2018-09-08T02:45:51+08:00">2018-09-08</time>
+                <time title="Modified: 2019-03-03 15:32:15" itemprop="dateModified" datetime="2019-03-03T15:32:15+08:00">2019-03-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#define PI 3.14</span><br><span class="line"></span><br><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">class Circle&#123;</span><br><span class="line">private:</span><br><span class="line">	int r;</span><br><span class="line">public:</span><br><span class="line">	double getArea()&#123;</span><br><span class="line">		return r*r*PI;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	void setR(int r)&#123;</span><br><span class="line">		this-&gt;r = r;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// C++ 中，访问成员变量和成员方法时，类是不需要进行实例化的</span><br><span class="line">	// C++的类，作用更类似于结构体struct</span><br><span class="line">	Circle cl;</span><br><span class="line">	cl.setR(5);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; &quot;面积为：&quot; &lt;&lt; cl.getArea() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="类的大小"><a href="#类的大小" class="headerlink" title="类的大小"></a>类的大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">public:</span><br><span class="line">	int i;</span><br><span class="line">	int j;</span><br><span class="line">	int k;</span><br><span class="line">	static int l;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B&#123;</span><br><span class="line">public:</span><br><span class="line">	int i;</span><br><span class="line">	int j;</span><br><span class="line">	int k;</span><br><span class="line">	void myPrintf()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;打印&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 常函数，修饰的是this的内容，即是常量指针</span><br><span class="line">	// 不能在函数中修改this指向的变量的内容，使函数更加安全；</span><br><span class="line">	// const B* const this</span><br><span class="line">	void testConst()const&#123;</span><br><span class="line">		//this-&gt;i = 10;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// B* const this</span><br><span class="line">	void testConst2()&#123;</span><br><span class="line">		this-&gt;j = 10;</span><br><span class="line">		// this 是指针常量，不能修改指向</span><br><span class="line">		//this = (B*)0x00009;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	cout &lt;&lt; sizeof(A) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; sizeof(B) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// C/C++内存分区：栈、堆、全局(静态、全局)、常量区(字符串)、程序代码区</span><br><span class="line">	// 普通类属性与结构体中的属性有相同的内存布局(各属性大小的和)，</span><br><span class="line">	// 静态成员存在于全局区中；</span><br><span class="line">	// 函数存在于程序代码区中；</span><br><span class="line">	// 类的每一个对象，其普通属性存在各自的内存中，而函数则是共享的，放在程序代码区中，</span><br><span class="line">	// 当类进行调用时，通过this指针区分不同的对象调用；</span><br><span class="line"></span><br><span class="line">	// 普通对象能调用常函数</span><br><span class="line">	B b;</span><br><span class="line">	b.testConst();</span><br><span class="line">	b.testConst2();</span><br><span class="line"></span><br><span class="line">	const B b1;</span><br><span class="line">	// 常量对象只能调用常函数</span><br><span class="line">	// 在常函数中，当前对象指向的变量内容不能被修改，能够起到防止数据成员被非法访问</span><br><span class="line">	//b1.testConst2();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">struct Teacher&#123;</span><br><span class="line">private:</span><br><span class="line">	char name[20];</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	int age;</span><br><span class="line">	void say()&#123;</span><br><span class="line">		cout &lt;&lt; this-&gt;age &lt;&lt; &quot;岁;&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// C++中的结构体是不需要在前面添加struct关键字的</span><br><span class="line">	// C++中，结构体与类最大的区别在于，类是可以进行继承的，而结构体是不行的；</span><br><span class="line">	Teacher t1;</span><br><span class="line">	t1.age = 20;</span><br><span class="line">	t1.say();</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="C-中的类定义步骤"><a href="#C-中的类定义步骤" class="headerlink" title="C++中的类定义步骤"></a>C++中的类定义步骤</h4><p>1，在C++中，类和函数一般会声明在头文件中：<br>teacher.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// C++ 中，类和函数的声明都是放在头文件中的</span><br><span class="line"></span><br><span class="line">// 确保该头文件在多次include时，只会被引入，编译一次</span><br><span class="line">#pragma once</span><br><span class="line"></span><br><span class="line">class MyTeacher&#123;</span><br><span class="line">private:</span><br><span class="line">	int age;</span><br><span class="line">	char* name;</span><br><span class="line">public:</span><br><span class="line">	void setAge(int age);</span><br><span class="line">	int getAge();</span><br><span class="line">	void setName(char* name);</span><br><span class="line">	char* getName();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>2，实现<br>teacher.cpp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;teacher.h&quot;</span><br><span class="line"></span><br><span class="line">int MyTeacher::getAge()&#123;</span><br><span class="line">	return this-&gt;age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void MyTeacher::setAge(int age)&#123;</span><br><span class="line">	this-&gt;age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void MyTeacher::setName(char* name)&#123;</span><br><span class="line">	this-&gt;name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">char* MyTeacher::getName()&#123;</span><br><span class="line">	return this-&gt;name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;teacher.h&quot;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	MyTeacher t;</span><br><span class="line">	t.setName = &quot;hsh&quot;;</span><br><span class="line">	t.setAge = 20;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/C++引用、指针/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/NDK/C++/C++引用、指针/" itemprop="url">
+                  C++ 引用和指针
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-24 03:22:08" itemprop="dateModified" datetime="2019-02-24T03:22:08+08:00">2019-02-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// 变量的内容保存在特定的内存地址中，而变量名则可以认为是该地址名的别名</span><br><span class="line">	int a = 10;</span><br><span class="line">	// 在C++中，我们可以通过引用，为一个变量定义新的别名</span><br><span class="line">	int &amp;b = a;</span><br><span class="line"></span><br><span class="line">	// &amp;b表示了让b拷贝a的特性，</span><br><span class="line">	// 区别于指针，为p赋值a的地址；</span><br><span class="line">	// 实际引用和指针的效果是类似的！</span><br><span class="line">	// 指针可以理解为多保存一份变量的地址，变量值是地址，要通过地址取实际的变量值，需要多一步，用*,取地址运算</span><br><span class="line">	// 引用可以理解为省略了指针用*取值的步骤，因为引用和原变量名的作用是一致的，就是一个别名，直接通过引用就能</span><br><span class="line">	// 拿到实际变量的值(可以认为，引用比指针消耗更少，因为引用不需要再保存一份地址)</span><br><span class="line">	int *p = &amp;a;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; b&lt;&lt;endl;</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="引用传递"><a href="#引用传递" class="headerlink" title="引用传递"></a>引用传递</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void swap_1(int *a, int *b)&#123;</span><br><span class="line">	int c;</span><br><span class="line">	c = *a;</span><br><span class="line">	*a = *b;</span><br><span class="line">	*b = c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 通过引用进行交换</span><br><span class="line">// a和b此时不再是进行值传递，而是通过了引用传递</span><br><span class="line">// 此时的a和b就是调用处的传进来的参数，而不是新的变量</span><br><span class="line">void swap_2(int &amp;a, int &amp;b)&#123;</span><br><span class="line">	int c;</span><br><span class="line">	c = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 引用的主要作用是作为函数的参数和返回值：</span><br><span class="line">// 1，通过引用进行调用，比通过指针调用更加简便，省去了添加*，进行取值</span><br><span class="line">// 2，通过引用作为参数传递，可以直接传递原值，在函数中直接操作源参数，减少参数传递过程中产生的副本，提高效率</span><br><span class="line">// 3，我们可以直接通过引用操作源变量，而指针必须通过取值(*p)才能间接操作，且从可读性上讲，指针更差；</span><br><span class="line">void changeAge(Teacher &amp;t)&#123;</span><br><span class="line">	t.age = 100;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	int x = 10, y = 20;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; &quot;a = &quot; &lt;&lt; x &lt;&lt; &quot;b = &quot; &lt;&lt; y &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// 通过指针进行值交换</span><br><span class="line">	swap_1(&amp;x, &amp;y);</span><br><span class="line">	cout &lt;&lt; &quot;a1 = &quot; &lt;&lt; x &lt;&lt; &quot;b1 = &quot; &lt;&lt; y &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// 通过引用进行值交换</span><br><span class="line">	swap_2(x, y);</span><br><span class="line">	cout &lt;&lt; &quot;a2 = &quot; &lt;&lt; x &lt;&lt; &quot;b2 = &quot; &lt;&lt; y &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="指针引用"><a href="#指针引用" class="headerlink" title="指针引用"></a>指针引用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">void getTeacher(Teacher **p)&#123;</span><br><span class="line">	// 定义一个指针，并让它指向申请的内存空间的首地址，详单与为其赋值该内存空间地址</span><br><span class="line">	Teacher* t = (Teacher*)malloc(sizeof(Teacher));</span><br><span class="line">	// p是二级指针，其应该赋值指针变量的地址</span><br><span class="line">	//p = &amp;t;</span><br><span class="line">	// *p表示取值其地址的内容，其原先保存的是指针的地址，取值则表示取值对应地址的指针变量</span><br><span class="line">	// t就是一个指针变量，可以直接赋值给*p</span><br><span class="line">	*p = t;</span><br><span class="line">	// 一级指针的取值</span><br><span class="line">	(*t).age = 20;</span><br><span class="line">	t-&gt;age = 21;</span><br><span class="line"></span><br><span class="line">	// 二级指针的取值：先取到一级指针变量值(*p)，即指针保存的变量地址，然后取到一级指针指向的变量，及变量地址指向的变量内容(**p)</span><br><span class="line">	(*p)-&gt;name = &quot;hsh&quot;;</span><br><span class="line">	(**p).name = &quot;hsh&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义一个指针引用,指针引用可以省略前面的*号</span><br><span class="line">void getTeacher(Teacher *&amp;p)&#123;</span><br><span class="line">	// 引用是指针变量的别名(sizeof引用得出的大小就是对应变量的大小)，也可以认为，它就是一个一级指针变量</span><br><span class="line">	p = (Teacher*)malloc(sizeof(Teacher));</span><br><span class="line"></span><br><span class="line">	// 一级指针的赋值操作</span><br><span class="line">	p-&gt;name = &quot;hsh&quot;;</span><br><span class="line">	p-&gt;age = 20;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 此处如果传递一个一级指针变量，则无法对指针进行初始化</span><br><span class="line">void getTeacher2(Teacher *t)&#123;</span><br><span class="line">	// 传递一个Teacher变量的地址同样是错误的，因为下面的操作实际是：</span><br><span class="line">	// 1，申请一段堆内存；</span><br><span class="line">	// 2，将堆内存的首地址赋给t；</span><br><span class="line">	// 也就是说，t被重新赋值了，原先传递进来的参数值被抹掉了</span><br><span class="line">	t = (Teacher*)malloc(sizeof(Teacher));</span><br><span class="line">	t-&gt;age = 10;</span><br><span class="line">	t-&gt;name = &quot;hsh&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 此处操作的是原来地址指向的变量(对其进行初始化)</span><br><span class="line">// 可以影响到传递进来的实参</span><br><span class="line">void getTeacher3(Teacher *t)&#123;</span><br><span class="line">	(*t) = &#123; &quot;hsh&quot;, 20 &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	//Teacher *t;</span><br><span class="line">	// 如果传递给二级指针，则必须传递地址</span><br><span class="line">	//getTeacher(&amp;t);</span><br><span class="line"></span><br><span class="line">	// 如果形参是引用，则直接传递变量即可</span><br><span class="line">	// t就是一个指针变量，当它传递给一级指针的函数形参时，</span><br><span class="line">	// 仍然只是值传递，想要达到引用传递的目的，形参必须是一个二级指针或者指针引用</span><br><span class="line">	//getTeacher(t);</span><br><span class="line"></span><br><span class="line">	// 报错！！！，指针并没有被初始化</span><br><span class="line">	// 并不是说，指针作为形参，传递过去就是引用传递，因为指针本身也可以认为是变量的一种，</span><br><span class="line">	// 指针要实现引用传递的途径和普通变量是一样的，通过多一级的指针接收或者通过引用形参来接收</span><br><span class="line">	//getTeacher2(t);</span><br><span class="line"></span><br><span class="line">	//cout &lt;&lt; t-&gt;name &lt;&lt; t-&gt;age &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	Teacher teacher;</span><br><span class="line">	// 报错！！！，变量并没有被初始化</span><br><span class="line">	// 传递一个没有初始化的首地址作为形参，</span><br><span class="line">	// 如果函数中使用了动态内存申请来给指针赋值，同样会错误，因为，此时指针指向的地址已经被重新赋值了</span><br><span class="line">	//getTeacher2(&amp;teacher);</span><br><span class="line">	//cout &lt;&lt; teacher.name &lt;&lt; teacher.age &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// 正确！！！</span><br><span class="line">	// 只是对原来地址指向的变量进行初始化，则可以</span><br><span class="line">	getTeacher3(&amp;teacher);</span><br><span class="line">	cout &lt;&lt; teacher.name &lt;&lt; teacher.age &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="指针常量与常量指针"><a href="#指针常量与常量指针" class="headerlink" title="指针常量与常量指针"></a>指针常量与常量指针</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void main()&#123;</span><br><span class="line">	int a = 1;</span><br><span class="line"></span><br><span class="line">	// 指针常量，指针的常量，不能改变地址的指针，但可以修改它指向的内容</span><br><span class="line">	// const修饰的是指针，所以指针内容不能改变，即地址不能改变</span><br><span class="line">	int const *p1 = &amp;a;</span><br><span class="line"></span><br><span class="line">	// 常量指针，指向常量的指针，内容不能修改</span><br><span class="line">	// const修饰的是变量类型，所以变量类型的内容常量化</span><br><span class="line">	const int *p2 = &amp;a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="常引用"><a href="#常引用" class="headerlink" title="常引用"></a>常引用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void main()&#123;</span><br><span class="line">	int a = 10;</span><br><span class="line">	int c = 2;</span><br><span class="line">	// 常引用是不能重新赋值的</span><br><span class="line">	const int &amp;b = a;</span><br><span class="line">	//b = c;</span><br><span class="line">	// 跟上面是一样的，没区别</span><br><span class="line">	int const &amp;d = a;</span><br><span class="line">	//d = c;</span><br><span class="line">	//&amp;d = 1;</span><br><span class="line"></span><br><span class="line">	// 固定为右边的字面量，实际就是定义常量</span><br><span class="line">	const int &amp;e = 10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/构造函数、析构函数和拷贝构造函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/NDK/C++/构造函数、析构函数和拷贝构造函数/" itemprop="url">
+                  C++ 类和结构体
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-24 17:08:20" itemprop="dateModified" datetime="2019-02-24T17:08:20+08:00">2019-02-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h4 id="调用顺序"><a href="#调用顺序" class="headerlink" title="调用顺序"></a>调用顺序</h4><p>如果一个类里面存在其他类的属性对象，那么构造函数和析构函数的调用顺序为：</p>
+<p>创建时：先调用属性对象的构造函数，在执行自己的构造函数；<br>销毁时：先调用自己的析构函数，再执行属性对象的析构函数；</p>
+<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>构造函数在对象被销毁时调用；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// 只要声明变量，就会调用无参构造函数</span><br><span class="line">	//Student s;</span><br><span class="line"></span><br><span class="line">	// 调用有参构造函数</span><br><span class="line">	//Student s1(20, &quot;lili&quot;);</span><br><span class="line">	//Student s3 = Student(20, &quot;Damn&quot;);</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h4><p>析构函数在对象被销毁时调用；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 对象被销毁时调用，可以做善后处理，比如，释放内存</span><br><span class="line">	~Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用析构函数&quot; &lt;&lt; endl;</span><br><span class="line">		free(name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void func()&#123;</span><br><span class="line">	Student t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	//func();</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h4><p>调用场景：<br>1，变量间的赋值： T t1 = t2;<br>2，函数调用时传参，值传递时调用；<br>3，作为函数返回值返回，给其他变量赋值时(与第1种情况同 )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 对象被销毁时调用，可以做善后处理，比如，释放内存</span><br><span class="line">	~Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用析构函数&quot; &lt;&lt; endl;</span><br><span class="line">		free(name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 拷贝构造函数</span><br><span class="line">	// 调用场景：</span><br><span class="line">	// 1，变量间的赋值： T t1 = t2;</span><br><span class="line">	// 2，函数调用时传参，值传递时调用；</span><br><span class="line">	// 3，作为函数返回值返回，给其他变量赋值时(与第1种情况同 )</span><br><span class="line">	// 默认情况下，拷贝构造函数是浅拷贝(值拷贝)</span><br><span class="line">	//Student(const Student &amp;obj)&#123;</span><br><span class="line">	//	this-&gt;name = obj.name;</span><br><span class="line">	//	this-&gt;age = obj.age;</span><br><span class="line">	//	cout &lt;&lt; &quot;copy obj&quot; &lt;&lt; endl;</span><br><span class="line">	//&#125;</span><br><span class="line"></span><br><span class="line">	// 深拷贝</span><br><span class="line">	// 开辟一段新的内存，不只拷贝变量值，还会拷贝对应的地址内容</span><br><span class="line">	Student(const Student &amp;obj)&#123;</span><br><span class="line">		int len = strlen(obj.name);</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, obj.name);</span><br><span class="line">		this-&gt;age = obj.age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	Student s(30,&quot;lilian&quot;);</span><br><span class="line">	Student s_cp = s;</span><br><span class="line"></span><br><span class="line">	copyPro();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="浅拷贝问题"><a href="#浅拷贝问题" class="headerlink" title="浅拷贝问题"></a>浅拷贝问题</h5><p>默认情况下，拷贝构造函数是浅拷贝，也就是值拷贝。当我们在构造函数中为成员变量开辟了动态<br>堆内存空间，进行浅拷贝后，拷贝变量也会指向同一个堆内存空间，此时，在变量销毁时，调用<br>析构函数，源变量和拷贝变量都会对同一内存空间进行释放，此时就会报错。<br>（浅拷贝是值拷贝，而指针的值是地址，所以拷贝出来都是指向同一个地址空间）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void copyPro()&#123;</span><br><span class="line">	Student stu(10, &quot;llll&quot;);</span><br><span class="line"></span><br><span class="line">	// stu2拷贝了stu的变量值，其成员变量name同时指向了同一个内存空间</span><br><span class="line">	Student stu2 = stu;</span><br><span class="line"></span><br><span class="line">	// 函数销毁时，stu和stu2都会调用析构函数去释放内存空间，导致重复释放的问题</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>深拷贝解决浅拷贝问题：</em><br>开辟一段新的内存，不只拷贝变量值，还会拷贝对应的地址内容；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Student(const Student &amp;obj)&#123;</span><br><span class="line">  int len = strlen(obj.name);</span><br><span class="line">  // 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">  this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">  strcpy(this-&gt;name, obj.name);</span><br><span class="line">  this-&gt;age = obj.age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/NDK/C++/命名空间/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/18/NDK/C++/命名空间/" itemprop="url">
+                  C++ 命名空间
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-18 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-18T00:00:00+08:00">2019-02-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-20 01:03:24" itemprop="dateModified" datetime="2019-02-20T01:03:24+08:00">2019-02-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">// 标准命名空间</span><br><span class="line">// 当引入该命名空间后，我们就可以直接调用其中的函数，省略掉前缀</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// 命名空间类似于Java中的包，通过命名空间，允许我们在不同的命名空间中，定义同名</span><br><span class="line">// 的变量和函数</span><br><span class="line">// 命名空间可以用来归类同一种类型的函数和变量；</span><br><span class="line">// Java中的包允许有别的包，同样命名空间中也允许别的命名空间</span><br><span class="line">namespace NSP_A&#123;</span><br><span class="line">	int a = 9;</span><br><span class="line"></span><br><span class="line">	namespace NSP_AA&#123;</span><br><span class="line">		int a = 100;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">namespace NSP_B&#123;</span><br><span class="line">	int a = 8;</span><br><span class="line"></span><br><span class="line">	// 定义结构体</span><br><span class="line">	struct Human&#123;</span><br><span class="line">		char* name;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line"></span><br><span class="line">	// C++下的标准输入输出</span><br><span class="line">	// 其中，std是标准输入输出的命名空间；</span><br><span class="line">	// cout是其中定义的函数</span><br><span class="line">	// &lt;&lt; 则是该命名空间中重载的输出操作符</span><br><span class="line">	//std::cout &lt;&lt; &quot;this is C plus plus!&quot; &lt;&lt; std::endl;</span><br><span class="line">	// :: 访问修饰符，相当于Java中的.</span><br><span class="line">	cout &lt;&lt; &quot;no namespace C plus plus!&quot; &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// 命名空间使用</span><br><span class="line">	cout &lt;&lt; NSP_A::a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; NSP_A::NSP_AA::a &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// 使用命名空间中的结构体</span><br><span class="line">	NSP_B::Human h = &#123;&quot;Adam&quot;&#125;;</span><br><span class="line"></span><br><span class="line">	using namespace NSP_B;</span><br><span class="line">	// C++中，结构体允许省略前面的struct</span><br><span class="line">	struct Human human = &#123; &quot;Lili&quot; &#125;;</span><br><span class="line">	Human human = &#123;&quot;Lili&quot;&#125;;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/NDK/C/ndk项目/文件拆分、合并/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/17/NDK/C/ndk项目/文件拆分、合并/" itemprop="url">
+                  Untitled
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-17 10:33:59 / Modified: 10:33:49" itemprop="dateCreated datePublished" datetime="2019-02-17T10:33:59+08:00">2019-02-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/NDK/C++/C++与C的关系/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/17/NDK/C++/C++与C的关系/" itemprop="url">
+                  C++ 与 C的关系
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-17 00:00:00 / Modified: 19:35:21" itemprop="dateCreated datePublished" datetime="2019-02-17T00:00:00+08:00">2019-02-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h3 id="C与C-的关系"><a href="#C与C-的关系" class="headerlink" title="C与C++的关系"></a>C与C++的关系</h3><p>1，C++ 是在C的基础上，对C的增强，引入了面向对象的概念(不完全面向对象)，而C只是面向过程；</p>
+<p>2，C++ 中允许存在C代码，也就是说，C++可以与C混编，而在C中则不允许；</p>
+<p>3，C++中支持C中的关键字和函数，同时又部分定义了自己的相同功能的函数，比如：<br>对于堆内存，可以通过C的malloc()和free()来管理，也可以用自己的一套new()和delete来管理；</p>
+<p>4，C++引入了类(class)的概念，出现了对象和引用；</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/NDK/C/开源C库使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/16/NDK/C/开源C库使用/" itemprop="url">
+                  开源C/C++库使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-16T00:00:00+08:00">2019-02-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-17 18:41:48" itemprop="dateModified" datetime="2019-02-17T18:41:48+08:00">2019-02-17</time>
               
             
           </span>
@@ -1304,194 +1762,60 @@
 
       
         
-          <!-- toc -->
-<h4 id="字符串操作函数"><a href="#字符串操作函数" class="headerlink" title="字符串操作函数"></a>字符串操作函数</h4><blockquote>
-<p>参考网站：<a href="http://www.kuqin.com/clib/string/strcmp.html" target="_blank" rel="noopener">http://www.kuqin.com/clib/string/strcmp.html</a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/05/NDK/C/字符串函数/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Android/注解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/03/Android/注解/" itemprop="url">
-                  注解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-03T00:00:00+08:00">2018-08-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
-              
-            
-          </span>
-
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="元数据-metadata"><a href="#元数据-metadata" class="headerlink" title="元数据(metadata)"></a>元数据(metadata)</h4><p>元数据就是描述数据的数据，对数据及信息资源的描述性信息.比如说一个文本文件,有创建时间,创建人,文件大小等数据,这都可以理解为是元数据.</p>
+            <!-- toc -->
+<h4 id="bsdiff增量更新库使用步骤以及问题处理"><a href="#bsdiff增量更新库使用步骤以及问题处理" class="headerlink" title="bsdiff增量更新库使用步骤以及问题处理"></a>bsdiff增量更新库使用步骤以及问题处理</h4><p>1，下载bsdiff源码：(bsdiff4.3-win32-src.zip)<br><a href="http://www.daemonology.net/bsdiff/" target="_blank" rel="noopener">http://www.daemonology.net/bsdiff/</a></p>
+<p>2，创建一个新的C项目，将源码中的C和C++文件拷贝进来；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">暂时只需要bsdiff.cpp，用来拆分新包，bspatch.cpp不可以引入；</span><br><span class="line">bspatch是用来合并包文件的，需要引入bzip2的源码来辅助操作，如果引入将会报错！！！</span><br></pre></td></tr></table></figure></p>
+<p>3，关于_CRT_SECURE_NO_WARNINGS 错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">由于项目中可能使用了老版本、非安全版本的函数，所以编译时将会报错，解决方案是继续使用这些</span><br><span class="line">函数。</span><br><span class="line"></span><br><span class="line">另一个问题是，如果存在多个这种情况的源文件时，可以通过在命令行中输入：</span><br><span class="line">-D _CRT_SECURE_NO_WARNINGS</span><br></pre></td></tr></table></figure></p>
+<p><img src="\images\c非安全函数警告.jpg" alt="image"></p>
+<p>4，报错：warning C4996: ‘setmode’: The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _setmode. See online help for details.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原因与上面类似，可以通过增加宏定义来消除警告:_CRT_NONSTDC_NO_DEPRECATE</span><br></pre></td></tr></table></figure>
+<p><img src="\images\C安全警告.jpg" alt="image"></p>
+<p>5，error C4703: 使用了可能未初始化的本地指针变量“_new”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于源码使用了不同系统的编译器，而visual studio默认对语法进行了严格的检查，所以会出现以上的警告，解决方案是关闭掉vs的检查；</span><br></pre></td></tr></table></figure>
+<p><img src="\images\关闭语法检查.jpg" alt="image"></p>
 <blockquote>
-<p>在java中,元数据以标签的形式存在java代码中,它的存在并不影响程序代码的编译和执行，通常它被用来生成其它的文件或运行时知道被运行代码的描述信息。java当中的javadoc和注解都属于元数据.</p>
+<p>如果生成解决方案成功，则说明配置成功，可以开始进行jni配置；</p>
 </blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/03/Android/注解/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>6，可以看到在bsdiff.cpp中存在启动main函数，通过调用该方法可以生成我们需要的拆分包；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 将main函数修改为bsdiff_main，方便我们的jni函数调用</span><br><span class="line">int bsdiff_main(int argc,char *argv[])&#123;</span><br><span class="line">  //...</span><br><span class="line"></span><br><span class="line">  // 可以看到，此处要求我们传入四个参数</span><br><span class="line">  // 参数1：任意</span><br><span class="line">  // 参数2：旧apk文件的路径</span><br><span class="line">  // 参数3：新apk文件的路径</span><br><span class="line">  // 参数4：拆分出来的文件保存路径</span><br><span class="line">  if(argc!=4) errx(1,&quot;usage: %s oldfile newfile patchfile\n&quot;,argv[0]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7，编写jni函数，并生成对应的解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL Java_com_hsh_bsdiff_BsdiffUtill_diff_1apk</span><br><span class="line">(JNIEnv *env, jclass jcls, jstring fileName_, jstring oldFile_, jstring newFile_, jstring patchFile_)&#123;</span><br><span class="line"></span><br><span class="line">	char* fileName = (char*)env-&gt;GetStringUTFChars(fileName_, 0);</span><br><span class="line">	char* oldFile = (char*)env-&gt;GetStringUTFChars(oldFile_, 0);</span><br><span class="line">	char* newFile = (char*)env-&gt;GetStringUTFChars(newFile_, 0);</span><br><span class="line">	char* patchFile = (char*)env-&gt;GetStringUTFChars(patchFile_, 0);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	char *args[] = &#123; fileName, oldFile, newFile, patchFile&#125;;</span><br><span class="line"></span><br><span class="line">	bsdiff_main(4, args);</span><br><span class="line"></span><br><span class="line">	env-&gt;ReleaseStringUTFChars(fileName_, fileName);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(oldFile_, oldFile);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(newFile_, newFile);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(patchFile_, patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对应的Java方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class BsdiffUtill &#123;</span><br><span class="line"></span><br><span class="line">	static&#123;</span><br><span class="line">		System.loadLibrary(&quot;jni/patch_dispatch_apk&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 *</span><br><span class="line">	 * @param name</span><br><span class="line">	 * @param oldFile</span><br><span class="line">	 * @param newFile</span><br><span class="line">	 * @param patchFile</span><br><span class="line">	 */</span><br><span class="line">	public native static void diff_apk(String name,String oldFile,String newFile,String patchFile);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Bsdiff &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		BsdiffUtill.diff_apk(&quot;apk_patch&quot;, &quot;H:\\bsdiff_patch\\app_1.0version.apk&quot;,</span><br><span class="line">				&quot;H:\\bsdiff_patch\\app_2.0version.apk&quot;, &quot;H:\\bsdiff_patch\\app_patch.patch&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行Java程序，可以在对应路径下生成拆分包；</p>
+<p>8，合并拆分包；</p>
+<p><em>注意，Android是linux系统，所以在编写NDK时，bsdiff要使用linux系统版本下的源码。</em></p>
+<p>9，bsdiff合并时，需要使用到bzip2的源码，所以同样需要下载bzip2的源码：<br><a href="https://download.csdn.net/download/juncojet/10235311" target="_blank" rel="noopener">https://download.csdn.net/download/juncojet/10235311</a></p>
+<p>然后引进项目中；</p>
+<p>10，让bspatch.c中引用bzip2的源码；</p>
+<p>添加头文件引用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 本源文件只要求引入该头文件</span><br><span class="line">#include &quot;bzip2/bzlib.c&quot;</span><br><span class="line"></span><br><span class="line">// 但实际编译时，缺报bzlib.c缺少对应的引用函数(BZ2_crc32Table,BZ2_compressBlock,BZ2_crc32Table...)，</span><br><span class="line">// 大概猜测原因是：在配置CMakeLists时，只配置了bspatch.c文件，而bzip2源文件并没有配置，所以这些文件没有</span><br><span class="line">// 被项目管理起来。在bzlib.c中，头文件bzlib_private.h声明的函数无法被项目知道，所以在bzlib.c进行调用时，</span><br><span class="line">// 才会报出找不到这些函数的错误。解决方案就是引入底下的源文件，不再通过bzlib_private.h找，而是直接引用；</span><br><span class="line">#include &quot;bzip2/crctable.c&quot;</span><br><span class="line">#include &quot;bzip2/compress.c&quot;</span><br><span class="line">#include &quot;bzip2/decompress.c&quot;</span><br><span class="line">#include &quot;bzip2/randtable.c&quot;</span><br><span class="line">#include &quot;bzip2/blocksort.c&quot;</span><br><span class="line">#include &quot;bzip2/huffman.c&quot;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>之后按照上面的生成拆分包的步骤，编写Android下的NDK；</p>
+</blockquote>
+<p>11，在bspatch.c下添加jni调用函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL</span><br><span class="line">Java_com_hsh_bsdiff_1patch_PatchUtil_patchFile(JNIEnv *env, jclass type, jstring oldFile_,</span><br><span class="line">                                               jstring newFile_, jstring patchFile_) &#123;</span><br><span class="line">    char *oldFile = (char *) (*env)-&gt;GetStringUTFChars(env, oldFile_, 0);</span><br><span class="line">    char *newFile = (char *) (*env)-&gt;GetStringUTFChars(env, newFile_, 0);</span><br><span class="line">    char *patchFile = (char *) (*env)-&gt;GetStringUTFChars(env, patchFile_, 0);</span><br><span class="line"></span><br><span class="line">    char *fileName = &quot;apk_patch&quot;;</span><br><span class="line"></span><br><span class="line">    char *params[] = &#123;fileName, oldFile, newFile, patchFile&#125;;</span><br><span class="line">    // 将源文件的main函数直接修改为patch_main，进行调用</span><br><span class="line">    patch_main(4,params);</span><br><span class="line"></span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;oldFile = %s&quot;, oldFile);</span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;newFile = %s&quot;, newFile);</span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;patchFile = %s&quot;, patchFile);</span><br><span class="line"></span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, oldFile_, oldFile);</span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, newFile_, newFile);</span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, patchFile_, patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Java代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class PatchUtil &#123;</span><br><span class="line"></span><br><span class="line">    static&#123;</span><br><span class="line">        System.loadLibrary(&quot;native-lib&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public native static void patchFile(String oldFile,String newFile,String patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>12，旧版的apk中需要有合并升级的逻辑，这样在下载拆分包后，可以直接进行合并；</p>
+<p><strong>重要的api</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 获得应用包下保存的当前版本的apk</span><br><span class="line">final String apkPath = getApplicationContext().getPackageResourcePath();</span><br></pre></td></tr></table></figure></p>
+<p>模拟合并后执行安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">new Thread(new Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            PatchUtil.patchFile(apkPath, newPath, patch_path);</span><br><span class="line">            runOnUiThread(new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, &quot;success&quot;, Toast.LENGTH_LONG).show();</span><br><span class="line">                    // 7.0以上需要配置FileProvider才能安装</span><br><span class="line">                    ApkUtils.installApk(MainActivity.this, newPath);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; catch (Error error) &#123;</span><br><span class="line">            error.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure></p>
+<p><strong>生成新的apk文件的路径可以是任意，即使在安装后被删除也是无所谓的，因为应用包下会自动保有原来的apk文件！</strong></p>
+<blockquote>
+<p>当有新版的apk发布时，利用新版的apk与旧版的apk，调用上面步骤生成拆分库，生成对应的拆分包。</p>
+</blockquote>
+<blockquote>
+<p>不同版本的旧apk通过访问服务器，获取到对应的升级拆分包，进行升级。</p>
+</blockquote>
+<p><em>差分算法</em></p>
+<ul>
+<li><p>差分算法是对新旧的两个文件进行比较，筛选，分类出两个文件中的相同部分，不同部分(修改的部分)，以及额外增加的部分；</p>
+</li>
+<li><p>对于相同的部分，会用下标标识出来，对于不同的部分和额外增加的部分，会通过bzip2进行压缩，<br>所以生成的差分包 = 映射标识相同位置的数据+不同部分、额外增加部分的压缩数据；</p>
+</li>
+<li><p>合成时，对于相同的部分，根据差分包中标识的下标，从旧文件中直接读取出来，写进新文件中；对于不同的部分(修改的部分)和额外增加的部分，通过bzip2进行解压，再写进新文件中；</p>
+</li>
+</ul>
+<p>特点，生成差分包时，差分包的大小并不与新、旧包大小差值成正比关系，而是与新旧包中数据的重复情况成正比关系：<em>重复的数据越多，则生成的差分包越小；被修改的部分越多，则对应生成的映射标识越多，差分包也越大；</em>  </p>
+
+          
         
       
     </div>
@@ -1543,7 +1867,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Android/Utils/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/NDK/C/jni缓存策略/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1562,8 +1886,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/03/Android/Utils/" itemprop="url">
-                  Utils
+                <a class="post-title-link" href="/2019/02/11/NDK/C/jni缓存策略/" itemprop="url">
+                  jni缓存策略
                 </a>
               
             
@@ -1589,24 +1913,12 @@
                 
               
 
-              <time title="Created: 2018-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-03T00:00:00+08:00">2018-08-03</time>
+              <time title="Created: 2019-02-11 00:00:00 / Modified: 07:45:48" itemprop="dateCreated datePublished" datetime="2019-02-11T00:00:00+08:00">2019-02-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
               
             
           </span>
@@ -1623,7 +1935,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
 
                 
                 
@@ -1660,394 +1972,14 @@
         
           
             <!-- toc -->
-<h4 id="校验重复方法签名"><a href="#校验重复方法签名" class="headerlink" title="校验重复方法签名"></a>校验重复方法签名</h4><p>该方法取自EventBus3.0，原理是通过HashMap的put方法，在相同key的情况下，会返回旧的数据；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">private boolean checkAddWithMethodSignature(Method method, Class&lt;?&gt; eventType) &#123;</span><br><span class="line">    // 构造方法签名</span><br><span class="line">    methodKeyBuilder.setLength(0);</span><br><span class="line">    methodKeyBuilder.append(method.getName());</span><br><span class="line">    methodKeyBuilder.append(&apos;&gt;&apos;).append(eventType.getName());</span><br><span class="line"></span><br><span class="line">    String methodKey = methodKeyBuilder.toString();</span><br><span class="line">    Class&lt;?&gt; methodClass = method.getDeclaringClass();</span><br><span class="line">    // 放进HashMap查看是否有重复</span><br><span class="line">    Class&lt;?&gt; methodClassOld = subscriberClassByMethodKey.put(methodKey, methodClass);</span><br><span class="line">    // 如果方法签名重复，并且两个方法是在同一个类或者存在父子或接口继承关系</span><br><span class="line">    if (methodClassOld == null || methodClassOld.isAssignableFrom(methodClass)) &#123;</span><br><span class="line">        // Only add if not already found in a sub class</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // Revert the put, old class is further down the class hierarchy</span><br><span class="line">        subscriberClassByMethodKey.put(methodKey, methodClassOld);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Android/EventBus/基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/03/Android/EventBus/基础/" itemprop="url">
-                  EventBus源码分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-03T00:00:00+08:00">2018-08-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="什么是EventBus"><a href="#什么是EventBus" class="headerlink" title="什么是EventBus"></a>什么是EventBus</h4><p><strong>EventBus是一个使用”观察者模式”的、松耦合的开源框架，能够帮助我们简化代码、松依赖、加速开发。</strong></p>
-<p>EventBus基于观察者模式中的发布-订阅(Publish-Subscribe)模式(事件总线)，与传统的观察者模式<br>不同，在传统的观察者模式下，我们更多是处于订阅者的身份，数据的发布大多数情况下我们是不可控的，我<br>们一般只能触发数据开始发送，而EventBus则将发布(post)和订阅的能力都交由我们自己处理；<br>当然，EventBus同样拥有观察者模式的优点，就是发布者和订阅者是解耦的。</p>
-<blockquote>
-<p>1、订阅者注册时，会用两个HashMap来保存其信息，分别是根据事件类型(key)保存订阅信息<br>(订阅者 - 订阅方法)的subscriptionsByEventType和根据订阅者(key)保存其对应的所有订阅事件的<br>typesBySubscriber；<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/03/Android/EventBus/基础/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Java/Java基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/31/Java/Java基础/" itemprop="url">
-                  Java基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!-- toc -->
-<h4 id="变量的存储位置"><a href="#变量的存储位置" class="headerlink" title="变量的存储位置"></a>变量的存储位置</h4><p>1.寄存器：最快的存储区, 由编译器根据需求进行分配,我们在程序中无法控制。</p>
-<ol start="2">
-<li><p>栈：存放基本类型的变量数据和对象的引用，但对象本身不存放在栈中，而是存放在堆（new 出来的对象）<br>或者常量池中（字符串常量对象存放在常量池中）。</p>
-</li>
-<li><p>堆：存放所有new出来的对象。</p>
-</li>
-<li><p>静态域：存放静态成员（static定义的）。</p>
-</li>
-<li><p>常量池：存放字符串常量和基本类型常量（public static final）。</p>
-</li>
-<li><p>非RAM存储：硬盘等永久存储空间。</p>
-</li>
-</ol>
-<hr>
-<blockquote>
-<p>堆栈：</p>
-<ul>
-<li>对于栈和常量池中的对象可以共享，对于堆中的对象不可以共享;</li>
-<li>栈中的数据大小和生命周期是可以确定的，当没有引用指向数据时，这个数据就会消失。堆中的对象的由垃<br>圾回收器负责回收，因此大小和生命周期不需要确定，具有很大的灵活性;</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>字符串：</p>
-<ul>
-<li>对于字符串：其对象的引用都是存储在栈中的，如果是编译期已经创建好(直接用双引号定义的)的就存储在<br>常量池中，如果是运行期（new出来的）才能确定的就存储在堆中。对于equals相等的字符串，在常量池中永<br>远只有一份，在堆中有多份；</li>
-<li>对于通过new产生一个字符串（假设为”china”）时，会先去常量池中查找是否已经有了”china”对象，如<br>果没有则在常量池中创建一个此字符串对象，然后堆中再创建一个常量池中此”china”对象的拷贝对象。这也<br>就是有道面试题：String s = new String(“xyz”);产生几个对象？一个或两个，如果常量池中原来没有<br>”xyz”,就是两个。</li>
-</ul>
-</blockquote>
-<h4 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h4><ul>
-<li>一个程序至少有一个进程(通过为Activity设置android:process可以让其运行在单独的进程中)，一个<br>进程至少有一个线程；</li>
-<li>进程可以单独存在，而线程不能独立存在，必须依赖于一个进程；</li>
-<li>进程是系统资源分配的最小单位，线程是程序执行的最小单位；</li>
-<li>进程有自己独立的内存地址空间，进程之间无法直接通讯，只能通过IPC进行通讯；</li>
-<li>线程间共享进程的地址空间和内存资源，多个线程共享全局变量和静态变量，所以线程之间的通讯更加方便；</li>
-<li>进程之间是相互独立的，一个进程死掉，不会影响到其他进程，而在多线程的环境下，一个线程死掉，其所<br>在的整个进程也会死掉；</li>
-</ul>
-<h4 id="内部类的优点"><a href="#内部类的优点" class="headerlink" title="内部类的优点"></a>内部类的优点</h4><p>Java不支持多继承 ，只支持多实现。但是，很多时候，只是实现一些接口很难解决问题，此时，我们就可以<br>使用内部类来解决问题。内部类即可与外部类关联(非静态内部类)，也可以独立于外部类(静态内部类)，并且，<br>内部类的环境是不受到外部类的影响的，通过它们来继承我们需要的类的能力，能让我们更灵活的解决问题；</p>
-<p>可以说，接口只是帮我们解决了部分问题，而内部类赋予类多重继承的能力，使解决问题的方案更加的完整；</p>
+<h3 id="通过局部静态变量进行缓存"><a href="#通过局部静态变量进行缓存" class="headerlink" title="通过局部静态变量进行缓存"></a>通过局部静态变量进行缓存</h3><p>通过在方法中声明局部的静态变量，可以在方法初始化时进行方法中的某个资源的初始化，<br>并且在以后每次调用该方法时，确保不需要重复初始化该资源，同时确保其他的方法无法调用<br>到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 缓存策略</span><br><span class="line"></span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_cached</span><br><span class="line">(JNIEnv * env, jobject obj)&#123;</span><br><span class="line">	jclass cls = (*env)-&gt;GetObjectClass(env, obj);</span><br><span class="line"></span><br><span class="line">	// 静态局部变量</span><br><span class="line">	// 作用域存在于本函数</span><br><span class="line">	// 生命周期为应用生命周期</span><br><span class="line">	// 全局的其他地方无法使用到</span><br><span class="line">	static jfieldID key_id = NULL;</span><br><span class="line">	// 只在函数被第一次调用时进行初始化</span><br><span class="line">	if (key_id == NULL)&#123;</span><br><span class="line">		key_id = (*env)-&gt;GetFieldID(env, cls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">		printf(&quot;init key id;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>Java中调用</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public native void cached();</span><br><span class="line"></span><br><span class="line"> for (int i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">   test.cached();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="全局变量初始时进行创建"><a href="#全局变量初始时进行创建" class="headerlink" title="全局变量初始时进行创建"></a>全局变量初始时进行创建</h3><p>全局变量可以在dll库加载时进行进行全局变量的初始化；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 初始化全局变量</span><br><span class="line">// 在初始化动态库之后，调用该方法，进行全局变量的初始化，并且能够确保只调用一次。</span><br><span class="line">jmethodID method_id;</span><br><span class="line">jfieldID fid;</span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_initIds</span><br><span class="line">(JNIEnv * env, jclass jcls)&#123;</span><br><span class="line">	method_id = (*env)-&gt;GetMethodID(env, jcls, &quot;randomInt&quot;, &quot;()I&quot;);</span><br><span class="line">	fid = (*env)-&gt;GetFieldID(env, jcls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">	printf(&quot;first init!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>Java中调用</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">  System.out.println( System.getProperty(&quot;java.library.path&quot;));</span><br><span class="line">  System.loadLibrary(&quot;jni/jini_04&quot;);</span><br><span class="line">  // 加载完成动态库之后，立刻调用初始化方法，初始化全局变量</span><br><span class="line">  initIds();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -2090,7 +2022,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2133,7 +2065,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2164,7 +2096,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2223,7 +2157,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/ES6新特性/ES6新特性/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Kotlin/基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -330,8 +330,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/28/js/ES6新特性/ES6新特性/" itemprop="url">
-                  ES6新特性
+                <a class="post-title-link" href="/2018/07/31/Kotlin/基础/" itemprop="url">
+                  Kotlin基础
                 </a>
               
             
@@ -357,7 +357,7 @@
                 
               
 
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
+              <time title="Created: 2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
             
 
             
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
               
             
           </span>
@@ -391,7 +391,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kotlin/" itemprop="url" rel="index"><span itemprop="name">Kotlin</span></a></span>
 
                 
                 
@@ -427,10 +427,16 @@
       
         
           <!-- toc -->
-<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>可以使用const来声明一个常量；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">const PI = 3.14;</span><br><span class="line">PI = 3; // 某些浏览器不报错，但是无效果！</span><br><span class="line">PI; // 3.14</span><br></pre></td></tr></table></figure></p>
+<h4 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h4><ul>
+<li><p>Kotlin没有8进制，只有2进制和16进制，十进制；</p>
+</li>
+<li><p>as? 可以进行安全的类型转换，当转换失败时，会被自动赋为null：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val s String =&quot;aaa&quot;;</span><br><span class="line">val a Int? = s as? Int</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/ES6新特性/ES6新特性/#more" rel="contents">
+            <a class="btn" href="/2018/07/31/Kotlin/基础/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -486,7 +492,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/ES6新特性/使用场景/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/Handler/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -505,8 +511,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/28/js/ES6新特性/使用场景/" itemprop="url">
-                  使用场景
+                <a class="post-title-link" href="/2018/07/30/Android/Handler/" itemprop="url">
+                  Handler
                 </a>
               
             
@@ -532,7 +538,7 @@
                 
               
 
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
+              <time title="Created: 2018-07-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-30T00:00:00+08:00">2018-07-30</time>
             
 
             
@@ -549,537 +555,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="交换变量内容"><a href="#交换变量内容" class="headerlink" title="交换变量内容"></a>交换变量内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var x=1, y=2;</span><br><span class="line">[x, y] = [y, x]</span><br></pre></td></tr></table></figure>
-<h4 id="解构对象内容"><a href="#解构对象内容" class="headerlink" title="解构对象内容"></a>解构对象内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var &#123;hostname:domain, pathname:path&#125; = location;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/ES6新特性/使用场景/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/js/ES6新特性/解构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/js/ES6新特性/解构/" itemprop="url">
-                  解构
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-28T00:00:00+08:00">2018-07-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h4><p>将数组的元素同时赋给多个变量；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 如果浏览器支持解构赋值就不会报错:</span><br><span class="line">var [x, y, z] = [&apos;hello&apos;, &apos;JavaScript&apos;, &apos;ES6&apos;];</span><br></pre></td></tr></table></figure>
-<p>解构赋值可以进行灵活的运用，比如对二维数组进行解构：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let [x, [y, z]] = [&apos;hello&apos;, [&apos;JavaScript&apos;, &apos;ES6&apos;]];</span><br><span class="line">x; // &apos;hello&apos;</span><br><span class="line">y; // &apos;JavaScript&apos;</span><br><span class="line">z; // &apos;ES6&apos;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/28/js/ES6新特性/解构/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/git笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/27/git笔记/" itemprop="url">
-                  git笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-27 14:24:10" itemprop="dateCreated datePublished" datetime="2018-07-27T14:24:10+08:00">2018-07-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-31 15:07:28" itemprop="dateModified" datetime="2018-07-31T15:07:28+08:00">2018-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/27/git笔记/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/Glide获取指定图片的缓存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/27/Glide获取指定图片的缓存/" itemprop="url">
-                  获取Glide缓存图片
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-27 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-27T00:00:00+08:00">2018-07-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
               
             
           </span>
@@ -1132,12 +608,22 @@
       
         
           <!-- toc -->
-<p>用Glide这么久了，我一直有个疑问，Glide该如何获取到指定的缓存图片？</p>
-<p>原生Glide是没有提供任何Api用来获取缓存图片的，至少我是没找到。</p>
-<p>翻看Glide源码（3.7），发现其中一个叫：EngineKey的类，Glide通过该类来查找对应的缓存文件。<br>该类构造方法参数多达10个，并且不是开放出来的，也就是说，通过自己构造EngineKey这条路是走不通的。<br>
+<h4 id="Handler消息机制"><a href="#Handler消息机制" class="headerlink" title="Handler消息机制"></a>Handler消息机制</h4><ul>
+<li><p>Handler在创建时，就会在构造方法中拿到当前线程的Looper，而Looper保存有当前线程的消息队列，也<br>会和Handler绑定到一起；</p>
+</li>
+<li><p>Handler在哪个线程被创建，就会绑定哪个线程中的Looper；</p>
+</li>
+<li><p>主线程默认会创建一个MainLooper，而如果在子线程中创建Handler，就需要我们手动为其创建一个<br>Looper，并绑定到Handler中；</p>
+<blockquote>
+<p>查看ActivityThread类，在main方法中调用了Looper的prepareMainLooper方法来初始化<br>MainLooper，可以获取它来判断当前的操作是否位于主线程。</p>
+</blockquote>
+</li>
+<li><p>使用Looper.prepare()即可为当前线程创建一个Looper，每一个Looper中都自带一个消息队列；</p>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/27/Glide获取指定图片的缓存/#more" rel="contents">
+            <a class="btn" href="/2018/07/30/Android/Handler/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1193,7 +679,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/基础 (1)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/MVX/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1212,8 +698,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/27/基础 (1)/" itemprop="url">
-                  正则表达式
+                <a class="post-title-link" href="/2018/07/30/Android/MVX/" itemprop="url">
+                  MVX
                 </a>
               
             
@@ -1239,7 +725,7 @@
                 
               
 
-              <time title="Created: 2018-07-27 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-27T00:00:00+08:00">2018-07-27</time>
+              <time title="Created: 2018-07-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-30T00:00:00+08:00">2018-07-30</time>
             
 
             
@@ -1256,7 +742,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
               
             
           </span>
@@ -1273,7 +759,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
 
                 
                 
@@ -1308,31 +794,27 @@
 
       
         
-          <!-- toc -->
-<h4 id="匹配字符"><a href="#匹配字符" class="headerlink" title="匹配字符"></a>匹配字符</h4><blockquote>
-<p>1、”.”匹配\n之外的任意一个字符；</p>
+          
+            <!-- toc -->
+<h4 id="三层架构与MVX模式"><a href="#三层架构与MVX模式" class="headerlink" title="三层架构与MVX模式"></a>三层架构与MVX模式</h4><ul>
+<li>MVX是一种设计模式，而三层架构则是一种架构思想，或者说是一种编写代码的纲领；</li>
+<li>MVX可以认为是在三层架构下的一种具体的表现；</li>
+<li>三层架构分为：表现层，业务逻辑层，数据访问层；其中的数据访问层即Model概念区别于MVX模式的Model；</li>
+<li>三层架构中的Model表示对数据的访问的总代理，涉及了数据的增删改查操作，数据可以来自本地或者网络；</li>
+<li>MVX模式下的Model就是一种纯粹的数据类，是一个数据实体的表现；</li>
+</ul>
+<h4 id="MVC、MVP"><a href="#MVC、MVP" class="headerlink" title="MVC、MVP"></a>MVC、MVP</h4><blockquote>
+<p>MVC和MVP最主要的区别在于M层和V层的沟通方式，MVC模式下，M、V两层能够直接进行沟通，而MVP模式下，<br>M、V两层只能通过P层进行沟通；</p>
 </blockquote>
-<blockquote>
-<p>2、\d匹配数字，即0-9；</p>
-</blockquote>
-<blockquote>
-<p>3、\D匹配非数字；</p>
-</blockquote>
-<blockquote>
-<p>4、\s 匹配空白字符，即空格、tab键和回车；</p>
-</blockquote>
-<blockquote>
-<p>5、\S匹配非空白字符；</p>
-</blockquote>
-<blockquote>
-<p>6、\w匹配单词字符，即a-z，A-Z，0-9、下划线_<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/27/基础 (1)/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>MVC：</p>
+<p>传统的MVC模式下，V层通过C从M层中获取到数据，然后展示在V层上；</p>
+<p>但是，大多数情况下，在拿到数据后我们需要对数据进行加工，此时不得不将逻辑编写在V层上，久而久之，V层就会变得臃肿；</p>
+<p>还有一种情况，当我们操作了V层，通过C修改了M层，当M层在修改后，为了通知V层，M层不得不持有V层引用，因为C是单向的，M层无法通过C通知V层；</p>
+<p>MVP：</p>
+<p>MVP中的Presenter即能够解决V层业务代码臃肿问题，因为P中持有了V层的引用，直接在P中操作业务逻辑，然后将结果通知给V层(<strong>被动P模式，View元素操作完全由P进行。另一种主动P模式，在V层的数据操作还是在V层中进行，P层更多是起到沟通M层和V层数据的作用，这种模式下，V的臃肿并没有解决！</strong>);</p>
+<p>MVP中的Presenter也解决了M层和V层数据沟通的问题，它双向持有了两层的引用，能直接操作两层数据进行交换和传输；</p>
+
+          
         
       
     </div>
@@ -1384,7 +866,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/ViewPager + Fragment组合实现局部刷新Fragment/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/Fragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1403,8 +885,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/27/ViewPager + Fragment组合实现局部刷新Fragment/" itemprop="url">
-                  ViewPager局部刷新
+                <a class="post-title-link" href="/2018/07/30/Android/Fragment/" itemprop="url">
+                  Fragment
                 </a>
               
             
@@ -1430,7 +912,7 @@
                 
               
 
-              <time title="Created: 2018-07-27 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-27T00:00:00+08:00">2018-07-27</time>
+              <time title="Created: 2018-07-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-30T00:00:00+08:00">2018-07-30</time>
             
 
             
@@ -1447,7 +929,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
               
             
           </span>
@@ -1500,11 +982,18 @@
       
         
           <!-- toc -->
+<h4 id="判断Fragment可见性"><a href="#判断Fragment可见性" class="headerlink" title="判断Fragment可见性"></a>判断Fragment可见性</h4><ul>
+<li><p>如果Fragment是通过FragmentManager进行show和hide操作来实现显隐的，是不会调用Fragment的<br>的声明周期方法的，但是可以通过onHiddenChanged来进行判断；</p>
+</li>
+<li><p>如果Fragment是配合ViewPager进行显隐的，则通过Fragment的setUserVisibleHint进行判断；</p>
 <blockquote>
-<p>在开发过程中，经常会用到ViewPager与Fragment实现多页面切换效果，有时，我们想要局部刷新某些Fragment，而其他Fragment保持状态不变，该如何做到呢？<br>
+<p>查看FragmentPagerAdapter和FragmentStatePagerAdapter源码可以看到对setUserVisibleHint<br>的调用，这个方法被调用非常频繁，在进行滑动操作时，处于当前屏幕和其左右的两个Fragment都有可能被<br>调用到，但是只有在Fragment成为当前屏幕的Fragment时参数才会为true，需要注意判断，并且不要做太多<br>的耗时操作，否则会影响到切换的流畅性；</p>
+</blockquote>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/27/ViewPager + Fragment组合实现局部刷新Fragment/#more" rel="contents">
+            <a class="btn" href="/2018/07/30/Android/Fragment/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1560,7 +1049,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/python正则：re/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Java/Exception、Error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1579,8 +1068,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/27/python正则：re/" itemprop="url">
-                  Python正则使用
+                <a class="post-title-link" href="/2018/07/30/Java/Exception、Error/" itemprop="url">
+                  Java异常、错误
                 </a>
               
             
@@ -1606,7 +1095,7 @@
                 
               
 
-              <time title="Created: 2018-07-27 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-27T00:00:00+08:00">2018-07-27</time>
+              <time title="Created: 2018-07-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-30T00:00:00+08:00">2018-07-30</time>
             
 
             
@@ -1623,7 +1112,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 18:04:40" itemprop="dateModified" datetime="2018-07-29T18:04:40+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
               
             
           </span>
@@ -1640,7 +1129,363 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/exception.jpg" alt="image"></p>
+<p>java中Exception、Error都是Throwable的子类！</p>
+<ul>
+<li>Exception即异常，是程序本身可以处理的；</li>
+<li>Error即错误，是程序本身无法处理的，通常是系统出现故障，或者虚拟机自身发出的错误，一般不需要主动<br>进行处理，比如OutOfMemoryError、StackOverflowError等等；</li>
+</ul>
+<p>根据异常的发生方式，可以分为检查异常和非检查异常；</p>
+<ul>
+<li><p>检查异常，要求编译器必须即时处理，Java编译器会在语法中对该类型的异常进行检查，并强制要求我们<br>通过try-catch语句进行主动捕获，或者用throws语句在方法声明后抛出该异常，否则无法编译通过，除了<br>Error、RuntimeException和其子类之外的异常都是检查异常；</p>
+</li>
+<li><p>非检查异常，这类异常编译器不要求我们主动捕获或抛出，发生在程序运行期间，通常能够导致程序崩溃。<br>其包括了RuntimeException及其子类(nullPointException、ArrayIndexOutOfBoundException等<br>)和Error；</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/Android基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/30/Android/Android基础/" itemprop="url">
+                  Android 基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-30T00:00:00+08:00">2018-07-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h4 id="Android-的数据存储方式"><a href="#Android-的数据存储方式" class="headerlink" title="Android 的数据存储方式"></a>Android 的数据存储方式</h4><h4 id="在Activity启动时何时能够拿到View宽高"><a href="#在Activity启动时何时能够拿到View宽高" class="headerlink" title="在Activity启动时何时能够拿到View宽高"></a>在Activity启动时何时能够拿到View宽高</h4><p>从Activity启动声明周期来看，即使是在onPostResume时也是拿不到宽高的！</p>
+<p>因为和Activity中View的布局、测量、绘制相关的类ViewRootImpl在onPostResume时还没有创建，只有<br>在之后DecorView被addView到WindowManagerImpl中，此时才会创建ViewRootImpl实例，用来管理View<br>的测量绘制工作；</p>
+<p>在ViewRootImpl的performTraversals被执行时，采取真正的测量、布局和绘制View；</p>
+<p>performTraversals会被执行两遍，并且在开始测量、布局和绘制之前，会将post进View中的Runnable<br>取出执行，利用这个特点，我们可以进行双重post，在第二重post中我们就能够最新测量出来的宽高；</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/29/NDK/C/基础/" itemprop="url">
+                  C基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-27 10:39:53" itemprop="dateModified" datetime="2018-08-27T10:39:53+08:00">2018-08-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
 
                 
                 
@@ -1676,11 +1521,543 @@
       
         
           <!-- toc -->
-<h4 id="导入正则：re"><a href="#导入正则：re" class="headerlink" title="导入正则：re"></a>导入正则：re</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br></pre></td></tr></table></figure>
-<h4 id="match"><a href="#match" class="headerlink" title="match"></a>match</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#match匹配的过程是从左第一个字符向右逐一匹配的，当匹配的过程出现不符合字符时，即停止</span><br><span class="line">匹配过程，相当于匹配表达式中设置了&quot;^&quot;</span><br><span class="line"></span><br><span class="line">re.match(pattern,str)</span><br><span class="line"></span><br><span class="line">In [34]: re.match(r&quot;aa(\d+?)ddd&quot;,&quot;aa1234ddd&quot;).group(1)</span><br><span class="line">Out[34]: &apos;1234&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="system函数"><a href="#system函数" class="headerlink" title="system函数"></a>system函数</h4><p>位于stdio.h，用于调用系统的函数；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 停止当前函数</span><br><span class="line">system(&quot;pause&quot;); // 等价(等待输入)：getchar();</span><br><span class="line">// 调出windows绘图软件</span><br><span class="line">system(&quot;mspaint&quot;);</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/27/python正则：re/#more" rel="contents">
+            <a class="btn" href="/2018/07/29/NDK/C/基础/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/jni/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/29/NDK/C/jni/" itemprop="url">
+                  jni
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-16 15:14:51" itemprop="dateModified" datetime="2019-02-16T15:14:51+08:00">2019-02-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- toc -->
+<h4 id="JNI数据类型"><a href="#JNI数据类型" class="headerlink" title="JNI数据类型"></a>JNI数据类型</h4><blockquote>
+<p>JNI基本数据类型是Java基本数据类型和C数据类型之间的桥梁；</p>
+</blockquote>
+<p>Java数据类型   –&gt;  JNI数据类型  –&gt;  C数据类型<br>boolean            jboolean<br>byte               jbyte<br>char               jchar<br>short              jshort<br>int                jint<br>long               jlong<br>float              jfloat<br>double             jdouble<br>void               void</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/29/NDK/C/jni/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/指针/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/29/NDK/C/指针/" itemprop="url">
+                  指针
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-27 09:24:55" itemprop="dateModified" datetime="2018-08-27T09:24:55+08:00">2018-08-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- toc -->
+<h4 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h4><blockquote>
+<p>指针存储的是变量的内存地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void main()&#123;</span><br><span class="line">	int i = 60;</span><br><span class="line">	// 创建一个int类型的指针，并将i的地址赋给它</span><br><span class="line">	int* p = &amp;i;</span><br><span class="line">	printf(&quot;%#x\n&quot;, p);</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>在指针中，* 称为取内容运算符，指针变量指向的是变量的地址，而拥有了变量的地址，我们可以直接通过指针操作其指向的地址中的内容；</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/29/NDK/C/指针/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/C访问Java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/29/NDK/C/C访问Java/" itemprop="url">
+                  C与Java互操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-08 11:34:00" itemprop="dateModified" datetime="2019-03-08T11:34:00+08:00">2019-03-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- toc -->
+<h4 id="JNI读取Java成员变量类型对应的签名"><a href="#JNI读取Java成员变量类型对应的签名" class="headerlink" title="JNI读取Java成员变量类型对应的签名"></a>JNI读取Java成员变量类型对应的签名</h4><p>C访问Java中对应的成员变量，需要根据变量名和变量签名来定位变量；<br><img src="\images\Java数据类型签名列表.png" alt="image"></p>
+<p>Java方法签名：全类名.方法名(形参数据类型列表)返回值数据类型</p>
+<p>其中的返回数据类型的签名与变量有区别：<br><img src="\images\java方法返回类型签名.jpeg" alt="image"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/29/NDK/C/C访问Java/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1725,7 +2102,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1768,7 +2145,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1799,7 +2176,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1858,7 +2237,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

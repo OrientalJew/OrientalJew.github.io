@@ -115,18 +115,18 @@
 
 
 
-  <meta name="description" content="jni异常处理jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动抛出异常进行警告； 123456789101112131415161718192021222324JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_catchException(JNIEnv * env, jobject jobj)&amp;">
+  <meta name="description" content="jni异常处理jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动抛出异常进行警告； /错误纠正：jni层的异常是可以被Java层捕获到的！！！/// 根据Jni层抛出的异常，可以发现其实Throwable和Error的子类，所以我们可以通过捕获这两者// 来达到捕获的目的123456789101112131415161718192021222324">
 <meta name="keywords" content="jni">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jni异常处理">
 <meta property="og:url" content="http://yoursite.com/2018/10/07/NDK/C/jni异常处理/index.html">
 <meta property="og:site_name" content="HSH&#39;s Blogs">
-<meta property="og:description" content="jni异常处理jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动抛出异常进行警告； 123456789101112131415161718192021222324JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_catchException(JNIEnv * env, jobject jobj)&amp;">
+<meta property="og:description" content="jni异常处理jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动抛出异常进行警告； /错误纠正：jni层的异常是可以被Java层捕获到的！！！/// 根据Jni层抛出的异常，可以发现其实Throwable和Error的子类，所以我们可以通过捕获这两者// 来达到捕获的目的123456789101112131415161718192021222324">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T08:42:21.914Z">
+<meta property="og:updated_time" content="2019-02-12T00:20:28.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jni异常处理">
-<meta name="twitter:description" content="jni异常处理jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动抛出异常进行警告； 123456789101112131415161718192021222324JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_catchException(JNIEnv * env, jobject jobj)&amp;">
+<meta name="twitter:description" content="jni异常处理jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动抛出异常进行警告； /错误纠正：jni层的异常是可以被Java层捕获到的！！！/// 根据Jni层抛出的异常，可以发现其实Throwable和Error的子类，所以我们可以通过捕获这两者// 来达到捕获的目的123456789101112131415161718192021222324">
 
 
 
@@ -357,12 +357,24 @@
                 
               
 
-              <time title="Created: 2018-10-07 00:00:00 / Modified: 16:42:21" itemprop="dateCreated datePublished" datetime="2018-10-07T00:00:00+08:00">2018-10-07</time>
+              <time title="Created: 2018-10-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-07T00:00:00+08:00">2018-10-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-12 08:20:28" itemprop="dateModified" datetime="2019-02-12T08:20:28+08:00">2019-02-12</time>
               
             
           </span>
@@ -423,8 +435,9 @@
       
         <!-- toc -->
 <h4 id="jni异常处理"><a href="#jni异常处理" class="headerlink" title="jni异常处理"></a>jni异常处理</h4><p>jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动<br>抛出异常进行警告；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_catchException</span><br><span class="line">(JNIEnv * env, jobject jobj)&#123;</span><br><span class="line">	jclass cls = (*env)-&gt;GetObjectClass(env, jobj);</span><br><span class="line">	jfieldID fid = (*env)-&gt;GetFieldID(env, cls, &quot;key2&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line"></span><br><span class="line">	// 捕获Jni异常</span><br><span class="line">	jthrowable exc = (*env)-&gt;ExceptionOccurred(env);</span><br><span class="line">	if (exc != NULL)&#123;</span><br><span class="line">		// 清空异常，确保Java层能够运行</span><br><span class="line">		(*env)-&gt;ExceptionClear(env);</span><br><span class="line"></span><br><span class="line">		// 重新获取</span><br><span class="line">		fid = (*env)-&gt;GetFieldID(env, cls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line"></span><br><span class="line">		jstring str = (*env)-&gt;GetObjectField(env, jobj, fid);</span><br><span class="line">		char* c_str = (*env)-&gt;GetStringUTFChars(env, str, NULL);</span><br><span class="line"></span><br><span class="line">		// 抛出Java层能够捕获的异常</span><br><span class="line">		if (_stricmp(c_str, &quot;hsh&quot;) != 0)&#123;</span><br><span class="line">			jclass new_exc = (*env)-&gt;FindClass(env, &quot;java/lang/IllegalArgumentException&quot;);</span><br><span class="line">			(*env)-&gt;ThrowNew(env, new_exc, &quot;key&apos;s value is invalid!&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>/<strong>错误纠正：jni层的异常是可以被Java层捕获到的！！！</strong>/<br>// 根据Jni层抛出的异常，可以发现其实Throwable和Error的子类，所以我们可以通过捕获这两者<br>// 来达到捕获的目的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_catchException</span><br><span class="line">(JNIEnv * env, jobject jobj)&#123;</span><br><span class="line">	jclass cls = (*env)-&gt;GetObjectClass(env, jobj);</span><br><span class="line">	jfieldID fid = (*env)-&gt;GetFieldID(env, cls, &quot;key2&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line"></span><br><span class="line">	// 捕获Jni异常</span><br><span class="line">	jthrowable exc = (*env)-&gt;ExceptionOccurred(env);</span><br><span class="line">	if (exc != NULL)&#123;</span><br><span class="line">		// 清空异常，确保Java层能够运行</span><br><span class="line">		(*env)-&gt;ExceptionClear(env);</span><br><span class="line"></span><br><span class="line">		// 重新获取</span><br><span class="line">		fid = (*env)-&gt;GetFieldID(env, cls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line"></span><br><span class="line">		jstring str = (*env)-&gt;GetObjectField(env, jobj, fid);</span><br><span class="line">		char* c_str = (*env)-&gt;GetStringUTFChars(env, str, NULL);</span><br><span class="line"></span><br><span class="line">		// 抛出Java层能够捕获的异常</span><br><span class="line">		if (_stricmp(c_str, &quot;hsh&quot;) != 0)&#123;</span><br><span class="line">			jclass new_exc = (*env)-&gt;FindClass(env, &quot;java/lang/IllegalArgumentException&quot;);</span><br><span class="line">			(*env)-&gt;ThrowNew(env, new_exc, &quot;key&apos;s value is invalid!&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>java:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  // Jni层次的异常是无法被捕获到的</span><br><span class="line">  test.catchException();</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">  // 我们在Jni中主动抛出的异常能够被捕获</span><br><span class="line">  System.out.println(e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>/<strong>通过捕获Throwable进行达到Jni层的异常捕获</strong>/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  // Jni层次的异常是无法被捕获到的</span><br><span class="line">  test.catchException();</span><br><span class="line">&#125; catch (Throwable e) &#123;</span><br><span class="line">  // 我们在Jni中主动抛出的异常能够被捕获</span><br><span class="line">  System.out.println(e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -458,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/12/Android/okio/基础/" rel="next" title="Okio基础">
-                <i class="fa fa-chevron-left"></i> Okio基础
+              <a href="/2018/10/07/NDK/C/jni引用/" rel="next" title="jni中的引用">
+                <i class="fa fa-chevron-left"></i> jni中的引用
               </a>
             
           </div>
@@ -468,8 +481,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/07/NDK/C/jni引用/" rel="prev" title="jni中的引用">
-                jni中的引用 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/11/NDK/C/jni缓存策略/" rel="prev" title="jni缓存策略">
+                jni缓存策略 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +557,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -575,7 +588,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -634,7 +649,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

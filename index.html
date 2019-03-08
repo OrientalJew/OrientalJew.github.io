@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/NDK/C/jni缓存策略/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/NDK/C++/虚继承、虚函数、纯虚函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -330,8 +330,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/11/NDK/C/jni缓存策略/" itemprop="url">
-                  jni缓存策略
+                <a class="post-title-link" href="/2019/03/08/NDK/C++/虚继承、虚函数、纯虚函数/" itemprop="url">
+                  虚继承、虚函数、纯虚函数
                 </a>
               
             
@@ -357,7 +357,7 @@
                 
               
 
-              <time title="Created: 2019-02-11 00:00:00 / Modified: 07:45:48" itemprop="dateCreated datePublished" datetime="2019-02-11T00:00:00+08:00">2019-02-11</time>
+              <time title="Created: 2019-03-08 00:00:00 / Modified: 11:15:48" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">2019-03-08</time>
             
 
             
@@ -379,7 +379,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -416,586 +416,33 @@
         
           
             <!-- toc -->
-<h3 id="通过局部静态变量进行缓存"><a href="#通过局部静态变量进行缓存" class="headerlink" title="通过局部静态变量进行缓存"></a>通过局部静态变量进行缓存</h3><p>通过在方法中声明局部的静态变量，可以在方法初始化时进行方法中的某个资源的初始化，<br>并且在以后每次调用该方法时，确保不需要重复初始化该资源，同时确保其他的方法无法调用<br>到。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 缓存策略</span><br><span class="line"></span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_cached</span><br><span class="line">(JNIEnv * env, jobject obj)&#123;</span><br><span class="line">	jclass cls = (*env)-&gt;GetObjectClass(env, obj);</span><br><span class="line"></span><br><span class="line">	// 静态局部变量</span><br><span class="line">	// 作用域存在于本函数</span><br><span class="line">	// 生命周期为应用生命周期</span><br><span class="line">	// 全局的其他地方无法使用到</span><br><span class="line">	static jfieldID key_id = NULL;</span><br><span class="line">	// 只在函数被第一次调用时进行初始化</span><br><span class="line">	if (key_id == NULL)&#123;</span><br><span class="line">		key_id = (*env)-&gt;GetFieldID(env, cls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">		printf(&quot;init key id;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong><em>Java中调用</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public native void cached();</span><br><span class="line"></span><br><span class="line"> for (int i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">   test.cached();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="全局变量初始时进行创建"><a href="#全局变量初始时进行创建" class="headerlink" title="全局变量初始时进行创建"></a>全局变量初始时进行创建</h3><p>全局变量可以在dll库加载时进行进行全局变量的初始化；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 初始化全局变量</span><br><span class="line">// 在初始化动态库之后，调用该方法，进行全局变量的初始化，并且能够确保只调用一次。</span><br><span class="line">jmethodID method_id;</span><br><span class="line">jfieldID fid;</span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_initIds</span><br><span class="line">(JNIEnv * env, jclass jcls)&#123;</span><br><span class="line">	method_id = (*env)-&gt;GetMethodID(env, jcls, &quot;randomInt&quot;, &quot;()I&quot;);</span><br><span class="line">	fid = (*env)-&gt;GetFieldID(env, jcls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">	printf(&quot;first init!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong><em>Java中调用</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">  System.out.println( System.getProperty(&quot;java.library.path&quot;));</span><br><span class="line">  System.loadLibrary(&quot;jni/jini_04&quot;);</span><br><span class="line">  // 加载完成动态库之后，立刻调用初始化方法，初始化全局变量</span><br><span class="line">  initIds();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/NDK/C/jni引用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/NDK/C/jni引用/" itemprop="url">
-                  jni中的引用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-10-07 00:00:00 / Modified: 16:42:27" itemprop="dateCreated datePublished" datetime="2018-10-07T00:00:00+08:00">2018-10-07</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="jni中的引用"><a href="#jni中的引用" class="headerlink" title="jni中的引用"></a>jni中的引用</h4><p>jni引用类型分为：局部引用和全局引用</p>
-<p>作用：在JNI中告知虚拟机何时回收一个JNI变量<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/07/NDK/C/jni引用/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/NDK/C/jni异常处理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/07/NDK/C/jni异常处理/" itemprop="url">
-                  jni异常处理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-10-07 00:00:00 / Modified: 16:42:21" itemprop="dateCreated datePublished" datetime="2018-10-07T00:00:00+08:00">2018-10-07</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!-- toc -->
-<h4 id="jni异常处理"><a href="#jni异常处理" class="headerlink" title="jni异常处理"></a>jni异常处理</h4><p>jni层抛出的异常是无法在Java层被捕获到，只能在C层进行清空，如果有必要，需要向Java层主动<br>抛出异常进行警告；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_catchException</span><br><span class="line">(JNIEnv * env, jobject jobj)&#123;</span><br><span class="line">	jclass cls = (*env)-&gt;GetObjectClass(env, jobj);</span><br><span class="line">	jfieldID fid = (*env)-&gt;GetFieldID(env, cls, &quot;key2&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line"></span><br><span class="line">	// 捕获Jni异常</span><br><span class="line">	jthrowable exc = (*env)-&gt;ExceptionOccurred(env);</span><br><span class="line">	if (exc != NULL)&#123;</span><br><span class="line">		// 清空异常，确保Java层能够运行</span><br><span class="line">		(*env)-&gt;ExceptionClear(env);</span><br><span class="line"></span><br><span class="line">		// 重新获取</span><br><span class="line">		fid = (*env)-&gt;GetFieldID(env, cls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line"></span><br><span class="line">		jstring str = (*env)-&gt;GetObjectField(env, jobj, fid);</span><br><span class="line">		char* c_str = (*env)-&gt;GetStringUTFChars(env, str, NULL);</span><br><span class="line"></span><br><span class="line">		// 抛出Java层能够捕获的异常</span><br><span class="line">		if (_stricmp(c_str, &quot;hsh&quot;) != 0)&#123;</span><br><span class="line">			jclass new_exc = (*env)-&gt;FindClass(env, &quot;java/lang/IllegalArgumentException&quot;);</span><br><span class="line">			(*env)-&gt;ThrowNew(env, new_exc, &quot;key&apos;s value is invalid!&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>java:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  // Jni层次的异常是无法被捕获到的</span><br><span class="line">  test.catchException();</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">  // 我们在Jni中主动抛出的异常能够被捕获</span><br><span class="line">  System.out.println(e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/Android/okio/基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/12/Android/okio/基础/" itemprop="url">
-                  Okio基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-12T00:00:00+08:00">2018-09-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-11 10:34:37" itemprop="dateModified" datetime="2019-02-11T10:34:37+08:00">2019-02-11</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!-- toc -->
-<h4 id="Okio"><a href="#Okio" class="headerlink" title="Okio"></a>Okio</h4><p>封装InputStream和OutputStream为Source和Sink，提供了一些列高效读写字节和字符的方法；</p>
-<p><img src="/images/okio.jpg" alt="image"></p>
-<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ul>
-<li><p>向File中写入数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String name = &quot;xiaoming&quot;;</span><br><span class="line">int age = 11;</span><br><span class="line"></span><br><span class="line">try &#123;</span><br><span class="line">    Okio.buffer(Okio.sink(file)).writeUtf8(name).writeInt(age).close();</span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;catch (IOException ex)&#123;</span><br><span class="line">  ex.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>文件拷贝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  /**</span><br><span class="line"> * 当同时存在Source和Sink时，不建议完全采用链式的调用，因为source、sink在结束时必须关闭；</span><br><span class="line"> * 小心使用writeAll,因为writeAll并不会返回Sink，所以采用链式调用最后没法直接close；</span><br><span class="line"> *</span><br><span class="line"> * 对于压缩文件，如果在最后没有调用close将流正确关闭，则会损坏到压缩文件</span><br><span class="line"> */</span><br><span class="line">  // Okio.buffer(Okio.sink(destFile)).writeAll(Okio.buffer(Okio.source(srcFile)));</span><br><span class="line">  BufferedSink sink = Okio.buffer(Okio.sink(new File(filePath)));</span><br><span class="line"></span><br><span class="line">  BufferedSource source = Okio.buffer(Okio.source(in));</span><br><span class="line"></span><br><span class="line">  sink.writeAll(source);</span><br><span class="line"></span><br><span class="line">  sink.close();</span><br><span class="line">  source.close();</span><br><span class="line"></span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;catch (IOException ex)&#123;</span><br><span class="line">  ex.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h4><ul>
-<li><p>对应原生IO的InputStream，提供字节流数据，通过source，可以从网络、存储、内存等地方读取到数据流；</p>
-</li>
-<li><p>提供了read方法，支持Sink读取数据到其Buffer缓存中；</p>
-</li>
-<li><p>一般情况下，不要直接操作Source，而是操作BufferedSource，它提供了更丰富、高效的接口；</p>
-</li>
-<li><p>Source还提供了一个强大的skip方法(BufferedSource)，能让我们跳过指定数量的字节后，再读字节流；</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public interface Source extends Closeable &#123;</span><br><span class="line">  /**</span><br><span class="line">   * Removes at least 1, and up to &#123;@code byteCount&#125; bytes from this and appends</span><br><span class="line">   * them to &#123;@code sink&#125;. Returns the number of bytes read, or -1 if this</span><br><span class="line">   * source is exhausted.</span><br><span class="line">   */</span><br><span class="line">  // 将字节数据从source中移除，并添加到Sink中</span><br><span class="line">  long read(Buffer sink, long byteCount) throws IOException;</span><br><span class="line"></span><br><span class="line">  /** Returns the timeout for this source. */</span><br><span class="line">  Timeout timeout();</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * Closes this source and releases the resources held by this source. It is an</span><br><span class="line">   * error to read a closed source. It is safe to close a source more than once.</span><br><span class="line">   */</span><br><span class="line">  @Override void close() throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="BufferedSource"><a href="#BufferedSource" class="headerlink" title="BufferedSource"></a>BufferedSource</h4><p>带有缓存的Source接口，实际实现是RealBufferedSource；</p>
-<h4 id="Sink"><a href="#Sink" class="headerlink" title="Sink"></a>Sink</h4><ul>
-<li><p>对应原生IO的OutputStream，提供了write方法，用来从Source缓存中读取缓存数据，写入到自己的<br>Buffer缓存中；</p>
-</li>
-<li><p>一般情况下，不要直接操作Sink，而是操作BufferedSink，它提供了更丰富、高效的接口；</p>
-</li>
-<li><p>Sink能够代替DataOutputStream(写入原生数据)、BufferedOutputStream(写入缓存数据)、<br>OutputStreamWriter(数据流字符编码)；</p>
-</li>
-<li><p>在结束时，必须调用Sink的close方法，将缓存数据推送进目标中，并且释放调用持有的资源(在采用<br>链式调用时，需要注意最后也需要关闭Sink)；</p>
-</li>
-</ul>
-<p>通过：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Okio.buffer(Sink);</span><br></pre></td></tr></table></figure></p>
-<p>可以得到BufferedSink实例；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public interface Sink extends Closeable, Flushable &#123;</span><br><span class="line">  /** Removes &#123;@code byteCount&#125; bytes from &#123;@code source&#125; and appends them to this. */</span><br><span class="line">  // 基础的write操作,该方法将指定数量的字节从source中移出，并写入自己的Buffer</span><br><span class="line">  void write(Buffer source, long byteCount) throws IOException;</span><br><span class="line"></span><br><span class="line">  /** Pushes all buffered bytes to their final destination. */</span><br><span class="line">  @Override void flush() throws IOException;</span><br><span class="line"></span><br><span class="line">  /** Returns the timeout for this sink. */</span><br><span class="line">  Timeout timeout();</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * Pushes all buffered bytes to their final destination and releases the</span><br><span class="line">   * resources held by this sink. It is an error to write a closed sink. It is</span><br><span class="line">   * safe to close a sink more than once.</span><br><span class="line">   */</span><br><span class="line">   // Sink可以多次调用close</span><br><span class="line">  @Override void close() throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="BufferedSink"><a href="#BufferedSink" class="headerlink" title="BufferedSink"></a>BufferedSink</h4><p>带有缓存的Sink接口，实际实现是BufferedSink类；</p>
-<h4 id="Segment"><a href="#Segment" class="headerlink" title="Segment"></a>Segment</h4><p>Segment字面的意思就是片段，okio将数据也就是Buffer分割成一块块的片段，内部维护者固定长度的<br>byte[]数组，同时segment拥有前面节点和后面节点，构成一个双向循环链表；</p>
-<p><img src="/images/segment.png" alt="image"></p>
-<ul>
-<li>采用双向链表的解构，每一个Segment都代表一个节点，并且保存了前后两个节点的指针，<br>提供了pop(出栈)和push(入栈)方法；</li>
-<li>封装了一个byte数组，用来保存一小段缓存数据；</li>
-<li>多个Segment之间可能会分享数据流，在这种情况下的Segment，可能无法被回收和修改；</li>
-<li>pop方法用来将当前Segment从当前链表中移除，push方法用来将一个Segment添加到当前Segment的<br>后面；</li>
-</ul>
-<p>属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/** The size of all segments in bytes. */</span><br><span class="line">static final int SIZE = 8192;</span><br><span class="line"></span><br><span class="line">/** Segments will be shared when doing so avoids &#123;@code arraycopy()&#125; of this many bytes. */</span><br><span class="line">// 在调用split分割Segment时，如果要求分割的字节数超过了该值，则不会采用复制数组的方式进行</span><br><span class="line">// 分割，而是采用共享的方式</span><br><span class="line">static final int SHARE_MINIMUM = 1024;</span><br><span class="line"></span><br><span class="line">final byte[] data;</span><br><span class="line"></span><br><span class="line">// Segment保存的字节数组中，第一个可读的位置</span><br><span class="line">/** The next byte of application data byte to read in this segment. */</span><br><span class="line">int pos;</span><br><span class="line"></span><br><span class="line">// Segment的剩余可写的字节数组的第一个位置</span><br><span class="line">// 所以Segment实际保存的数据为pos ~ limit-1</span><br><span class="line">/** The first byte of available data ready to be written to. */</span><br><span class="line">int limit;</span><br><span class="line"></span><br><span class="line">// Segment的字节数据是不是与别的Segment共享的，默认情况下是false</span><br><span class="line">// 当在split时采用的是共享的方式，则分割出来的Segment该变量为true</span><br><span class="line">/** True if other segments or byte strings use the same byte array. */</span><br><span class="line">boolean shared;</span><br><span class="line"></span><br><span class="line">// 当前Segment是否是其中字节数据的拥有者</span><br><span class="line">/** True if this segment owns the byte array and can append to it, extending &#123;@code limit&#125;. */</span><br><span class="line">boolean owner;</span><br><span class="line"></span><br><span class="line">/** Next segment in a linked or circularly-linked list. */</span><br><span class="line">Segment next;</span><br><span class="line"></span><br><span class="line">/** Previous segment in a circularly-linked list. */</span><br><span class="line">Segment prev;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>pos和limit变量类似于两个指针，在Segment进行字节数据共享时，这两个变量用来指定当前Segment<br>有效的数据域(范围)，这也是为什么，当多个Segment共享字节数据时，Segment无法被修改。如果修改了，<br>那么其他的Segment的有效数据域可能会受到影响；</p>
+<h3 id="虚继承解决同源继承二义性"><a href="#虚继承解决同源继承二义性" class="headerlink" title="虚继承解决同源继承二义性"></a>虚继承解决同源继承二义性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">public:</span><br><span class="line">	char* name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class A1 :public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class A2 :public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B :public A1, public A2&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	B b;</span><br><span class="line">	// 报错，存在二意性</span><br><span class="line">	b.name = &quot;jack&quot;;</span><br><span class="line"></span><br><span class="line">	// 显式指定父类进行调用</span><br><span class="line">	b.A1::name = &quot;rose&quot;;</span><br><span class="line">	b.A2::name = &quot;jack&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过虚继承，可以确保同源继承，只有一份相同的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class A1 :virtual public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class A2 :virtual public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	B b;</span><br><span class="line">	// 报错，存在二意性</span><br><span class="line">	// 当继承父类为virtual继承时，能够确保不同路径继承来的同名成员只有一份拷贝，解决二义性</span><br><span class="line">	b.name = &quot;jack&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="虚函数实现多态"><a href="#虚函数实现多态" class="headerlink" title="虚函数实现多态"></a>虚函数实现多态</h3><blockquote>
 </blockquote>
-<ul>
-<li>sharedCopy</li>
-</ul>
-<p>创建一个新的Segment，这个与创建它的Segment共享同一个字节数组数据，并且标明这个新的Segment不是<br>字节数组数据的拥有者；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Segment sharedCopy() &#123;</span><br><span class="line">  shared = true;</span><br><span class="line">  return new Segment(data, pos, limit, true, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>unsharedCopy</li>
-</ul>
-<p>创建一个全新的Segment，并且这个Segment的数据与创建它的Segment是相同的；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Segment unsharedCopy() &#123;</span><br><span class="line">  return new Segment(data.clone(), pos, limit, false, true);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>pop</li>
-</ul>
-<p>将当前Segment从链表中移除；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public @Nullable Segment pop() &#123;</span><br><span class="line">  Segment result = next != this ? next : null;</span><br><span class="line">  prev.next = next;</span><br><span class="line">  next.prev = prev;</span><br><span class="line">  next = null;</span><br><span class="line">  prev = null;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>push</li>
-</ul>
-<p>将Segment添加到当前Segment之后；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public Segment push(Segment segment) &#123;</span><br><span class="line">  segment.prev = this;</span><br><span class="line">  segment.next = next;</span><br><span class="line">  next.prev = segment;</span><br><span class="line">  next = segment;</span><br><span class="line">  return segment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>split</li>
-</ul>
-<p>根据传入的字节数，分割Segment，将新分割出来的Segment添加到当前Segment之前；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public Segment split(int byteCount) &#123;</span><br><span class="line">  if (byteCount &lt;= 0 || byteCount &gt; limit - pos) throw new IllegalArgumentException();</span><br><span class="line">  Segment prefix;</span><br><span class="line"></span><br><span class="line">  // We have two competing performance goals:</span><br><span class="line">  //  - Avoid copying data. We accomplish this by sharing segments.</span><br><span class="line">  //  - Avoid short shared segments. These are bad for performance because they are readonly and</span><br><span class="line">  //    may lead to long chains of short segments.</span><br><span class="line">  // To balance these goals we only share segments when the copy will be large.</span><br><span class="line">  // 如果分割的字节数超过了1024，则采用共享字节数组的方式</span><br><span class="line">  if (byteCount &gt;= SHARE_MINIMUM) &#123;</span><br><span class="line">    prefix = sharedCopy();</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    // 否则直接创建一个新的Segment，并复制数据</span><br><span class="line">    prefix = SegmentPool.take();</span><br><span class="line">    System.arraycopy(data, pos, prefix.data, 0, byteCount);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 如果采用共享数据的方式，data数据拥有者的pos最大不会超过limit</span><br><span class="line">  // 如果是共享数据的方式，分割后的两个Segment实际是通过pos和limit来分别指向同一个字节数组的</span><br><span class="line">  // 不同数据段</span><br><span class="line">  prefix.limit = prefix.pos + byteCount;</span><br><span class="line">  // 当前Segment的pos重新指向</span><br><span class="line">  pos += byteCount;</span><br><span class="line">  // 将分割出去的Segment放到前一个Segment的后面，也就是当前Segment的前面</span><br><span class="line">  prev.push(prefix);</span><br><span class="line">  return prefix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>compact</li>
-</ul>
-<p>合并当前Segment和它之前的Segment为一个；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void compact() &#123;</span><br><span class="line">  if (prev == this) throw new IllegalStateException();</span><br><span class="line">  if (!prev.owner) return; // Cannot compact: prev isn&apos;t writable.</span><br><span class="line">  int byteCount = limit - pos;</span><br><span class="line">  // 如果prev是与别的Segment共享字节数组的，则其只能使用从limit～SIZE的部分</span><br><span class="line">  // 否则，0～pos部分也是可以使用的，当然，一般情况下，pos是等于0的</span><br><span class="line">  int availableByteCount = SIZE - prev.limit + (prev.shared ? 0 : prev.pos);</span><br><span class="line">  if (byteCount &gt; availableByteCount) return; // Cannot compact: not enough writable space.</span><br><span class="line">  // 开始合并到prev中</span><br><span class="line">  writeTo(prev, byteCount);</span><br><span class="line">  // 移除当前Segment</span><br><span class="line">  pop();</span><br><span class="line">  SegmentPool.recycle(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>writeTo</li>
-</ul>
-<p>将指定字节数的数据移到Sink中；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public void writeTo(Segment sink, int byteCount) &#123;</span><br><span class="line">  if (!sink.owner) throw new IllegalArgumentException();</span><br><span class="line">  // sink从limit~SIZE的部分不足以放入当前Segment，则检查Sink的0~pos部分是否可以放入数据</span><br><span class="line">  if (sink.limit + byteCount &gt; SIZE) &#123;</span><br><span class="line">    // We can&apos;t fit byteCount bytes at the sink&apos;s current position. Shift sink first.</span><br><span class="line">    // 虽然Sink是其字节数组的拥有者，但是其字节数组一部分是与别人共享的，这部分共享的数据，</span><br><span class="line">    // 可能使用了0～pos的部分，所以这部分不能被修改</span><br><span class="line">    if (sink.shared) throw new IllegalArgumentException();</span><br><span class="line">    // 加上前面的pos部分也不足以将当前Segment数据移进Sink中</span><br><span class="line">    if (sink.limit + byteCount - sink.pos &gt; SIZE) throw new IllegalArgumentException();</span><br><span class="line">    // 将sink的字节数组数据移到pos = 0的位置</span><br><span class="line">    System.arraycopy(sink.data, sink.pos, sink.data, 0, sink.limit - sink.pos);</span><br><span class="line">    sink.limit -= sink.pos;</span><br><span class="line">    sink.pos = 0;</span><br><span class="line">  &#125;</span><br><span class="line">  // 将当前Segment的数据移到Sink中</span><br><span class="line">  System.arraycopy(data, pos, sink.data, sink.limit, byteCount);</span><br><span class="line">  sink.limit += byteCount;</span><br><span class="line">  pos += byteCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="ByteString"><a href="#ByteString" class="headerlink" title="ByteString"></a>ByteString</h4><p>ByteString内部可以保存byte类型的数据，作为一个工具类，它可以把byte转为String，这个String可<br>以是utf8的值，也可以是base64后的值，也可以是md5的值等等;</p>
+<p>动态多态：在程序运行期间，决定哪个函数被调用(类似于动态代理)<br> 1，继承<br> 2，父类引用或指针接收子类的对象实例<br> 3，函数重写</p>
+<blockquote>
+<p>静态多态：子类进行方法重载</p>
+</blockquote>
+<p>在Java中，默认情况下，使用父类变量来接收子类实例就能够实现动态多态，但是，C++中，要实现<br>动态多态，我们必须显式的将父类函数声明为虚函数；</p>
+<p>plane.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#pragma once</span><br><span class="line"></span><br><span class="line">class Plane&#123;</span><br><span class="line">public:</span><br><span class="line">  // 为了实现动态多态，必须声明为virtual类型</span><br><span class="line">	virtual void fly();</span><br><span class="line"></span><br><span class="line">	virtual void land();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>plane.cpp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;plane.h&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void Plane::fly()&#123;</span><br><span class="line">	cout &lt;&lt; &quot;simple fly&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Plane::land()&#123;</span><br><span class="line">	cout &lt;&lt; &quot;simple land&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>jet.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;plane.h&quot;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class Jet :public Plane&#123;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	void fly();</span><br><span class="line"></span><br><span class="line">	void land();</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>jet.cpp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;jet.h&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void Jet::fly()&#123;</span><br><span class="line">	cout &lt;&lt; &quot;jet fly&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Jet::land()&#123;</span><br><span class="line">	cout &lt;&lt; &quot;jet land&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>dragon.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#pragma once</span><br><span class="line">#include &quot;plane.h&quot;</span><br><span class="line"></span><br><span class="line">class Dragon :public Plane&#123;</span><br><span class="line">public:</span><br><span class="line">	void fly();</span><br><span class="line"></span><br><span class="line">	void land();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>dragon.cpp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;dragon.h&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void Dragon::fly()&#123;</span><br><span class="line">	cout &lt;&lt; &quot;Dragon fly&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Dragon::land()&#123;</span><br><span class="line">	cout &lt;&lt; &quot;Dragon land&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;plane.h&quot;</span><br><span class="line">#include &quot;jet.h&quot;</span><br><span class="line">#include &quot;dragon.h&quot;</span><br><span class="line">// 如果在Java中，则可以通过父类接收子类，并且执行时也是调用实际的子类的内容(也就是多态)</span><br><span class="line">void bizPlay(Plane&amp; p)&#123;</span><br><span class="line">	p.fly();</span><br><span class="line"></span><br><span class="line">	p.land();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	Plane p;</span><br><span class="line">	bizPlay(p);</span><br><span class="line"></span><br><span class="line">	// 如果想要子类的函数能够被调用(实现多态)，则父类声明函数时，必须声明为虚函数</span><br><span class="line">	Jet j;</span><br><span class="line">	bizPlay(j);</span><br><span class="line"></span><br><span class="line">	Dragon d;</span><br><span class="line">	bizPlay(d);</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>1，有纯虚函数的类即抽象类<br>2，抽象类不能被实例化<br>3，子类继承抽象类，必须实现父类的纯虚函数，否则子类也是抽象类<br>作用：为了继承约束，对于子类具体实现是未知的。</p>
+<blockquote>
+<p>纯虚函数在函数声明后面必须增加”=0”，这是与虚函数的区别：</p>
+</blockquote>
+<p>拥有纯虚函数的类是抽象类，是不允许进行实例化的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Tet&#123;</span><br><span class="line">public:</span><br><span class="line">	virtual void myFun()=0;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">  // 实例化将在编译期就报错</span><br><span class="line">  Tet t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>拥有虚函数的类和普通类并没有太大区别(除了实现多态)，不管函数只是头文件声明，还是已经实现了<br>函数体，都能够被直接实例化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Tet&#123;</span><br><span class="line">public:</span><br><span class="line">	virtual void myFun();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">  // 实例化在编译期没有问题，但是，并没有实现函数体，所以运行期将报错；</span><br><span class="line">  Tet t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>拥有纯虚函数的类即为抽象类，抽象类是允许有非纯虚函数的；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">class Shape&#123;</span><br><span class="line">public:</span><br><span class="line">	// 纯虚函数</span><br><span class="line">	// 必须等于0，否则会被解释为函数的头文件函数声明</span><br><span class="line">	virtual void sayArea() = 0;</span><br><span class="line"></span><br><span class="line">	// 和Java一样，抽象类中可以有已经实现的方法</span><br><span class="line">	void print()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;I am print&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Circle :public Shape&#123;</span><br><span class="line">public:</span><br><span class="line">	Circle(int r)&#123;</span><br><span class="line">		this-&gt;r = r;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	void sayArea()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;Circle Area&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">private:</span><br><span class="line">	int r;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// 纯虚函数不能被实例化</span><br><span class="line">	//Shape s;</span><br><span class="line">	//s.sayArea();</span><br><span class="line"></span><br><span class="line">	// 子类必须实现抽象父类的方法，才能够被实例化</span><br><span class="line">	 Circle c(2);</span><br><span class="line">	 c.sayArea();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="只包含纯虚函数的类即接口"><a href="#只包含纯虚函数的类即接口" class="headerlink" title="只包含纯虚函数的类即接口"></a>只包含纯虚函数的类即接口</h4><p>接口与抽象类，在语法上区别并不是很大，只是逻辑上的划分(C++)，可以认为，接口就是只存在<br>纯虚函数的抽象类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 可以认为是接口</span><br><span class="line">class Drawable&#123;</span><br><span class="line">	virtual void draw() = 0;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1049,7 +496,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/28/NDK/C/预编译/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/NDK/C++/继承/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1068,8 +515,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/28/NDK/C/预编译/" itemprop="url">
-                  预编译处理
+                <a class="post-title-link" href="/2019/03/08/NDK/C++/继承/" itemprop="url">
+                  C++ 继承
                 </a>
               
             
@@ -1095,24 +542,12 @@
                 
               
 
-              <time title="Created: 2018-08-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">2018-08-28</time>
+              <time title="Created: 2019-03-08 00:00:00 / Modified: 10:17:40" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">2019-03-08</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 16:38:23" itemprop="dateModified" datetime="2018-08-30T16:38:23+08:00">2018-08-30</time>
               
             
           </span>
@@ -1129,7 +564,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1164,17 +599,19 @@
 
       
         
-          <!-- toc -->
-<h4 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h4><p>C代码的执行流程大致可以分为：</p>
-<p>1、编译：.c编译为目标代码(.obj)；<br>2、链接：将目标代码与C函数库链接合并，形成最终的可执行文件(包含了汇编阶段)；<br>3、执行；</p>
-<p>而预编译，也称为预处理，发生于编译之前，目的是为编译做准备工作，完成头文件与对应函数代码<br>的替换；<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/28/NDK/C/预编译/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <!-- toc -->
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承的作用：解决代码的重用性；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">	Human(char* name, int age)&#123;</span><br><span class="line">		this-&gt;name = name;</span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">		cout &lt;&lt; &quot;Human构造函数&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~Human()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;Human析构函数&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	void say()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;说话:...&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">	// 子类可以继承使用该权限修饰符下的变量和方法</span><br><span class="line">	//protected:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Man:public Human&#123;</span><br><span class="line">public:</span><br><span class="line">	// 继承后，子类构造方法，需要给父类初始化</span><br><span class="line">	// 注意，对象变量的初始化方式很相近</span><br><span class="line">	Man(char* name) :Human(name,12),h(&quot;Denny&quot;,10)&#123;</span><br><span class="line">		this-&gt;brother = name;</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; &quot;Man 构造函数&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~Man()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;Man析构函数&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	void chasing()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;正在泡妞&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 覆盖父类的方法</span><br><span class="line">	// 并非多态中的重写</span><br><span class="line">	void say()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;男人说：...&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">private:</span><br><span class="line">	char* brother;</span><br><span class="line"></span><br><span class="line">	Human h;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 创建时，先执行父类构造函数，销毁时，先执行子类析构函数</span><br><span class="line">void func()&#123;</span><br><span class="line">	Man man(&quot;jack&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	//Man m1(&quot;&quot;);</span><br><span class="line">	//m1.say();</span><br><span class="line"></span><br><span class="line">	// 子类实例可以赋值给父类对象，指针和引用</span><br><span class="line">	//Human h1 = m1;</span><br><span class="line">	//Human* h_p = &amp;m1;</span><br><span class="line">	//Human&amp; h = m1;</span><br><span class="line"></span><br><span class="line">	//func();</span><br><span class="line"></span><br><span class="line">	// 并非Java多态中的那种重写，而只是覆盖</span><br><span class="line">	Man m1(&quot;&quot;);</span><br><span class="line">	m1.say(); // 男人说：...</span><br><span class="line">	// 通过父类实例来接收，调用时指向的是父类的方法，而非子类的方法，</span><br><span class="line">	// 说明并非重写，只是覆盖了</span><br><span class="line">	Human h = m1;</span><br><span class="line">	h.say();  // 说话:...</span><br><span class="line"></span><br><span class="line">	// 在没有重写的情况下，子类仍然可以调用父类的方法</span><br><span class="line">	m1.Human::say();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="继承权限组合"><a href="#继承权限组合" class="headerlink" title="继承权限组合"></a>继承权限组合</h3><p>父类权限         子类继承方式            子类中         子类外<br>public           public                  public         public<br>public           protected               public         protected<br>public           private                 public         private</p>
+<p>protected        public                  protected      protected<br>protected        protected               protected      protected<br>protected        private                 protected      private</p>
+<p>private          public                  private        private<br>private          protected               private        private</p>
+<h3 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Person&#123;</span><br><span class="line">public:</span><br><span class="line">	Person(char* name)&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	Person(char*name, int age)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Citizen&#123;</span><br><span class="line">public:</span><br><span class="line">	Citizen(int age)&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">	void say()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;saying...&quot;&lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class Student:public Person,private Citizen&#123;</span><br><span class="line">public:</span><br><span class="line">	// 多继承时，构造函数可以有不同的组合</span><br><span class="line">	Student(char*name) :Person(name),Citizen(10)&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	Student(char*name, int age) :Person(name,age), Citizen(age)&#123;</span><br><span class="line">		say();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="虚继承解决同源继承二义性"><a href="#虚继承解决同源继承二义性" class="headerlink" title="虚继承解决同源继承二义性"></a>虚继承解决同源继承二义性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">public:</span><br><span class="line">	char* name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class A1 :public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class A2 :public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B :public A1, public A2&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	B b;</span><br><span class="line">	// 报错，存在二意性</span><br><span class="line">	b.name = &quot;jack&quot;;</span><br><span class="line"></span><br><span class="line">	// 显式指定父类进行调用</span><br><span class="line">	b.A1::name = &quot;rose&quot;;</span><br><span class="line">	b.A2::name = &quot;jack&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过虚继承，可以确保同源继承，只有一份相同的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class A1 :virtual public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class A2 :virtual public A&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	B b;</span><br><span class="line">	// 报错，存在二意性</span><br><span class="line">	// 当继承父类为virtual继承时，能够确保不同路径继承来的同名成员只有一份拷贝，解决二义性</span><br><span class="line">	b.name = &quot;jack&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1226,7 +663,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/26/NDK/C/IO操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/NDK/C++/模板函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1245,8 +682,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/26/NDK/C/IO操作/" itemprop="url">
-                  IO操作
+                <a class="post-title-link" href="/2019/03/08/NDK/C++/模板函数/" itemprop="url">
+                  模板函数
                 </a>
               
             
@@ -1272,24 +709,12 @@
                 
               
 
-              <time title="Created: 2018-08-26 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-26T00:00:00+08:00">2018-08-26</time>
+              <time title="Created: 2019-03-08 00:00:00 / Modified: 11:23:23" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">2019-03-08</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-28 19:56:23" itemprop="dateModified" datetime="2018-08-28T19:56:23+08:00">2018-08-28</time>
               
             
           </span>
@@ -1306,7 +731,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1341,15 +766,12 @@
 
       
         
-          <!-- toc -->
-<h4 id="获取文件大小"><a href="#获取文件大小" class="headerlink" title="获取文件大小"></a>获取文件大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void main()&#123;</span><br><span class="line">	char* path = &quot;C:\\Users\\dell\\Desktop\\文件加密.png&quot;;</span><br><span class="line">	FILE* file = fopen(path, &quot;rb&quot;);</span><br><span class="line"></span><br><span class="line">	// 重新定位指针到文件末尾</span><br><span class="line">	fseek(file, 0, SEEK_END);</span><br><span class="line"></span><br><span class="line">	// 返回当前的文件指针，相对于文件开头的偏移量</span><br><span class="line">	int length = ftell(file);</span><br><span class="line"></span><br><span class="line">	printf(&quot;%d\n&quot;,length);</span><br><span class="line"></span><br><span class="line">	getchar();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/26/NDK/C/IO操作/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <!-- toc -->
+<p>模板函数采用的是类似于Java中的泛型机制，抽取出共同的业务逻辑，让其适用于不同的数据类型；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">void mySwap(T &amp;a, T &amp;b)&#123;</span><br><span class="line">	T temp = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template&lt;typename T,typename Z&gt;</span><br><span class="line">void myCout(T &amp;a, Z &amp;b)&#123;</span><br><span class="line">	cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	int a = 1;</span><br><span class="line">	int b = 2;</span><br><span class="line"></span><br><span class="line">	//mySwap&lt;int&gt;(a, b);</span><br><span class="line">	mySwap(a, b);</span><br><span class="line"></span><br><span class="line">	myCout&lt;int, char&gt;(a,b);</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1401,7 +823,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/Android/OkHttp/OkHttp源码分析二/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/类的对象属性成员初始化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1420,8 +842,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/16/Android/OkHttp/OkHttp源码分析二/" itemprop="url">
-                  OkHttp源码分析(二)
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/类的对象属性成员初始化/" itemprop="url">
+                  C++ 类的对象属性成员初始化
                 </a>
               
             
@@ -1447,24 +869,12 @@
                 
               
 
-              <time title="Created: 2018-08-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-16T00:00:00+08:00">2018-08-16</time>
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:19:21" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-31 11:05:38" itemprop="dateModified" datetime="2018-08-31T11:05:38+08:00">2018-08-31</time>
               
             
           </span>
@@ -1481,7 +891,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1516,15 +926,11 @@
 
       
         
-          <!-- toc -->
-<h4 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h4><p>每一个Call请求都需要经过一些列的拦截器处理，Ok通过这些拦截器实现了对Call请求的重试、重定向、缓存<br>、设置请求头、压缩，甚至是最终对服务端的请求和接收返回数据也都是在拦截器中进行的；</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/16/Android/OkHttp/OkHttp源码分析二/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <!-- toc -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 构造函数的对象属性初始化列表</span><br><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	int id;</span><br><span class="line">	// 属性对象</span><br><span class="line">	// 为属性对象赋值只有两种方式，一种是创建时直接初始化</span><br><span class="line">	Teacher t0 = Teacher(&quot;lili&quot;);</span><br><span class="line"></span><br><span class="line">	// 另一种是在构造函数后面，挨个为它们初始化</span><br><span class="line">	Teacher t1;</span><br><span class="line">	Teacher t2;</span><br><span class="line">public:</span><br><span class="line">	// 属性对象被要求必须初始化</span><br><span class="line">	//Student(int id)&#123;</span><br><span class="line">	//	this-&gt;id = id;</span><br><span class="line">	//&#125;</span><br><span class="line"></span><br><span class="line">	// 初始化时，同时初始化属性对象</span><br><span class="line">	Student(int id,char *t1_name):t1(t1_name),t2(t1_name)&#123;</span><br><span class="line">		this-&gt;id = id;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1576,7 +982,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/Android/OkHttp/Http基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/运算符重载/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1595,8 +1001,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/14/Android/OkHttp/Http基础/" itemprop="url">
-                  Http基础
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/运算符重载/" itemprop="url">
+                  C++ 运算符重载
                 </a>
               
             
@@ -1622,24 +1028,12 @@
                 
               
 
-              <time title="Created: 2018-08-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-14T00:00:00+08:00">2018-08-14</time>
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:53:01" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-31 11:05:38" itemprop="dateModified" datetime="2018-08-31T11:05:38+08:00">2018-08-31</time>
               
             
           </span>
@@ -1656,7 +1050,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1691,16 +1085,12 @@
 
       
         
-          <!-- toc -->
-<h4 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h4><p>WebSocket协议是基于TCP的一种新的网络协议。它实现了浏览器与服务器全双工(full-duplex)通信——允<br>许服务器主动发送信息给客户端。</p>
-<p>在WebSocket协议协议产生之前，双工通讯是通过客户端向服务端不停的发送HTTP请求，从服务端拉取数据<br>更新来实现的。这样做造成了客户端的HTTP轮询的滥用，并且效率是底下的。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/14/Android/OkHttp/Http基础/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <!-- toc -->
+<p>Java中的字符串String之所以能够相加，其实就是重载了+号运算符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class Point&#123;</span><br><span class="line">public:</span><br><span class="line">	int x;</span><br><span class="line">	int y;</span><br><span class="line">public:</span><br><span class="line">	Point(int x = 0, int y = 0)&#123;</span><br><span class="line">		this-&gt;x = x;</span><br><span class="line">		this-&gt;y = y;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 采用成员函数，定义运算符</span><br><span class="line">	Point operator-(Point &amp;p)&#123;</span><br><span class="line">		Point temp(this-&gt;x - p.x, this-&gt;y - p.y);</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 重载运算符+(本质还是函数调用)</span><br><span class="line">// 为了减少中间传递的拷贝，参数使用引用；(也可以用指针，当时运算符使用起来更麻烦，需要使用*)</span><br><span class="line">Point operator+(Point &amp;p1, Point &amp;p2)&#123;</span><br><span class="line">	Point temp(p1.x + p2.x, p1.y + p2.y);</span><br><span class="line">	return temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 当属性私有时，重载的运算符无法访问到私有的属性，此时可以通过友元函数来实现</span><br><span class="line">class Point&#123;</span><br><span class="line"></span><br><span class="line">	// 声明友元函数式的操作符，这样操作符就能够访问私有属性</span><br><span class="line">	friend Point operator+(Point&amp; p1, Point&amp; p2)&#123;</span><br><span class="line">		Point temp(p1.x + p2.x, p1.y + p2.y);</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">	int x;</span><br><span class="line">	int y;</span><br><span class="line">public:</span><br><span class="line">	Point(int x, int y)&#123;</span><br><span class="line">		this-&gt;x = x;</span><br><span class="line">		this-&gt;y = y;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Point operator+(Point&amp; p1, Point&amp; p2)&#123;</span><br><span class="line">	Point temp(p1.x + p1.x, p1.y + p2.y);</span><br><span class="line">	return temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1752,7 +1142,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/Android/OkHttp/Okhttp源码分析一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/静态(Static)成员/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1771,8 +1161,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/14/Android/OkHttp/Okhttp源码分析一/" itemprop="url">
-                  OkHttp源码分析(一)
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/静态(Static)成员/" itemprop="url">
+                  C++ 静态成员
                 </a>
               
             
@@ -1798,24 +1188,12 @@
                 
               
 
-              <time title="Created: 2018-08-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-14T00:00:00+08:00">2018-08-14</time>
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:23:13" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-31 11:05:38" itemprop="dateModified" datetime="2018-08-31T11:05:38+08:00">2018-08-31</time>
               
             
           </span>
@@ -1832,7 +1210,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架源码/" itemprop="url" rel="index"><span itemprop="name">框架源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1867,16 +1245,11 @@
 
       
         
-          <!-- toc -->
-<h4 id="Call"><a href="#Call" class="headerlink" title="Call"></a>Call</h4><blockquote>
-<p>Call 在OKHttp中代表着一个已经准备好可以执行的Http请求；<br><br>Call请求是能够被取消的；<br><br>Cal代表着一个独立的request和response的Stream流，并且是不能够被执行两次的；<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/14/Android/OkHttp/Okhttp源码分析一/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <!-- toc -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Car&#123;</span><br><span class="line">public:</span><br><span class="line">	char *name;</span><br><span class="line">	// 静态变量</span><br><span class="line">	static int num;</span><br><span class="line"></span><br><span class="line">	// 静态函数，不能够访问类的成员变量</span><br><span class="line">	static void run()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;car running.&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 静态变量初始化只能在类和函数外边进行</span><br><span class="line">int Car::num = 4;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// 初始化后，静态变量才可以使用</span><br><span class="line">	Car::num++;</span><br><span class="line">	cout &lt;&lt; Car::num &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// 调用静态函数</span><br><span class="line">	Car::run();</span><br><span class="line"></span><br><span class="line">	// 通过实例也是可以访问的</span><br><span class="line">	Car c;</span><br><span class="line">	cout &lt;&lt; c.num &lt;&lt; endl;</span><br><span class="line">	c.run();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1928,7 +1301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/13/NDK/C/结构体/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/申请和释放动态堆内存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1947,8 +1320,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/13/NDK/C/结构体/" itemprop="url">
-                  结构体
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/申请和释放动态堆内存/" itemprop="url">
+                  C++ 申请和释放动态堆内存
                 </a>
               
             
@@ -1974,24 +1347,12 @@
                 
               
 
-              <time title="Created: 2018-08-13 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-13T00:00:00+08:00">2018-08-13</time>
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:21:22" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-24 21:11:10" itemprop="dateModified" datetime="2018-09-24T21:11:10+08:00">2018-09-24</time>
               
             
           </span>
@@ -2008,7 +1369,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -2043,16 +1404,491 @@
 
       
         
-          <!-- toc -->
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>结构体是一种构造数据类型，其将不同的数据类型整合起来，形成一个自定义的数据，类似于<br>JavaScript中的类，不同的是，不能够定义函数；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 结构体是一种构造数据类型</span><br><span class="line">// 把不同的数据类型整合起来，成为一个自定义的数据类型</span><br><span class="line">struct  man&#123;</span><br><span class="line">	int age;</span><br><span class="line">	char name[10];</span><br><span class="line">	char* sex;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/13/NDK/C/结构体/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <!-- toc -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">void funcc()&#123;</span><br><span class="line"></span><br><span class="line">	// C++的写法在开辟和释放内存时，会调用构造函数和析构函数</span><br><span class="line">	// 动态申请堆内存，保存对象</span><br><span class="line">	Teacher *t1 = new Teacher(&quot;Jack&quot;);</span><br><span class="line">	// 释放堆内存</span><br><span class="line">	delete t1;</span><br><span class="line"></span><br><span class="line">	// C的写法在开辟和释放时，不会调用构造函数和析构函数</span><br><span class="line">	Teacher *t2 = (Teacher*)malloc(sizeof(Teacher));</span><br><span class="line">	free(t2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void funA()&#123;</span><br><span class="line">	// C数组</span><br><span class="line">	int *p1 = (int*)malloc(sizeof(int)* 10);</span><br><span class="line">	p1[0] = 1;</span><br><span class="line">	free(p1);</span><br><span class="line"></span><br><span class="line">	// C++</span><br><span class="line">	int *p2 = new int[10];</span><br><span class="line">	p2[0] = 2;</span><br><span class="line">	delete[] p2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/由C++，NDK引伸到热修复/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/由C++，NDK引伸到热修复/" itemprop="url">
+                  NDK实现热修复的原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:37:48" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<p>C和C++中，内存分区：栈、堆、全局(静态、全局)、常量区(字符串)、程序代码区</p>
+<p>同样，Java也分为五大区：<br>1，虚拟机栈(JVM Stack)，存对象引用，基本数据类型<br>2，本地方法栈(Native Method Stack)<br>3，方法区(常量，静态变量以及编译后的代码)<br>4，程序计数器<br>5，直接内存</p>
+<p><em>热修复原理:</em><br>每一个类对象中都保存有每个方法的地址指针，调用方法实际就是通过这些指针去方法区调用<br>对应的方法对象。热修复就是通过这种原理实现的。在不进行重启的情况下，将不同的方法加载<br>到内存中，然后，动态地将原来的对象方法指针重新指向该新的方法。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/友元函数，友元类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/友元函数，友元类/" itemprop="url">
+                  C++ 友元函数和友元类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:46:20" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">	// 定义友元函数</span><br><span class="line">	// 友元函数只是声明，实现将在类外进行</span><br><span class="line">	// 必须传递本类的指针作为参数</span><br><span class="line">	friend void accessI(A*p, int a);</span><br><span class="line"></span><br><span class="line">	// 定义B为友元类，这样B中就可以修改A的私有成员</span><br><span class="line">	friend class B;</span><br><span class="line">private:</span><br><span class="line">	int i;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	void printI()&#123;</span><br><span class="line">		cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B&#123;</span><br><span class="line">private:</span><br><span class="line">	A a;</span><br><span class="line">public:</span><br><span class="line">	void modifyA()&#123;</span><br><span class="line">		// B是A的友元类，可以修改A的私有成员</span><br><span class="line">		a.i = 10;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void accessI(A*p, int a)&#123;</span><br><span class="line">	p-&gt;i = a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	A a;</span><br><span class="line">	accessI(&amp;a, 100);</span><br><span class="line">	a.printI();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Java中，我们可以通过Class.forName(“com.xxx.xx”)的形式，获取到任何类，并且能够通过<br>Class访问对应类的任何属性，也就是说，Class实际是Java中所有类的友元类(Java底层是用C和C++实现的)。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/常量和常函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/常量和常函数/" itemprop="url">
+                  常量和常函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:28:43" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class B&#123;</span><br><span class="line">public:</span><br><span class="line">	int i;</span><br><span class="line">	int j;</span><br><span class="line">	int k;</span><br><span class="line">	void myPrintf()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;打印&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 常函数，修饰的是this的内容，即是常量指针</span><br><span class="line">	// 不能在函数中修改this指向的变量的内容，使函数更加安全；</span><br><span class="line">	// const B* const this</span><br><span class="line">	void testConst()const&#123;</span><br><span class="line">		//this-&gt;i = 10;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// B* const this</span><br><span class="line">	void testConst2()&#123;</span><br><span class="line">		this-&gt;j = 10;</span><br><span class="line">		// this 是指针常量，不能修改指向</span><br><span class="line">		//this = (B*)0x00009;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	cout &lt;&lt; sizeof(A) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; sizeof(B) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// C/C++内存分区：栈、堆、全局(静态、全局)、常量区(字符串)、程序代码区</span><br><span class="line">	// 普通类属性与结构体中的属性有相同的内存布局(各属性大小的和)，</span><br><span class="line">	// 静态成员存在于全局区中；</span><br><span class="line">	// 函数存在于程序代码区中；</span><br><span class="line"></span><br><span class="line">	// 普通对象能调用常函数</span><br><span class="line">	B b;</span><br><span class="line">	b.testConst();</span><br><span class="line">	b.testConst2();</span><br><span class="line"></span><br><span class="line">	const B b1;</span><br><span class="line">	// 常量对象只能调用常函数</span><br><span class="line">	// 在常函数中，当前对象指向的变量内容不能被修改，能够起到防止数据成员被非法访问</span><br><span class="line">	//b1.testConst2();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -2093,7 +1929,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2136,7 +1972,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2167,7 +2003,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2226,7 +2064,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

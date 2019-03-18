@@ -311,6 +311,397 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Kotlin/接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/Kotlin/接口/" itemprop="url">
+                  接口
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kotlin/" itemprop="url" rel="index"><span itemprop="name">Kotlin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h4 id="定义变量和方法"><a href="#定义变量和方法" class="headerlink" title="定义变量和方法"></a>定义变量和方法</h4><p>Kotlin中的接口是可以定义变量和方法体，但变量不可以初始化，也就是不能有状态，只能有定义（<strong>Java<br>中的变量可以被初始化</strong>），在被继承时必须初始化接口变量，赋予状态，而方法表示的是实现过程，本身就没<br>有状态（<strong>Java8开始，也支持定义static和default类型的方法，这些方法是可以有方法体的</strong>）。</p>
+<blockquote>
+<p>为什么接口中的变量不能被初始化？</p>
+</blockquote>
+<p>因为接口中的变量没有backing field，也就无法存储变量，所以只能做为一种声明；</p>
+<p>backing field(类中定义的变量自带，用来存储变量内容，可以理解为堆栈) + get、set 方法 等价于<br>Kotlin类中的属性Property，这也是Kotlin中独有的；</p>
+<p>在Kotlin中只需声明一个变量，就相当于属性，backing field + get、set 方法由Kotlin自动生成；<br>在Java中，这些都必须自己手动声明；</p>
+<h4 id="解决多接口方法冲突"><a href="#解决多接口方法冲突" class="headerlink" title="解决多接口方法冲突"></a>解决多接口方法冲突</h4><p>当一个类继承了多个接口，这些接口出现了两个完全一致的方法声明，必须通过super进行显式指定调用方；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">interface n1&#123;</span><br><span class="line">    fun nn(): Int = 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface n2&#123;</span><br><span class="line">    fun nn(): Int = 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">abstract class n3&#123;</span><br><span class="line">    open fun nn(): Int = 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class n0 : n1, n2, n3() &#123;</span><br><span class="line">    val i = 0</span><br><span class="line">    override fun nn(): Int &#123;</span><br><span class="line">        if (i &gt; 0) &#123;</span><br><span class="line">            return super&lt;n2&gt;.nn()</span><br><span class="line">        &#125;else if (i &lt; 0) &#123;</span><br><span class="line">            return super&lt;n3&gt;.nn()</span><br><span class="line">        &#125;</span><br><span class="line">        return super&lt;n1&gt;.nn()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="SAM接口"><a href="#SAM接口" class="headerlink" title="SAM接口"></a>SAM接口</h4><p>SAM接口又称为函数式接口(Single Abstract Method interfaces)，这种接口可以简单的理解为：只有<br>一个抽象方法的接口，这种接口可以通过lambda实现简化，在Java8和Kotlin中都有应用到。</p>
+<blockquote>
+<p>比如View的OnclickListener接口就是一个典型的SAM接口，Kotlin中的函数类型也可以理解为SAM接口<br>的另一种形式(Kotlin不需要定义SAM接口，有函数类型就够了，对SAM接口的简化只是为了兼容Java)。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Java/Java基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/Java/Java基础/" itemprop="url">
+                  Java基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-31T00:00:00+08:00">2018-07-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h4 id="变量的存储位置"><a href="#变量的存储位置" class="headerlink" title="变量的存储位置"></a>变量的存储位置</h4><p>1.寄存器：最快的存储区, 由编译器根据需求进行分配,我们在程序中无法控制。</p>
+<ol start="2">
+<li><p>栈：存放基本类型的变量数据和对象的引用，但对象本身不存放在栈中，而是存放在堆（new 出来的对象）<br>或者常量池中（字符串常量对象存放在常量池中）。</p>
+</li>
+<li><p>堆：存放所有new出来的对象。</p>
+</li>
+<li><p>静态域：存放静态成员（static定义的）。</p>
+</li>
+<li><p>常量池：存放字符串常量和基本类型常量（public static final）。</p>
+</li>
+<li><p>非RAM存储：硬盘等永久存储空间。</p>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p>堆栈：</p>
+<ul>
+<li>对于栈和常量池中的对象可以共享，对于堆中的对象不可以共享;</li>
+<li>栈中的数据大小和生命周期是可以确定的，当没有引用指向数据时，这个数据就会消失。堆中的对象的由垃<br>圾回收器负责回收，因此大小和生命周期不需要确定，具有很大的灵活性;</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>字符串：</p>
+<ul>
+<li>对于字符串：其对象的引用都是存储在栈中的，如果是编译期已经创建好(直接用双引号定义的)的就存储在<br>常量池中，如果是运行期（new出来的）才能确定的就存储在堆中。对于equals相等的字符串，在常量池中永<br>远只有一份，在堆中有多份；</li>
+<li>对于通过new产生一个字符串（假设为”china”）时，会先去常量池中查找是否已经有了”china”对象，如<br>果没有则在常量池中创建一个此字符串对象，然后堆中再创建一个常量池中此”china”对象的拷贝对象。这也<br>就是有道面试题：String s = new String(“xyz”);产生几个对象？一个或两个，如果常量池中原来没有<br>”xyz”,就是两个。</li>
+</ul>
+</blockquote>
+<h4 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h4><ul>
+<li>一个程序至少有一个进程(通过为Activity设置android:process可以让其运行在单独的进程中)，一个<br>进程至少有一个线程；</li>
+<li>进程可以单独存在，而线程不能独立存在，必须依赖于一个进程；</li>
+<li>进程是系统资源分配的最小单位，线程是程序执行的最小单位；</li>
+<li>进程有自己独立的内存地址空间，进程之间无法直接通讯，只能通过IPC进行通讯；</li>
+<li>线程间共享进程的地址空间和内存资源，多个线程共享全局变量和静态变量，所以线程之间的通讯更加方便；</li>
+<li>进程之间是相互独立的，一个进程死掉，不会影响到其他进程，而在多线程的环境下，一个线程死掉，其所<br>在的整个进程也会死掉；</li>
+</ul>
+<h4 id="内部类的优点"><a href="#内部类的优点" class="headerlink" title="内部类的优点"></a>内部类的优点</h4><p>Java不支持多继承 ，只支持多实现。但是，很多时候，只是实现一些接口很难解决问题，此时，我们就可以<br>使用内部类来解决问题。内部类即可与外部类关联(非静态内部类)，也可以独立于外部类(静态内部类)，并且，<br>内部类的环境是不受到外部类的影响的，通过它们来继承我们需要的类的能力，能让我们更灵活的解决问题；</p>
+<p>可以说，接口只是帮我们解决了部分问题，而内部类赋予类多重继承的能力，使解决问题的方案更加的完整；</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Kotlin/基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -492,7 +883,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/Handler/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Java/Exception、Error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -511,8 +902,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/30/Android/Handler/" itemprop="url">
-                  Handler
+                <a class="post-title-link" href="/2018/07/30/Java/Exception、Error/" itemprop="url">
+                  Java异常、错误
                 </a>
               
             
@@ -572,7 +963,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -607,27 +998,22 @@
 
       
         
-          <!-- toc -->
-<h4 id="Handler消息机制"><a href="#Handler消息机制" class="headerlink" title="Handler消息机制"></a>Handler消息机制</h4><ul>
-<li><p>Handler在创建时，就会在构造方法中拿到当前线程的Looper，而Looper保存有当前线程的消息队列，也<br>会和Handler绑定到一起；</p>
+          
+            <p><img src="/images/exception.jpg" alt="image"></p>
+<p>java中Exception、Error都是Throwable的子类！</p>
+<ul>
+<li>Exception即异常，是程序本身可以处理的；</li>
+<li>Error即错误，是程序本身无法处理的，通常是系统出现故障，或者虚拟机自身发出的错误，一般不需要主动<br>进行处理，比如OutOfMemoryError、StackOverflowError等等；</li>
+</ul>
+<p>根据异常的发生方式，可以分为检查异常和非检查异常；</p>
+<ul>
+<li><p>检查异常，要求编译器必须即时处理，Java编译器会在语法中对该类型的异常进行检查，并强制要求我们<br>通过try-catch语句进行主动捕获，或者用throws语句在方法声明后抛出该异常，否则无法编译通过，除了<br>Error、RuntimeException和其子类之外的异常都是检查异常；</p>
 </li>
-<li><p>Handler在哪个线程被创建，就会绑定哪个线程中的Looper；</p>
-</li>
-<li><p>主线程默认会创建一个MainLooper，而如果在子线程中创建Handler，就需要我们手动为其创建一个<br>Looper，并绑定到Handler中；</p>
-<blockquote>
-<p>查看ActivityThread类，在main方法中调用了Looper的prepareMainLooper方法来初始化<br>MainLooper，可以获取它来判断当前的操作是否位于主线程。</p>
-</blockquote>
-</li>
-<li><p>使用Looper.prepare()即可为当前线程创建一个Looper，每一个Looper中都自带一个消息队列；</p>
+<li><p>非检查异常，这类异常编译器不要求我们主动捕获或抛出，发生在程序运行期间，通常能够导致程序崩溃。<br>其包括了RuntimeException及其子类(nullPointException、ArrayIndexOutOfBoundException等<br>)和Error；</p>
 </li>
 </ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/30/Android/Handler/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+
+          
         
       
     </div>
@@ -866,7 +1252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/Fragment/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/Handler/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -885,8 +1271,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/30/Android/Fragment/" itemprop="url">
-                  Fragment
+                <a class="post-title-link" href="/2018/07/30/Android/Handler/" itemprop="url">
+                  Handler
                 </a>
               
             
@@ -982,204 +1368,26 @@
       
         
           <!-- toc -->
-<h4 id="判断Fragment可见性"><a href="#判断Fragment可见性" class="headerlink" title="判断Fragment可见性"></a>判断Fragment可见性</h4><ul>
-<li><p>如果Fragment是通过FragmentManager进行show和hide操作来实现显隐的，是不会调用Fragment的<br>的声明周期方法的，但是可以通过onHiddenChanged来进行判断；</p>
+<h4 id="Handler消息机制"><a href="#Handler消息机制" class="headerlink" title="Handler消息机制"></a>Handler消息机制</h4><ul>
+<li><p>Handler在创建时，就会在构造方法中拿到当前线程的Looper，而Looper保存有当前线程的消息队列，也<br>会和Handler绑定到一起；</p>
 </li>
-<li><p>如果Fragment是配合ViewPager进行显隐的，则通过Fragment的setUserVisibleHint进行判断；</p>
+<li><p>Handler在哪个线程被创建，就会绑定哪个线程中的Looper；</p>
+</li>
+<li><p>主线程默认会创建一个MainLooper，而如果在子线程中创建Handler，就需要我们手动为其创建一个<br>Looper，并绑定到Handler中；</p>
 <blockquote>
-<p>查看FragmentPagerAdapter和FragmentStatePagerAdapter源码可以看到对setUserVisibleHint<br>的调用，这个方法被调用非常频繁，在进行滑动操作时，处于当前屏幕和其左右的两个Fragment都有可能被<br>调用到，但是只有在Fragment成为当前屏幕的Fragment时参数才会为true，需要注意判断，并且不要做太多<br>的耗时操作，否则会影响到切换的流畅性；</p>
+<p>查看ActivityThread类，在main方法中调用了Looper的prepareMainLooper方法来初始化<br>MainLooper，可以获取它来判断当前的操作是否位于主线程。</p>
 </blockquote>
+</li>
+<li><p>使用Looper.prepare()即可为当前线程创建一个Looper，每一个Looper中都自带一个消息队列；</p>
 </li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/30/Android/Fragment/#more" rel="contents">
+            <a class="btn" href="/2018/07/30/Android/Handler/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Java/Exception、Error/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/30/Java/Exception、Error/" itemprop="url">
-                  Java异常、错误
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-30T00:00:00+08:00">2018-07-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/exception.jpg" alt="image"></p>
-<p>java中Exception、Error都是Throwable的子类！</p>
-<ul>
-<li>Exception即异常，是程序本身可以处理的；</li>
-<li>Error即错误，是程序本身无法处理的，通常是系统出现故障，或者虚拟机自身发出的错误，一般不需要主动<br>进行处理，比如OutOfMemoryError、StackOverflowError等等；</li>
-</ul>
-<p>根据异常的发生方式，可以分为检查异常和非检查异常；</p>
-<ul>
-<li><p>检查异常，要求编译器必须即时处理，Java编译器会在语法中对该类型的异常进行检查，并强制要求我们<br>通过try-catch语句进行主动捕获，或者用throws语句在方法声明后抛出该异常，否则无法编译通过，除了<br>Error、RuntimeException和其子类之外的异常都是检查异常；</p>
-</li>
-<li><p>非检查异常，这类异常编译器不要求我们主动捕获或抛出，发生在程序运行期间，通常能够导致程序崩溃。<br>其包括了RuntimeException及其子类(nullPointException、ArrayIndexOutOfBoundException等<br>)和Error；</p>
-</li>
-</ul>
-
-          
         
       
     </div>
@@ -1405,7 +1613,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Android/Fragment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1424,8 +1632,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/29/NDK/C/基础/" itemprop="url">
-                  C基础
+                <a class="post-title-link" href="/2018/07/30/Android/Fragment/" itemprop="url">
+                  Fragment
                 </a>
               
             
@@ -1451,7 +1659,7 @@
                 
               
 
-              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
+              <time title="Created: 2018-07-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-30T00:00:00+08:00">2018-07-30</time>
             
 
             
@@ -1468,7 +1676,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-27 10:39:53" itemprop="dateModified" datetime="2018-08-27T10:39:53+08:00">2018-08-27</time>
+                <time title="Modified: 2018-08-05 16:22:14" itemprop="dateModified" datetime="2018-08-05T16:22:14+08:00">2018-08-05</time>
               
             
           </span>
@@ -1485,7 +1693,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
 
                 
                 
@@ -1521,10 +1729,18 @@
       
         
           <!-- toc -->
-<h4 id="system函数"><a href="#system函数" class="headerlink" title="system函数"></a>system函数</h4><p>位于stdio.h，用于调用系统的函数；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 停止当前函数</span><br><span class="line">system(&quot;pause&quot;); // 等价(等待输入)：getchar();</span><br><span class="line">// 调出windows绘图软件</span><br><span class="line">system(&quot;mspaint&quot;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="判断Fragment可见性"><a href="#判断Fragment可见性" class="headerlink" title="判断Fragment可见性"></a>判断Fragment可见性</h4><ul>
+<li><p>如果Fragment是通过FragmentManager进行show和hide操作来实现显隐的，是不会调用Fragment的<br>的声明周期方法的，但是可以通过onHiddenChanged来进行判断；</p>
+</li>
+<li><p>如果Fragment是配合ViewPager进行显隐的，则通过Fragment的setUserVisibleHint进行判断；</p>
+<blockquote>
+<p>查看FragmentPagerAdapter和FragmentStatePagerAdapter源码可以看到对setUserVisibleHint<br>的调用，这个方法被调用非常频繁，在进行滑动操作时，处于当前屏幕和其左右的两个Fragment都有可能被<br>调用到，但是只有在Fragment成为当前屏幕的Fragment时参数才会为true，需要注意判断，并且不要做太多<br>的耗时操作，否则会影响到切换的流畅性；</p>
+</blockquote>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/29/NDK/C/基础/#more" rel="contents">
+            <a class="btn" href="/2018/07/30/Android/Fragment/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1580,7 +1796,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/jni/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/dll/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1599,8 +1815,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/29/NDK/C/jni/" itemprop="url">
-                  jni
+                <a class="post-title-link" href="/2018/07/29/NDK/C/dll/" itemprop="url">
+                  dll
                 </a>
               
             
@@ -1643,7 +1859,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-16 15:14:51" itemprop="dateModified" datetime="2019-02-16T15:14:51+08:00">2019-02-16</time>
+                <time title="Modified: 2018-08-30 16:01:25" itemprop="dateModified" datetime="2018-08-30T16:01:25+08:00">2018-08-30</time>
               
             
           </span>
@@ -1695,18 +1911,22 @@
 
       
         
-          <!-- toc -->
-<h4 id="JNI数据类型"><a href="#JNI数据类型" class="headerlink" title="JNI数据类型"></a>JNI数据类型</h4><blockquote>
-<p>JNI基本数据类型是Java基本数据类型和C数据类型之间的桥梁；</p>
+          
+            <!-- toc -->
+<h4 id="visual-studio-生成dll"><a href="#visual-studio-生成dll" class="headerlink" title="visual studio 生成dll"></a>visual studio 生成dll</h4><blockquote>
+<p>dll是C中的动态库，在程序执行时，被动态加载进来；</p>
 </blockquote>
-<p>Java数据类型   –&gt;  JNI数据类型  –&gt;  C数据类型<br>boolean            jboolean<br>byte               jbyte<br>char               jchar<br>short              jshort<br>int                jint<br>long               jlong<br>float              jfloat<br>double             jdouble<br>void               void</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/29/NDK/C/jni/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<ul>
+<li>对于函数增加前缀：__declspec(dllexport)</li>
+<li>更改项目属性，将生成结果该为dll；</li>
+<li>点击生成，生成对应的解决方案；</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__declspec(dllexport) void plugin()&#123;</span><br><span class="line">	// 获取到对应的内存地址</span><br><span class="line">	int* p = 0x2ff9d8;</span><br><span class="line">	// 修改指定内存地址的内容</span><br><span class="line">	*p = 999;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="静态库与动态库"><a href="#静态库与动态库" class="headerlink" title="静态库与动态库"></a>静态库与动态库</h4><p>静态库与动态库的区别：</p>
+<p>静态库(.a)只能使用在一个exe程序中，打包时，会被打包进行exe程序中；</p>
+<p>动态库(.dll)能被多个程序共用，打包时不会被打进exe中，而是单独存在；</p>
+
+          
         
       
     </div>
@@ -1921,183 +2141,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/NDK/C/C访问Java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/29/NDK/C/C访问Java/" itemprop="url">
-                  C与Java互操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-29T00:00:00+08:00">2018-07-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-08 11:34:00" itemprop="dateModified" datetime="2019-03-08T11:34:00+08:00">2019-03-08</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="JNI读取Java成员变量类型对应的签名"><a href="#JNI读取Java成员变量类型对应的签名" class="headerlink" title="JNI读取Java成员变量类型对应的签名"></a>JNI读取Java成员变量类型对应的签名</h4><p>C访问Java中对应的成员变量，需要根据变量名和变量签名来定位变量；<br><img src="\images\Java数据类型签名列表.png" alt="image"></p>
-<p>Java方法签名：全类名.方法名(形参数据类型列表)返回值数据类型</p>
-<p>其中的返回数据类型的签名与变量有区别：<br><img src="\images\java方法返回类型签名.jpeg" alt="image"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/29/NDK/C/C访问Java/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2145,7 +2188,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2178,7 +2221,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2239,7 +2286,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

@@ -311,6 +311,392 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/NDK/C/开源C库使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/16/NDK/C/开源C库使用/" itemprop="url">
+                  开源C/C++库使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-16T00:00:00+08:00">2019-02-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-17 18:41:48" itemprop="dateModified" datetime="2019-02-17T18:41:48+08:00">2019-02-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h4 id="bsdiff增量更新库使用步骤以及问题处理"><a href="#bsdiff增量更新库使用步骤以及问题处理" class="headerlink" title="bsdiff增量更新库使用步骤以及问题处理"></a>bsdiff增量更新库使用步骤以及问题处理</h4><p>1，下载bsdiff源码：(bsdiff4.3-win32-src.zip)<br><a href="http://www.daemonology.net/bsdiff/" target="_blank" rel="noopener">http://www.daemonology.net/bsdiff/</a></p>
+<p>2，创建一个新的C项目，将源码中的C和C++文件拷贝进来；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">暂时只需要bsdiff.cpp，用来拆分新包，bspatch.cpp不可以引入；</span><br><span class="line">bspatch是用来合并包文件的，需要引入bzip2的源码来辅助操作，如果引入将会报错！！！</span><br></pre></td></tr></table></figure></p>
+<p>3，关于_CRT_SECURE_NO_WARNINGS 错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">由于项目中可能使用了老版本、非安全版本的函数，所以编译时将会报错，解决方案是继续使用这些</span><br><span class="line">函数。</span><br><span class="line"></span><br><span class="line">另一个问题是，如果存在多个这种情况的源文件时，可以通过在命令行中输入：</span><br><span class="line">-D _CRT_SECURE_NO_WARNINGS</span><br></pre></td></tr></table></figure></p>
+<p><img src="\images\c非安全函数警告.jpg" alt="image"></p>
+<p>4，报错：warning C4996: ‘setmode’: The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _setmode. See online help for details.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原因与上面类似，可以通过增加宏定义来消除警告:_CRT_NONSTDC_NO_DEPRECATE</span><br></pre></td></tr></table></figure>
+<p><img src="\images\C安全警告.jpg" alt="image"></p>
+<p>5，error C4703: 使用了可能未初始化的本地指针变量“_new”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于源码使用了不同系统的编译器，而visual studio默认对语法进行了严格的检查，所以会出现以上的警告，解决方案是关闭掉vs的检查；</span><br></pre></td></tr></table></figure>
+<p><img src="\images\关闭语法检查.jpg" alt="image"></p>
+<blockquote>
+<p>如果生成解决方案成功，则说明配置成功，可以开始进行jni配置；</p>
+</blockquote>
+<p>6，可以看到在bsdiff.cpp中存在启动main函数，通过调用该方法可以生成我们需要的拆分包；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 将main函数修改为bsdiff_main，方便我们的jni函数调用</span><br><span class="line">int bsdiff_main(int argc,char *argv[])&#123;</span><br><span class="line">  //...</span><br><span class="line"></span><br><span class="line">  // 可以看到，此处要求我们传入四个参数</span><br><span class="line">  // 参数1：任意</span><br><span class="line">  // 参数2：旧apk文件的路径</span><br><span class="line">  // 参数3：新apk文件的路径</span><br><span class="line">  // 参数4：拆分出来的文件保存路径</span><br><span class="line">  if(argc!=4) errx(1,&quot;usage: %s oldfile newfile patchfile\n&quot;,argv[0]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7，编写jni函数，并生成对应的解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL Java_com_hsh_bsdiff_BsdiffUtill_diff_1apk</span><br><span class="line">(JNIEnv *env, jclass jcls, jstring fileName_, jstring oldFile_, jstring newFile_, jstring patchFile_)&#123;</span><br><span class="line"></span><br><span class="line">	char* fileName = (char*)env-&gt;GetStringUTFChars(fileName_, 0);</span><br><span class="line">	char* oldFile = (char*)env-&gt;GetStringUTFChars(oldFile_, 0);</span><br><span class="line">	char* newFile = (char*)env-&gt;GetStringUTFChars(newFile_, 0);</span><br><span class="line">	char* patchFile = (char*)env-&gt;GetStringUTFChars(patchFile_, 0);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	char *args[] = &#123; fileName, oldFile, newFile, patchFile&#125;;</span><br><span class="line"></span><br><span class="line">	bsdiff_main(4, args);</span><br><span class="line"></span><br><span class="line">	env-&gt;ReleaseStringUTFChars(fileName_, fileName);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(oldFile_, oldFile);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(newFile_, newFile);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(patchFile_, patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对应的Java方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class BsdiffUtill &#123;</span><br><span class="line"></span><br><span class="line">	static&#123;</span><br><span class="line">		System.loadLibrary(&quot;jni/patch_dispatch_apk&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 *</span><br><span class="line">	 * @param name</span><br><span class="line">	 * @param oldFile</span><br><span class="line">	 * @param newFile</span><br><span class="line">	 * @param patchFile</span><br><span class="line">	 */</span><br><span class="line">	public native static void diff_apk(String name,String oldFile,String newFile,String patchFile);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Bsdiff &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		BsdiffUtill.diff_apk(&quot;apk_patch&quot;, &quot;H:\\bsdiff_patch\\app_1.0version.apk&quot;,</span><br><span class="line">				&quot;H:\\bsdiff_patch\\app_2.0version.apk&quot;, &quot;H:\\bsdiff_patch\\app_patch.patch&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行Java程序，可以在对应路径下生成拆分包；</p>
+<p>8，合并拆分包；</p>
+<p><em>注意，Android是linux系统，所以在编写NDK时，bsdiff要使用linux系统版本下的源码。</em></p>
+<p>9，bsdiff合并时，需要使用到bzip2的源码，所以同样需要下载bzip2的源码：<br><a href="https://download.csdn.net/download/juncojet/10235311" target="_blank" rel="noopener">https://download.csdn.net/download/juncojet/10235311</a></p>
+<p>然后引进项目中；</p>
+<p>10，让bspatch.c中引用bzip2的源码；</p>
+<p>添加头文件引用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 本源文件只要求引入该头文件</span><br><span class="line">#include &quot;bzip2/bzlib.c&quot;</span><br><span class="line"></span><br><span class="line">// 但实际编译时，缺报bzlib.c缺少对应的引用函数(BZ2_crc32Table,BZ2_compressBlock,BZ2_crc32Table...)，</span><br><span class="line">// 大概猜测原因是：在配置CMakeLists时，只配置了bspatch.c文件，而bzip2源文件并没有配置，所以这些文件没有</span><br><span class="line">// 被项目管理起来。在bzlib.c中，头文件bzlib_private.h声明的函数无法被项目知道，所以在bzlib.c进行调用时，</span><br><span class="line">// 才会报出找不到这些函数的错误。解决方案就是引入底下的源文件，不再通过bzlib_private.h找，而是直接引用；</span><br><span class="line">#include &quot;bzip2/crctable.c&quot;</span><br><span class="line">#include &quot;bzip2/compress.c&quot;</span><br><span class="line">#include &quot;bzip2/decompress.c&quot;</span><br><span class="line">#include &quot;bzip2/randtable.c&quot;</span><br><span class="line">#include &quot;bzip2/blocksort.c&quot;</span><br><span class="line">#include &quot;bzip2/huffman.c&quot;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>之后按照上面的生成拆分包的步骤，编写Android下的NDK；</p>
+</blockquote>
+<p>11，在bspatch.c下添加jni调用函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL</span><br><span class="line">Java_com_hsh_bsdiff_1patch_PatchUtil_patchFile(JNIEnv *env, jclass type, jstring oldFile_,</span><br><span class="line">                                               jstring newFile_, jstring patchFile_) &#123;</span><br><span class="line">    char *oldFile = (char *) (*env)-&gt;GetStringUTFChars(env, oldFile_, 0);</span><br><span class="line">    char *newFile = (char *) (*env)-&gt;GetStringUTFChars(env, newFile_, 0);</span><br><span class="line">    char *patchFile = (char *) (*env)-&gt;GetStringUTFChars(env, patchFile_, 0);</span><br><span class="line"></span><br><span class="line">    char *fileName = &quot;apk_patch&quot;;</span><br><span class="line"></span><br><span class="line">    char *params[] = &#123;fileName, oldFile, newFile, patchFile&#125;;</span><br><span class="line">    // 将源文件的main函数直接修改为patch_main，进行调用</span><br><span class="line">    patch_main(4,params);</span><br><span class="line"></span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;oldFile = %s&quot;, oldFile);</span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;newFile = %s&quot;, newFile);</span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;patchFile = %s&quot;, patchFile);</span><br><span class="line"></span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, oldFile_, oldFile);</span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, newFile_, newFile);</span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, patchFile_, patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Java代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class PatchUtil &#123;</span><br><span class="line"></span><br><span class="line">    static&#123;</span><br><span class="line">        System.loadLibrary(&quot;native-lib&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public native static void patchFile(String oldFile,String newFile,String patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>12，旧版的apk中需要有合并升级的逻辑，这样在下载拆分包后，可以直接进行合并；</p>
+<p><strong>重要的api</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 获得应用包下保存的当前版本的apk</span><br><span class="line">final String apkPath = getApplicationContext().getPackageResourcePath();</span><br></pre></td></tr></table></figure></p>
+<p>模拟合并后执行安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">new Thread(new Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            PatchUtil.patchFile(apkPath, newPath, patch_path);</span><br><span class="line">            runOnUiThread(new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, &quot;success&quot;, Toast.LENGTH_LONG).show();</span><br><span class="line">                    // 7.0以上需要配置FileProvider才能安装</span><br><span class="line">                    ApkUtils.installApk(MainActivity.this, newPath);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; catch (Error error) &#123;</span><br><span class="line">            error.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure></p>
+<p><strong>生成新的apk文件的路径可以是任意，即使在安装后被删除也是无所谓的，因为应用包下会自动保有原来的apk文件！</strong></p>
+<blockquote>
+<p>当有新版的apk发布时，利用新版的apk与旧版的apk，调用上面步骤生成拆分库，生成对应的拆分包。</p>
+</blockquote>
+<blockquote>
+<p>不同版本的旧apk通过访问服务器，获取到对应的升级拆分包，进行升级。</p>
+</blockquote>
+<p><em>差分算法</em></p>
+<ul>
+<li><p>差分算法是对新旧的两个文件进行比较，筛选，分类出两个文件中的相同部分，不同部分(修改的部分)，以及额外增加的部分；</p>
+</li>
+<li><p>对于相同的部分，会用下标标识出来，对于不同的部分和额外增加的部分，会通过bzip2进行压缩，<br>所以生成的差分包 = 映射标识相同位置的数据+不同部分、额外增加部分的压缩数据；</p>
+</li>
+<li><p>合成时，对于相同的部分，根据差分包中标识的下标，从旧文件中直接读取出来，写进新文件中；对于不同的部分(修改的部分)和额外增加的部分，通过bzip2进行解压，再写进新文件中；</p>
+</li>
+</ul>
+<p>特点，生成差分包时，差分包的大小并不与新、旧包大小差值成正比关系，而是与新旧包中数据的重复情况成正比关系：<em>重复的数据越多，则生成的差分包越小；被修改的部分越多，则对应生成的映射标识越多，差分包也越大；</em>  </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/NDK/C/jni缓存策略/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/11/NDK/C/jni缓存策略/" itemprop="url">
+                  jni缓存策略
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-11 00:00:00 / Modified: 07:45:48" itemprop="dateCreated datePublished" datetime="2019-02-11T00:00:00+08:00">2019-02-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<h3 id="通过局部静态变量进行缓存"><a href="#通过局部静态变量进行缓存" class="headerlink" title="通过局部静态变量进行缓存"></a>通过局部静态变量进行缓存</h3><p>通过在方法中声明局部的静态变量，可以在方法初始化时进行方法中的某个资源的初始化，<br>并且在以后每次调用该方法时，确保不需要重复初始化该资源，同时确保其他的方法无法调用<br>到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 缓存策略</span><br><span class="line"></span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_cached</span><br><span class="line">(JNIEnv * env, jobject obj)&#123;</span><br><span class="line">	jclass cls = (*env)-&gt;GetObjectClass(env, obj);</span><br><span class="line"></span><br><span class="line">	// 静态局部变量</span><br><span class="line">	// 作用域存在于本函数</span><br><span class="line">	// 生命周期为应用生命周期</span><br><span class="line">	// 全局的其他地方无法使用到</span><br><span class="line">	static jfieldID key_id = NULL;</span><br><span class="line">	// 只在函数被第一次调用时进行初始化</span><br><span class="line">	if (key_id == NULL)&#123;</span><br><span class="line">		key_id = (*env)-&gt;GetFieldID(env, cls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">		printf(&quot;init key id;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>Java中调用</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public native void cached();</span><br><span class="line"></span><br><span class="line"> for (int i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">   test.cached();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="全局变量初始时进行创建"><a href="#全局变量初始时进行创建" class="headerlink" title="全局变量初始时进行创建"></a>全局变量初始时进行创建</h3><p>全局变量可以在dll库加载时进行进行全局变量的初始化；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 初始化全局变量</span><br><span class="line">// 在初始化动态库之后，调用该方法，进行全局变量的初始化，并且能够确保只调用一次。</span><br><span class="line">jmethodID method_id;</span><br><span class="line">jfieldID fid;</span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_initIds</span><br><span class="line">(JNIEnv * env, jclass jcls)&#123;</span><br><span class="line">	method_id = (*env)-&gt;GetMethodID(env, jcls, &quot;randomInt&quot;, &quot;()I&quot;);</span><br><span class="line">	fid = (*env)-&gt;GetFieldID(env, jcls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">	printf(&quot;first init!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>Java中调用</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">  System.out.println( System.getProperty(&quot;java.library.path&quot;));</span><br><span class="line">  System.loadLibrary(&quot;jni/jini_04&quot;);</span><br><span class="line">  // 加载完成动态库之后，立刻调用初始化方法，初始化全局变量</span><br><span class="line">  initIds();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/NDK/C/jni异常处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1760,357 +2146,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/13/NDK/C/结构体/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/13/NDK/C/结构体/" itemprop="url">
-                  结构体
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-13 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-13T00:00:00+08:00">2018-08-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-09-24 21:11:10" itemprop="dateModified" datetime="2018-09-24T21:11:10+08:00">2018-09-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>结构体是一种构造数据类型，其将不同的数据类型整合起来，形成一个自定义的数据，类似于<br>JavaScript中的类，不同的是，不能够定义函数；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 结构体是一种构造数据类型</span><br><span class="line">// 把不同的数据类型整合起来，成为一个自定义的数据类型</span><br><span class="line">struct  man&#123;</span><br><span class="line">	int age;</span><br><span class="line">	char name[10];</span><br><span class="line">	char* sex;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/13/NDK/C/结构体/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/Java/捕获全局异常/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/11/Java/捕获全局异常/" itemprop="url">
-                  捕获全局异常
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-08-30 17:22:01" itemprop="dateModified" datetime="2018-08-30T17:22:01+08:00">2018-08-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <!-- toc -->
-<h4 id="UncaughtExceptionHandler"><a href="#UncaughtExceptionHandler" class="headerlink" title="UncaughtExceptionHandler"></a>UncaughtExceptionHandler</h4><p>Java提供了一种捕获全局异常的机制，当线程中出现异常时，我们可以主动将其捕获，并传入自己的异常<br>处理其，可以决定是否结束程序；<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/11/Java/捕获全局异常/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2158,7 +2193,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2191,7 +2226,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2252,7 +2291,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

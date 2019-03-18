@@ -311,6 +311,326 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/由C++，NDK引伸到热修复/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/由C++，NDK引伸到热修复/" itemprop="url">
+                  NDK实现热修复的原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:37:48" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<p>C和C++中，内存分区：栈、堆、全局(静态、全局)、常量区(字符串)、程序代码区</p>
+<p>同样，Java也分为五大区：<br>1，虚拟机栈(JVM Stack)，存对象引用，基本数据类型<br>2，本地方法栈(Native Method Stack)<br>3，方法区(常量，静态变量以及编译后的代码)<br>4，程序计数器<br>5，直接内存</p>
+<p><em>热修复原理:</em><br>每一个类对象中都保存有每个方法的地址指针，调用方法实际就是通过这些指针去方法区调用<br>对应的方法对象。热修复就是通过这种原理实现的。在不进行重启的情况下，将不同的方法加载<br>到内存中，然后，动态地将原来的对象方法指针重新指向该新的方法。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/NDK/C++/常量和常函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄声焕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HSH's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/03/NDK/C++/常量和常函数/" itemprop="url">
+                  常量和常函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-03 00:00:00 / Modified: 15:28:43" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+08:00">2019-03-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!-- toc -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class B&#123;</span><br><span class="line">public:</span><br><span class="line">	int i;</span><br><span class="line">	int j;</span><br><span class="line">	int k;</span><br><span class="line">	void myPrintf()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;打印&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 常函数，修饰的是this的内容，即是常量指针</span><br><span class="line">	// 不能在函数中修改this指向的变量的内容，使函数更加安全；</span><br><span class="line">	// const B* const this</span><br><span class="line">	void testConst()const&#123;</span><br><span class="line">		//this-&gt;i = 10;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// B* const this</span><br><span class="line">	void testConst2()&#123;</span><br><span class="line">		this-&gt;j = 10;</span><br><span class="line">		// this 是指针常量，不能修改指向</span><br><span class="line">		//this = (B*)0x00009;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	cout &lt;&lt; sizeof(A) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; sizeof(B) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	// C/C++内存分区：栈、堆、全局(静态、全局)、常量区(字符串)、程序代码区</span><br><span class="line">	// 普通类属性与结构体中的属性有相同的内存布局(各属性大小的和)，</span><br><span class="line">	// 静态成员存在于全局区中；</span><br><span class="line">	// 函数存在于程序代码区中；</span><br><span class="line"></span><br><span class="line">	// 普通对象能调用常函数</span><br><span class="line">	B b;</span><br><span class="line">	b.testConst();</span><br><span class="line">	b.testConst2();</span><br><span class="line"></span><br><span class="line">	const B b1;</span><br><span class="line">	// 常量对象只能调用常函数</span><br><span class="line">	// 在常函数中，当前对象指向的变量内容不能被修改，能够起到防止数据成员被非法访问</span><br><span class="line">	//b1.testConst2();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/24/NDK/C++/C++函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -484,7 +804,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/C++与C的区别/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/构造函数、析构函数和拷贝构造函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -503,8 +823,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/20/NDK/C++/C++与C的区别/" itemprop="url">
-                  C++ 与C 的区别
+                <a class="post-title-link" href="/2019/02/20/NDK/C++/构造函数、析构函数和拷贝构造函数/" itemprop="url">
+                  C++ 类和结构体
                 </a>
               
             
@@ -530,12 +850,24 @@
                 
               
 
-              <time title="Created: 2019-02-20 00:00:00 / Modified: 01:10:52" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
+              <time title="Created: 2019-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-24 17:08:20" itemprop="dateModified" datetime="2019-02-24T17:08:20+08:00">2019-02-24</time>
               
             
           </span>
@@ -589,8 +921,15 @@
         
           
             <!-- toc -->
-<h3 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// C++ 比C多了一种基本数据类型，bool</span><br><span class="line">	// true和false对应C中的1和0</span><br><span class="line">	//bool isSingle = true;</span><br><span class="line">	//bool isSingle = 3;</span><br><span class="line">	//bool isSingle = -3;</span><br><span class="line">	// 0表示false，非0表示true</span><br><span class="line">	bool isSingle = 0;</span><br><span class="line">	if (isSingle)&#123;</span><br><span class="line">		cout &lt;&lt; &quot;single&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">		cout &lt;&lt; &quot;not single&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	// 在C++中，三元运算符?:并不是表示普通的逻辑运算语句(语句(statement)：不返回值的代码块，或可执行代码行)，而是可以是表达式</span><br><span class="line">	// (表达式：允许有返回值)，它的返回值是逻辑运算的结果</span><br><span class="line">	// 在C中，三元运算符仍然只是一个语句！</span><br><span class="line">	int a = 1, b = 3;</span><br><span class="line">	// 对逻辑运算结果进行赋值</span><br><span class="line">	// a = 1,b= 10</span><br><span class="line">	(a &gt; b ? a : b) = 10;</span><br><span class="line">	cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;,b= &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="调用顺序"><a href="#调用顺序" class="headerlink" title="调用顺序"></a>调用顺序</h4><p>如果一个类里面存在其他类的属性对象，那么构造函数和析构函数的调用顺序为：</p>
+<p>创建时：先调用属性对象的构造函数，在执行自己的构造函数；<br>销毁时：先调用自己的析构函数，再执行属性对象的析构函数；</p>
+<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>构造函数在对象被销毁时调用；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// 只要声明变量，就会调用无参构造函数</span><br><span class="line">	//Student s;</span><br><span class="line"></span><br><span class="line">	// 调用有参构造函数</span><br><span class="line">	//Student s1(20, &quot;lili&quot;);</span><br><span class="line">	//Student s3 = Student(20, &quot;Damn&quot;);</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h4><p>析构函数在对象被销毁时调用；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 对象被销毁时调用，可以做善后处理，比如，释放内存</span><br><span class="line">	~Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用析构函数&quot; &lt;&lt; endl;</span><br><span class="line">		free(name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void func()&#123;</span><br><span class="line">	Student t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	//func();</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h4><p>调用场景：<br>1，变量间的赋值： T t1 = t2;<br>2，函数调用时传参，值传递时调用；<br>3，作为函数返回值返回，给其他变量赋值时(与第1种情况同 )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 对象被销毁时调用，可以做善后处理，比如，释放内存</span><br><span class="line">	~Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用析构函数&quot; &lt;&lt; endl;</span><br><span class="line">		free(name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 拷贝构造函数</span><br><span class="line">	// 调用场景：</span><br><span class="line">	// 1，变量间的赋值： T t1 = t2;</span><br><span class="line">	// 2，函数调用时传参，值传递时调用；</span><br><span class="line">	// 3，作为函数返回值返回，给其他变量赋值时(与第1种情况同 )</span><br><span class="line">	// 默认情况下，拷贝构造函数是浅拷贝(值拷贝)</span><br><span class="line">	//Student(const Student &amp;obj)&#123;</span><br><span class="line">	//	this-&gt;name = obj.name;</span><br><span class="line">	//	this-&gt;age = obj.age;</span><br><span class="line">	//	cout &lt;&lt; &quot;copy obj&quot; &lt;&lt; endl;</span><br><span class="line">	//&#125;</span><br><span class="line"></span><br><span class="line">	// 深拷贝</span><br><span class="line">	// 开辟一段新的内存，不只拷贝变量值，还会拷贝对应的地址内容</span><br><span class="line">	Student(const Student &amp;obj)&#123;</span><br><span class="line">		int len = strlen(obj.name);</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, obj.name);</span><br><span class="line">		this-&gt;age = obj.age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	Student s(30,&quot;lilian&quot;);</span><br><span class="line">	Student s_cp = s;</span><br><span class="line"></span><br><span class="line">	copyPro();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="浅拷贝问题"><a href="#浅拷贝问题" class="headerlink" title="浅拷贝问题"></a>浅拷贝问题</h5><p>默认情况下，拷贝构造函数是浅拷贝，也就是值拷贝。当我们在构造函数中为成员变量开辟了动态<br>堆内存空间，进行浅拷贝后，拷贝变量也会指向同一个堆内存空间，此时，在变量销毁时，调用<br>析构函数，源变量和拷贝变量都会对同一内存空间进行释放，此时就会报错。<br>（浅拷贝是值拷贝，而指针的值是地址，所以拷贝出来都是指向同一个地址空间）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void copyPro()&#123;</span><br><span class="line">	Student stu(10, &quot;llll&quot;);</span><br><span class="line"></span><br><span class="line">	// stu2拷贝了stu的变量值，其成员变量name同时指向了同一个内存空间</span><br><span class="line">	Student stu2 = stu;</span><br><span class="line"></span><br><span class="line">	// 函数销毁时，stu和stu2都会调用析构函数去释放内存空间，导致重复释放的问题</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>深拷贝解决浅拷贝问题：</em><br>开辟一段新的内存，不只拷贝变量值，还会拷贝对应的地址内容；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Student(const Student &amp;obj)&#123;</span><br><span class="line">  int len = strlen(obj.name);</span><br><span class="line">  // 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">  this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">  strcpy(this-&gt;name, obj.name);</span><br><span class="line">  this-&gt;age = obj.age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -996,7 +1335,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/构造函数、析构函数和拷贝构造函数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/NDK/C++/C++与C的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄声焕">
@@ -1015,8 +1354,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/20/NDK/C++/构造函数、析构函数和拷贝构造函数/" itemprop="url">
-                  C++ 类和结构体
+                <a class="post-title-link" href="/2019/02/20/NDK/C++/C++与C的区别/" itemprop="url">
+                  C++ 与C 的区别
                 </a>
               
             
@@ -1042,24 +1381,12 @@
                 
               
 
-              <time title="Created: 2019-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
+              <time title="Created: 2019-02-20 00:00:00 / Modified: 01:10:52" itemprop="dateCreated datePublished" datetime="2019-02-20T00:00:00+08:00">2019-02-20</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-24 17:08:20" itemprop="dateModified" datetime="2019-02-24T17:08:20+08:00">2019-02-24</time>
               
             
           </span>
@@ -1113,15 +1440,8 @@
         
           
             <!-- toc -->
-<h4 id="调用顺序"><a href="#调用顺序" class="headerlink" title="调用顺序"></a>调用顺序</h4><p>如果一个类里面存在其他类的属性对象，那么构造函数和析构函数的调用顺序为：</p>
-<p>创建时：先调用属性对象的构造函数，在执行自己的构造函数；<br>销毁时：先调用自己的析构函数，再执行属性对象的析构函数；</p>
-<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>构造函数在对象被销毁时调用；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// 只要声明变量，就会调用无参构造函数</span><br><span class="line">	//Student s;</span><br><span class="line"></span><br><span class="line">	// 调用有参构造函数</span><br><span class="line">	//Student s1(20, &quot;lili&quot;);</span><br><span class="line">	//Student s3 = Student(20, &quot;Damn&quot;);</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h4><p>析构函数在对象被销毁时调用；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 对象被销毁时调用，可以做善后处理，比如，释放内存</span><br><span class="line">	~Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用析构函数&quot; &lt;&lt; endl;</span><br><span class="line">		free(name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void func()&#123;</span><br><span class="line">	Student t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	//func();</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h4><p>调用场景：<br>1，变量间的赋值： T t1 = t2;<br>2，函数调用时传参，值传递时调用；<br>3，作为函数返回值返回，给其他变量赋值时(与第1种情况同 )</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;</span><br><span class="line">private:</span><br><span class="line">	char* name;</span><br><span class="line">	int age;</span><br><span class="line">public:</span><br><span class="line">	// 无参构造函数(会覆盖父类的无参构造函数)</span><br><span class="line">	Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用无参构造函数&quot; &lt;&lt; endl;</span><br><span class="line">		this-&gt;name = (char*)malloc(sizeof(char)*100);</span><br><span class="line">		strcpy(name, &quot;json&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 定义有参的构造函数后，默认无参构造函数将被覆盖</span><br><span class="line">	Student(int age, char* name)&#123;</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		int len = strlen(name);</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, name);</span><br><span class="line"></span><br><span class="line">		this-&gt;age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 对象被销毁时调用，可以做善后处理，比如，释放内存</span><br><span class="line">	~Student()&#123;</span><br><span class="line">		cout &lt;&lt; &quot;调用析构函数&quot; &lt;&lt; endl;</span><br><span class="line">		free(name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 拷贝构造函数</span><br><span class="line">	// 调用场景：</span><br><span class="line">	// 1，变量间的赋值： T t1 = t2;</span><br><span class="line">	// 2，函数调用时传参，值传递时调用；</span><br><span class="line">	// 3，作为函数返回值返回，给其他变量赋值时(与第1种情况同 )</span><br><span class="line">	// 默认情况下，拷贝构造函数是浅拷贝(值拷贝)</span><br><span class="line">	//Student(const Student &amp;obj)&#123;</span><br><span class="line">	//	this-&gt;name = obj.name;</span><br><span class="line">	//	this-&gt;age = obj.age;</span><br><span class="line">	//	cout &lt;&lt; &quot;copy obj&quot; &lt;&lt; endl;</span><br><span class="line">	//&#125;</span><br><span class="line"></span><br><span class="line">	// 深拷贝</span><br><span class="line">	// 开辟一段新的内存，不只拷贝变量值，还会拷贝对应的地址内容</span><br><span class="line">	Student(const Student &amp;obj)&#123;</span><br><span class="line">		int len = strlen(obj.name);</span><br><span class="line">		// 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">		this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">		strcpy(this-&gt;name, obj.name);</span><br><span class="line">		this-&gt;age = obj.age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	Student s(30,&quot;lilian&quot;);</span><br><span class="line">	Student s_cp = s;</span><br><span class="line"></span><br><span class="line">	copyPro();</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="浅拷贝问题"><a href="#浅拷贝问题" class="headerlink" title="浅拷贝问题"></a>浅拷贝问题</h5><p>默认情况下，拷贝构造函数是浅拷贝，也就是值拷贝。当我们在构造函数中为成员变量开辟了动态<br>堆内存空间，进行浅拷贝后，拷贝变量也会指向同一个堆内存空间，此时，在变量销毁时，调用<br>析构函数，源变量和拷贝变量都会对同一内存空间进行释放，此时就会报错。<br>（浅拷贝是值拷贝，而指针的值是地址，所以拷贝出来都是指向同一个地址空间）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void copyPro()&#123;</span><br><span class="line">	Student stu(10, &quot;llll&quot;);</span><br><span class="line"></span><br><span class="line">	// stu2拷贝了stu的变量值，其成员变量name同时指向了同一个内存空间</span><br><span class="line">	Student stu2 = stu;</span><br><span class="line"></span><br><span class="line">	// 函数销毁时，stu和stu2都会调用析构函数去释放内存空间，导致重复释放的问题</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><em>深拷贝解决浅拷贝问题：</em><br>开辟一段新的内存，不只拷贝变量值，还会拷贝对应的地址内容；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Student(const Student &amp;obj)&#123;</span><br><span class="line">  int len = strlen(obj.name);</span><br><span class="line">  // 字符串后面会带有0作为结束符，所以要加1</span><br><span class="line">  this-&gt;name = (char*)malloc(len + 1);</span><br><span class="line">  strcpy(this-&gt;name, obj.name);</span><br><span class="line">  this-&gt;age = obj.age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="bool"><a href="#bool" class="headerlink" title="bool"></a>bool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line">	// C++ 比C多了一种基本数据类型，bool</span><br><span class="line">	// true和false对应C中的1和0</span><br><span class="line">	//bool isSingle = true;</span><br><span class="line">	//bool isSingle = 3;</span><br><span class="line">	//bool isSingle = -3;</span><br><span class="line">	// 0表示false，非0表示true</span><br><span class="line">	bool isSingle = 0;</span><br><span class="line">	if (isSingle)&#123;</span><br><span class="line">		cout &lt;&lt; &quot;single&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">		cout &lt;&lt; &quot;not single&quot; &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// C++ 的标准输入，输出头文件</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void main()&#123;</span><br><span class="line"></span><br><span class="line">	// 在C++中，三元运算符?:并不是表示普通的逻辑运算语句(语句(statement)：不返回值的代码块，或可执行代码行)，而是可以是表达式</span><br><span class="line">	// (表达式：允许有返回值)，它的返回值是逻辑运算的结果</span><br><span class="line">	// 在C中，三元运算符仍然只是一个语句！</span><br><span class="line">	int a = 1, b = 3;</span><br><span class="line">	// 对逻辑运算结果进行赋值</span><br><span class="line">	// a = 1,b= 10</span><br><span class="line">	(a &gt; b ? a : b) = 10;</span><br><span class="line">	cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;,b= &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1632,392 +1952,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/NDK/C/开源C库使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/16/NDK/C/开源C库使用/" itemprop="url">
-                  开源C/C++库使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-16T00:00:00+08:00">2019-02-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-17 18:41:48" itemprop="dateModified" datetime="2019-02-17T18:41:48+08:00">2019-02-17</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!-- toc -->
-<h4 id="bsdiff增量更新库使用步骤以及问题处理"><a href="#bsdiff增量更新库使用步骤以及问题处理" class="headerlink" title="bsdiff增量更新库使用步骤以及问题处理"></a>bsdiff增量更新库使用步骤以及问题处理</h4><p>1，下载bsdiff源码：(bsdiff4.3-win32-src.zip)<br><a href="http://www.daemonology.net/bsdiff/" target="_blank" rel="noopener">http://www.daemonology.net/bsdiff/</a></p>
-<p>2，创建一个新的C项目，将源码中的C和C++文件拷贝进来；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">暂时只需要bsdiff.cpp，用来拆分新包，bspatch.cpp不可以引入；</span><br><span class="line">bspatch是用来合并包文件的，需要引入bzip2的源码来辅助操作，如果引入将会报错！！！</span><br></pre></td></tr></table></figure></p>
-<p>3，关于_CRT_SECURE_NO_WARNINGS 错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">由于项目中可能使用了老版本、非安全版本的函数，所以编译时将会报错，解决方案是继续使用这些</span><br><span class="line">函数。</span><br><span class="line"></span><br><span class="line">另一个问题是，如果存在多个这种情况的源文件时，可以通过在命令行中输入：</span><br><span class="line">-D _CRT_SECURE_NO_WARNINGS</span><br></pre></td></tr></table></figure></p>
-<p><img src="\images\c非安全函数警告.jpg" alt="image"></p>
-<p>4，报错：warning C4996: ‘setmode’: The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _setmode. See online help for details.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原因与上面类似，可以通过增加宏定义来消除警告:_CRT_NONSTDC_NO_DEPRECATE</span><br></pre></td></tr></table></figure>
-<p><img src="\images\C安全警告.jpg" alt="image"></p>
-<p>5，error C4703: 使用了可能未初始化的本地指针变量“_new”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于源码使用了不同系统的编译器，而visual studio默认对语法进行了严格的检查，所以会出现以上的警告，解决方案是关闭掉vs的检查；</span><br></pre></td></tr></table></figure>
-<p><img src="\images\关闭语法检查.jpg" alt="image"></p>
-<blockquote>
-<p>如果生成解决方案成功，则说明配置成功，可以开始进行jni配置；</p>
-</blockquote>
-<p>6，可以看到在bsdiff.cpp中存在启动main函数，通过调用该方法可以生成我们需要的拆分包；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 将main函数修改为bsdiff_main，方便我们的jni函数调用</span><br><span class="line">int bsdiff_main(int argc,char *argv[])&#123;</span><br><span class="line">  //...</span><br><span class="line"></span><br><span class="line">  // 可以看到，此处要求我们传入四个参数</span><br><span class="line">  // 参数1：任意</span><br><span class="line">  // 参数2：旧apk文件的路径</span><br><span class="line">  // 参数3：新apk文件的路径</span><br><span class="line">  // 参数4：拆分出来的文件保存路径</span><br><span class="line">  if(argc!=4) errx(1,&quot;usage: %s oldfile newfile patchfile\n&quot;,argv[0]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>7，编写jni函数，并生成对应的解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL Java_com_hsh_bsdiff_BsdiffUtill_diff_1apk</span><br><span class="line">(JNIEnv *env, jclass jcls, jstring fileName_, jstring oldFile_, jstring newFile_, jstring patchFile_)&#123;</span><br><span class="line"></span><br><span class="line">	char* fileName = (char*)env-&gt;GetStringUTFChars(fileName_, 0);</span><br><span class="line">	char* oldFile = (char*)env-&gt;GetStringUTFChars(oldFile_, 0);</span><br><span class="line">	char* newFile = (char*)env-&gt;GetStringUTFChars(newFile_, 0);</span><br><span class="line">	char* patchFile = (char*)env-&gt;GetStringUTFChars(patchFile_, 0);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	char *args[] = &#123; fileName, oldFile, newFile, patchFile&#125;;</span><br><span class="line"></span><br><span class="line">	bsdiff_main(4, args);</span><br><span class="line"></span><br><span class="line">	env-&gt;ReleaseStringUTFChars(fileName_, fileName);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(oldFile_, oldFile);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(newFile_, newFile);</span><br><span class="line">	env-&gt;ReleaseStringUTFChars(patchFile_, patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>对应的Java方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class BsdiffUtill &#123;</span><br><span class="line"></span><br><span class="line">	static&#123;</span><br><span class="line">		System.loadLibrary(&quot;jni/patch_dispatch_apk&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 *</span><br><span class="line">	 * @param name</span><br><span class="line">	 * @param oldFile</span><br><span class="line">	 * @param newFile</span><br><span class="line">	 * @param patchFile</span><br><span class="line">	 */</span><br><span class="line">	public native static void diff_apk(String name,String oldFile,String newFile,String patchFile);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Bsdiff &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		BsdiffUtill.diff_apk(&quot;apk_patch&quot;, &quot;H:\\bsdiff_patch\\app_1.0version.apk&quot;,</span><br><span class="line">				&quot;H:\\bsdiff_patch\\app_2.0version.apk&quot;, &quot;H:\\bsdiff_patch\\app_patch.patch&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行Java程序，可以在对应路径下生成拆分包；</p>
-<p>8，合并拆分包；</p>
-<p><em>注意，Android是linux系统，所以在编写NDK时，bsdiff要使用linux系统版本下的源码。</em></p>
-<p>9，bsdiff合并时，需要使用到bzip2的源码，所以同样需要下载bzip2的源码：<br><a href="https://download.csdn.net/download/juncojet/10235311" target="_blank" rel="noopener">https://download.csdn.net/download/juncojet/10235311</a></p>
-<p>然后引进项目中；</p>
-<p>10，让bspatch.c中引用bzip2的源码；</p>
-<p>添加头文件引用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 本源文件只要求引入该头文件</span><br><span class="line">#include &quot;bzip2/bzlib.c&quot;</span><br><span class="line"></span><br><span class="line">// 但实际编译时，缺报bzlib.c缺少对应的引用函数(BZ2_crc32Table,BZ2_compressBlock,BZ2_crc32Table...)，</span><br><span class="line">// 大概猜测原因是：在配置CMakeLists时，只配置了bspatch.c文件，而bzip2源文件并没有配置，所以这些文件没有</span><br><span class="line">// 被项目管理起来。在bzlib.c中，头文件bzlib_private.h声明的函数无法被项目知道，所以在bzlib.c进行调用时，</span><br><span class="line">// 才会报出找不到这些函数的错误。解决方案就是引入底下的源文件，不再通过bzlib_private.h找，而是直接引用；</span><br><span class="line">#include &quot;bzip2/crctable.c&quot;</span><br><span class="line">#include &quot;bzip2/compress.c&quot;</span><br><span class="line">#include &quot;bzip2/decompress.c&quot;</span><br><span class="line">#include &quot;bzip2/randtable.c&quot;</span><br><span class="line">#include &quot;bzip2/blocksort.c&quot;</span><br><span class="line">#include &quot;bzip2/huffman.c&quot;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>之后按照上面的生成拆分包的步骤，编写Android下的NDK；</p>
-</blockquote>
-<p>11，在bspatch.c下添加jni调用函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT void JNICALL</span><br><span class="line">Java_com_hsh_bsdiff_1patch_PatchUtil_patchFile(JNIEnv *env, jclass type, jstring oldFile_,</span><br><span class="line">                                               jstring newFile_, jstring patchFile_) &#123;</span><br><span class="line">    char *oldFile = (char *) (*env)-&gt;GetStringUTFChars(env, oldFile_, 0);</span><br><span class="line">    char *newFile = (char *) (*env)-&gt;GetStringUTFChars(env, newFile_, 0);</span><br><span class="line">    char *patchFile = (char *) (*env)-&gt;GetStringUTFChars(env, patchFile_, 0);</span><br><span class="line"></span><br><span class="line">    char *fileName = &quot;apk_patch&quot;;</span><br><span class="line"></span><br><span class="line">    char *params[] = &#123;fileName, oldFile, newFile, patchFile&#125;;</span><br><span class="line">    // 将源文件的main函数直接修改为patch_main，进行调用</span><br><span class="line">    patch_main(4,params);</span><br><span class="line"></span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;oldFile = %s&quot;, oldFile);</span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;newFile = %s&quot;, newFile);</span><br><span class="line">    __android_log_print(ANDROID_LOG_INFO, &quot;PatchFile&quot;, &quot;patchFile = %s&quot;, patchFile);</span><br><span class="line"></span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, oldFile_, oldFile);</span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, newFile_, newFile);</span><br><span class="line">    (*env)-&gt;ReleaseStringUTFChars(env, patchFile_, patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Java代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class PatchUtil &#123;</span><br><span class="line"></span><br><span class="line">    static&#123;</span><br><span class="line">        System.loadLibrary(&quot;native-lib&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public native static void patchFile(String oldFile,String newFile,String patchFile);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>12，旧版的apk中需要有合并升级的逻辑，这样在下载拆分包后，可以直接进行合并；</p>
-<p><strong>重要的api</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 获得应用包下保存的当前版本的apk</span><br><span class="line">final String apkPath = getApplicationContext().getPackageResourcePath();</span><br></pre></td></tr></table></figure></p>
-<p>模拟合并后执行安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">new Thread(new Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            PatchUtil.patchFile(apkPath, newPath, patch_path);</span><br><span class="line">            runOnUiThread(new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    Toast.makeText(MainActivity.this, &quot;success&quot;, Toast.LENGTH_LONG).show();</span><br><span class="line">                    // 7.0以上需要配置FileProvider才能安装</span><br><span class="line">                    ApkUtils.installApk(MainActivity.this, newPath);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; catch (Error error) &#123;</span><br><span class="line">            error.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure></p>
-<p><strong>生成新的apk文件的路径可以是任意，即使在安装后被删除也是无所谓的，因为应用包下会自动保有原来的apk文件！</strong></p>
-<blockquote>
-<p>当有新版的apk发布时，利用新版的apk与旧版的apk，调用上面步骤生成拆分库，生成对应的拆分包。</p>
-</blockquote>
-<blockquote>
-<p>不同版本的旧apk通过访问服务器，获取到对应的升级拆分包，进行升级。</p>
-</blockquote>
-<p><em>差分算法</em></p>
-<ul>
-<li><p>差分算法是对新旧的两个文件进行比较，筛选，分类出两个文件中的相同部分，不同部分(修改的部分)，以及额外增加的部分；</p>
-</li>
-<li><p>对于相同的部分，会用下标标识出来，对于不同的部分和额外增加的部分，会通过bzip2进行压缩，<br>所以生成的差分包 = 映射标识相同位置的数据+不同部分、额外增加部分的压缩数据；</p>
-</li>
-<li><p>合成时，对于相同的部分，根据差分包中标识的下标，从旧文件中直接读取出来，写进新文件中；对于不同的部分(修改的部分)和额外增加的部分，通过bzip2进行解压，再写进新文件中；</p>
-</li>
-</ul>
-<p>特点，生成差分包时，差分包的大小并不与新、旧包大小差值成正比关系，而是与新旧包中数据的重复情况成正比关系：<em>重复的数据越多，则生成的差分包越小；被修改的部分越多，则对应生成的映射标识越多，差分包也越大；</em>  </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/NDK/C/jni缓存策略/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄声焕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HSH's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/11/NDK/C/jni缓存策略/" itemprop="url">
-                  jni缓存策略
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-11 00:00:00 / Modified: 07:45:48" itemprop="dateCreated datePublished" datetime="2019-02-11T00:00:00+08:00">2019-02-11</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!-- toc -->
-<h3 id="通过局部静态变量进行缓存"><a href="#通过局部静态变量进行缓存" class="headerlink" title="通过局部静态变量进行缓存"></a>通过局部静态变量进行缓存</h3><p>通过在方法中声明局部的静态变量，可以在方法初始化时进行方法中的某个资源的初始化，<br>并且在以后每次调用该方法时，确保不需要重复初始化该资源，同时确保其他的方法无法调用<br>到。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 缓存策略</span><br><span class="line"></span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_cached</span><br><span class="line">(JNIEnv * env, jobject obj)&#123;</span><br><span class="line">	jclass cls = (*env)-&gt;GetObjectClass(env, obj);</span><br><span class="line"></span><br><span class="line">	// 静态局部变量</span><br><span class="line">	// 作用域存在于本函数</span><br><span class="line">	// 生命周期为应用生命周期</span><br><span class="line">	// 全局的其他地方无法使用到</span><br><span class="line">	static jfieldID key_id = NULL;</span><br><span class="line">	// 只在函数被第一次调用时进行初始化</span><br><span class="line">	if (key_id == NULL)&#123;</span><br><span class="line">		key_id = (*env)-&gt;GetFieldID(env, cls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">		printf(&quot;init key id;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong><em>Java中调用</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public native void cached();</span><br><span class="line"></span><br><span class="line"> for (int i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">   test.cached();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="全局变量初始时进行创建"><a href="#全局变量初始时进行创建" class="headerlink" title="全局变量初始时进行创建"></a>全局变量初始时进行创建</h3><p>全局变量可以在dll库加载时进行进行全局变量的初始化；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &quot;jni.h&quot;</span><br><span class="line"></span><br><span class="line">// 初始化全局变量</span><br><span class="line">// 在初始化动态库之后，调用该方法，进行全局变量的初始化，并且能够确保只调用一次。</span><br><span class="line">jmethodID method_id;</span><br><span class="line">jfieldID fid;</span><br><span class="line">JNIEXPORT void JNICALL Java_com_my_jnitest_JniTest_initIds</span><br><span class="line">(JNIEnv * env, jclass jcls)&#123;</span><br><span class="line">	method_id = (*env)-&gt;GetMethodID(env, jcls, &quot;randomInt&quot;, &quot;()I&quot;);</span><br><span class="line">	fid = (*env)-&gt;GetFieldID(env, jcls, &quot;key&quot;, &quot;Ljava/lang/String;&quot;);</span><br><span class="line">	printf(&quot;first init!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong><em>Java中调用</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">  System.out.println( System.getProperty(&quot;java.library.path&quot;));</span><br><span class="line">  System.loadLibrary(&quot;jni/jini_04&quot;);</span><br><span class="line">  // 加载完成动态库之后，立刻调用初始化方法，初始化全局变量</span><br><span class="line">  initIds();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2065,7 +1999,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2098,7 +2032,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2159,7 +2097,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
